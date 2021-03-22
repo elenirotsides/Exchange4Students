@@ -3,7 +3,7 @@ from typing import List
 
 from item import Item
 
-class FurnitureItem(Item):
+class ElectronicItem(Item):
 
     def __init__(self, item_id: int,
                  title: str,
