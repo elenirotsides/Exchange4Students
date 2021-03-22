@@ -1,14 +1,15 @@
-from abc import ABC, ABCMeta
+from abc import ABCMeta
 
 """
 Inteface for methods that a User acting as a Seller would use.
+
+This interface expects these methods to be implemented:
+
+def post_item(item_id: int) -> None:
+def edit_item(item_id: int) -> None:
+
 """
 class Seller(metaclass=ABCMeta):
-    """
-    This interface expects these methods to be implemented:
-    def post_item(item_id: int) -> None:
-    def edit_item(item_id: int) -> None:
-    """
 
     @classmethod
     def __subclasshook__(cls, subclass):
