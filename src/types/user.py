@@ -33,3 +33,19 @@ class User:
     def register(cls):
         pass
 
+    def post_item(self, item_id: int) -> type(None):
+        """Implements Seller.post_item()"""
+        pass
+
+    def edit_item(self, item_id: int) -> type(None):
+        """Implements Seller.edit_item()"""
+        pass
+
+    def send_message_to_seller(self, seller: str) -> bool:
+        """Implements Customer.send_message_to_seller()"""
+        pass
+
+    def purchase_item(self, item_id: int) -> type(None):
+        """Implements Customer.purchase_item()"""
+        pass
+

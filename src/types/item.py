@@ -1,9 +1,9 @@
 from decimal import Decimal
 
-"""
-An item listed by a user on the site.
-"""
 class Item:
+    """
+    An item listed by a user on the site.
+    """
 
     def __init__(self, item_id: int, title: str, desc: str, price: Decimal, weight: float, seller: str):
         # Private instance attributes

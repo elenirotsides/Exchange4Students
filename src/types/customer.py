@@ -1,15 +1,15 @@
 from abc import ABCMeta
 
-"""
-Inteface for methods that a User acting as a Customer would use.
-
-This interface expects these methods to be implemented:
-
-def send_message_to_seller(seller_username: str) -> bool:
-def purchase_item(item_id: int) -> None:
-
-"""
 class Customer(metaclass=ABCMeta):
+    """
+    Inteface for methods that a User acting as a Customer would use.
+
+    This interface expects these methods to be implemented:
+
+    def send_message_to_seller(seller_username: str) -> bool:
+    def purchase_item(item_id: int) -> type(None):
+
+    """
 
     @classmethod
     def __subclasshook__(cls, subclass):
