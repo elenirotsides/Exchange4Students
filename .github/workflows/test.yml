@@ -1,0 +1,40 @@
+name: CI Test
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+             
+            - name: Install yapf
+              run: pip3 install yapf
+            
+            - name: Enforce formatting with yapf
+              run: test -z $(python3 -m yapf -rd . | tr -d "\n\t ")
+
+            - name: Install pylint
+              run: pip3 install pylint
+
+            - name: Enforce best practices with pylint
+              run: python3 -m pylint **/*.py
+
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            
+            - name: Install dependencies
+              run: pip3 install -r requirements.txt
+
+            - name: Move into tests dir
+              run: cd src/tests
+ 
+            - name: Test
+              run: python3 test.py
