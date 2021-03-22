@@ -2,11 +2,11 @@
 Contains a User class.
 """
 
+
 class User:
     """
     Represents a user of the website. 
     """
-    
     def __init__(self, display_name: str, email: str, password: str):
         # Private instance attributes
         self._display_name = display_name
@@ -56,4 +56,3 @@ class User:
     def purchase_item(self, item_id: int) -> type(None):
         """Implements Customer.purchase_item()"""
         pass
-

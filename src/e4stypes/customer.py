@@ -1,5 +1,6 @@
 from abc import ABCMeta
 
+
 class Customer(metaclass=ABCMeta):
     """
     Inteface for methods that a User acting as a Customer would use.
@@ -10,12 +11,9 @@ class Customer(metaclass=ABCMeta):
     def purchase_item(item_id: int) -> type(None):
 
     """
-
     @classmethod
     def __subclasshook__(cls, subclass):
-        return (hasattr(subclass, 'send_message_to_seller') and
-                callable(subclass.send_message_to_seller) and
-                hasattr(subclass, 'purchase_item') and
-                callable(subclass.purchase_item))
-
-
+        return (hasattr(subclass, 'send_message_to_seller')
+                and callable(subclass.send_message_to_seller)
+                and hasattr(subclass, 'purchase_item')
+                and callable(subclass.purchase_item))
