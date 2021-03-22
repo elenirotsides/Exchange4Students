@@ -33,8 +33,7 @@ jobs:
             - name: Install dependencies
               run: pip3 install -r requirements.txt
 
-            - name: Move into tests dir
-              run: cd src/tests
- 
             - name: Test
-              run: python3 main.py
+              run: | 
+                cd src/tests 
+                python3 main.py
