@@ -1,20 +1,21 @@
 from decimal import Decimal
 from typing import List
 
+
 class Item:
     """
     An item listed by a user on the site.
     """
-
-    def __init__(self, item_id: int, title: str, desc: str, price: Decimal, weight: float, seller: str):
+    def __init__(self, item_id: int, title: str, desc: str, price: Decimal,
+                 weight: float, seller: str):
         # Private instance attributes
-        self._item_id: int     = item_id
-        self._title: str       = title
+        self._item_id: int = item_id
+        self._title: str = title
         self._description: str = desc
-        self._price: Decimal   = price
-        self._weight: float    = weight
-        self._seller: str      = seller
-        self._condition: str   = ""
+        self._price: Decimal = price
+        self._weight: float = weight
+        self._seller: str = seller
+        self._condition: str = ""
 
         # Public instance attributes
         self.quantity: int = 1
@@ -51,4 +52,3 @@ class Item:
     @classmethod
     def get_item_by_catergory(cls, category: str) -> List[Item]:
         pass
-

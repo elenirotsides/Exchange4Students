@@ -3,8 +3,8 @@ from typing import List
 
 from item import Item
 
-class OrderInformation:
 
+class OrderInformation:
     def __init__(self, item_list: List[Item], total_amount: Decimal):
         self.item_list: List[Item] = item_list
         self.total_amount: Decimal = total_amount
@@ -23,4 +23,3 @@ class OrderInformation:
 
     def select_exchange_type(self) -> type(None):
         pass
-    
