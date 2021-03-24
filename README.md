@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 ```
 cd src
-python main.py
+python app.py
 ```
 
 **or**
@@ -37,5 +37,5 @@ If you have python 2 and python 3 installed, python 2 will most likely be the de
 
 ```
 cd src
-python3 main.py
+python3 app.py
 ```
