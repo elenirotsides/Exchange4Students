@@ -67,11 +67,11 @@ class Item:
     def get_item_by_id(cls, item_id: str) -> Item:
         # Stores the result of the search
         get_clothing = clothing_col.find_one({'_id': ObjectId(item_id)})
-        get_book= book_col.find_one({'_id': ObjectId(item_id)})
+        get_book = book_col.find_one({'_id': ObjectId(item_id)})
         get_furniture = furniture_col.find_one({'_id': ObjectId(item_id)})
         get_electronic = electronic_col.find_one({'_id': ObjectId(item_id)})
         get_sports = sports_gear_col.find_one({'_id': ObjectId(item_id)})
-    
+
         # Returns the item dict if a item was found with the given item_id
         if get_clothing:
             return dict(get_clothing)
