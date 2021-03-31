@@ -1,4 +1,5 @@
 Flask
 flask-mongoengine
+flask-pymongo
 Flask-Login
 Flask-WTF
