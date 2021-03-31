@@ -85,5 +85,19 @@ class Item:
             return dict(get_sports)
 
     @classmethod
-    def get_item_by_catergory(cls, category: str) -> List[Item]:
-        pass
+    def get_item_by_category(cls, category: str) -> List[Item]:
+        if category == 'Clothing':
+            items = clothing_col.find({})
+            return list(items)
+        if category == 'Book':
+            items = book_col.find({})
+            return list(items)
+        if category == 'Furniture':
+            items = furniture_col.find({})
+            return list(items)
+        if category == 'Electronic':
+            items = electronic_col.find({})
+            return list(items)
+        if category == 'Sports Gear':
+            items = sports_gear_col.find({})
+            return list(items)
