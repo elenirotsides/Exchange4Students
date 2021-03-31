@@ -50,4 +50,6 @@ When you open MongoDB Compass, it'll ask you to enter the `Connection String`. H
 
 ![Mongo settings](mongo.png)
 
-I don't use my local instance of MongoDB for any intense dev work, which is why I don't have anything selected for the Authentication field.
+FYI: I don't use my local instance of MongoDB for any intense dev work, which is why I don't have anything selected for the Authentication field.
+
+**I recommend saving your connection string as a favorite in Compass, so you don't have to keep typing stuff in each time you want to connect to the databse**
