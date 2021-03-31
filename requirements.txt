@@ -1,4 +1,3 @@
 Flask
-flask-mongoengine
 Flask-Login
 Flask-WTF

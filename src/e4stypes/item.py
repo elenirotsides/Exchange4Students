@@ -1,5 +1,18 @@
 from decimal import Decimal
 from typing import List
+import pymongo
+
+# establish connection with database
+myclient = pymongo.MongoClient('mongodb://localhost:27017/')
+# create the databse if it doesn't already exist
+db = myclient.exchange4students
+
+# create collections
+clothing_col = db.clothing
+book_col = db.book
+furniture_col = db.furniture
+electronic_col = db.electronic
+sports_gear_col = db.sports_gear
 
 
 class Item:
@@ -43,7 +56,11 @@ class Item:
 
     @classmethod
     def get_all(cls) -> List[Item]:
-        pass
+        # find all items in item collection, returns list of dictionaries
+        all_items = list(clothing_col.find({})) + list(
+            book_col.find({})) + list(furniture_col.find({})) + list(
+                electronic_col.find({})) + list(sports_gear_col.find({}))
+        return all_items
 
     @classmethod
     def get_item_by_id(cls, item_id: int) -> Item:
