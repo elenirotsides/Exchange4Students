@@ -86,6 +86,8 @@ class Item:
 
     @classmethod
     def get_item_by_category(cls, category: str) -> List[Item]:
+        # Gets items by category
+        # Note: currently not accounting for empty collections. I can add checks for empty collections later if this causes problems.
         if category == 'Clothing':
             items = clothing_col.find({})
             return list(items)
