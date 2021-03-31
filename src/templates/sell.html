@@ -106,20 +106,72 @@
           
             <div class="album py-5 bg-light">
               <div class="container">
-
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                   <div class="col">
                     <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
+                      <form class="p-3">                       
+                        <div class="form-group">
+                          <label for="category_drop">Choose a Category</label>
+                          <select class="form-control" id="category_drop">
+                                <option value="no">Select</option>
+                                <option value="books">Books</option>
+                                <option value="clothes">Clothes</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="sports">Sports Gear</option>
+                          </select>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="price">Price</label>
+                          <textarea class="form-control" id="price" rows="1">$</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="seeAnotherFieldGroup">Do You Want To See Another Group of Fields?</label>
+                          <select class="form-control" id="seeAnotherFieldGroup">
+                                <option value="no">Not Particularly.</option>
+                                <option value="yes">I Guess!</option>
+                          </select>
+                        </div>
+                        
+                        <div class="form-group" id="otherFieldGroupDiv">
+                          <div class="row">
+                            <div class="col-6">
+                              <label for="otherField1">Group: Heres One!</label>
+                              <input type="text" class="form-control w-100" id="otherField1">
+                            </div>
+                            <div class="col-6">
+                              <label for="otherField2">Group: Another One!</label>
+                              <input type="text" class="form-control w-100" id="otherField2">
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="comments">Description</label>
+                          <textarea class="form-control" id="comments" rows="3"></textarea>
+                      </div>
+                      <h4>Upload a Photo</h3>
+                      <form method="POST" enctype="multipart/form-data" id="photo">
+                        {{ form.hidden_tag() }}
+                        {{ form.photo }}
+                        {% for error in form.photo.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                        {{ form.submit }}
+                      </form>
+
+                    {% if file_url %}
+                    <br>
+                    <img src="{{ file_url }}">
+                    {% endif %}
+                    
                       <div class="card-body">
-                        <p class="card-text">Sample Item</p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
+                            <button class="btn btn-primary" type="submit">Submit</button>
                           </div>
-                          <small class="text-muted">$x.xx</small>
                         </div>
                       </div>
                     </div>
@@ -129,6 +181,45 @@
             </div>
           
           </main>
+      <!-- jquery stuff-->
+    <script>
+      $("#choose_category").change(function() {
+        if ($(this).val() == "books") {
+          $('#price').show();
+          $('#photo').show();
+          $('#otherField').attr('required', '');
+          $('#otherField').attr('data-error', 'This field is required.');
+        }
+        if ($(this).val() == "yes") {
+          $('#price').show();
+          $('#otherField').attr('required', '');
+          $('#otherField').attr('data-error', 'This field is required.');
+        }
+         else {
+          $('#otherFieldDiv').hide();
+          $('#otherField').removeAttr('required');
+          $('#otherField').removeAttr('data-error');
+        }
+      });
+      $("#seeAnotherField").trigger("change");
+      
+      $("#seeAnotherFieldGroup").change(function() {
+        if ($(this).val() == "yes") {
+          $('#otherFieldGroupDiv').show();
+          $('#otherField1').attr('required', '');
+          $('#otherField1').attr('data-error', 'This field is required.');
+          $('#otherField2').attr('required', '');
+          $('#otherField2').attr('data-error', 'This field is required.');
+        } else {
+          $('#otherFieldGroupDiv').hide();
+          $('#otherField1').removeAttr('required');
+          $('#otherField1').removeAttr('data-error');
+          $('#otherField2').removeAttr('required');
+          $('#otherField2').removeAttr('data-error');
+        }
+      });
+      $("#seeAnotherFieldGroup").trigger("change");
+    </script>
     </body>
 </html>
      
