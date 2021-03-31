@@ -6,7 +6,7 @@ from clothing_item import ClothingGender
 
 
 class SportsGearItem(Item):
-    def __init__(self, item_id: int, title: str, desc: str, price: Decimal,
+    def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
                  weight: float, seller: str, gear_type: str, size: str,
                  gender: ClothingGender):
         super().__init__(item_id, title, desc, price, weight, seller)

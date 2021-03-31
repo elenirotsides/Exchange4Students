@@ -9,10 +9,10 @@ class OrderInformation:
         self.item_list: List[Item] = item_list
         self.total_amount: Decimal = total_amount
 
-    def add_to_cart(self, item_id: int) -> type(None):
+    def add_to_cart(self, item_id: str) -> type(None):
         pass
 
-    def remove_from_cart(self, item_id: int) -> type(None):
+    def remove_from_cart(self, item_id: str) -> type(None):
         pass
 
     def calculate_total_amount(self) -> Decimal:
