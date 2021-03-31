@@ -19,10 +19,10 @@ class Item:
     """
     An item listed by a user on the site.
     """
-    def __init__(self, item_id: int, title: str, desc: str, price: Decimal,
+    def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
                  weight: float, seller: str):
         # Private instance attributes
-        self._item_id: int = item_id
+        self._item_id: str = item_id
         self._title: str = title
         self._description: str = desc
         self._price: Decimal = price
@@ -33,7 +33,7 @@ class Item:
         # Public instance attributes
         self.quantity: int = 1
 
-    def get_item_id(self) -> int:
+    def get_item_id(self) -> str:
         return self._item_id
 
     def get_title(self) -> str:
@@ -63,7 +63,7 @@ class Item:
         return all_items
 
     @classmethod
-    def get_item_by_id(cls, item_id: int) -> Item:
+    def get_item_by_id(cls, item_id: str) -> Item:
         pass
 
     @classmethod

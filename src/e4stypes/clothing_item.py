@@ -18,7 +18,7 @@ class ClothingSize(Enum):
 
 
 class ClothingItem(Item):
-    def __init__(self, item_id: int, title: str, desc: str, price: Decimal,
+    def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
                  weight: float, seller: str, garment_type: str,
                  size: ClothingSize, gender: ClothingGender, color: str):
         super().__init__(item_id, title, desc, price, weight, seller)
