@@ -39,3 +39,15 @@ If you have python 2 and python 3 installed, python 2 will most likely be the de
 cd src
 python3 app.py
 ```
+
+## Mongo Setup
+
+In order to test, you need to make sure you have MongoDB installed, see https://docs.mongodb.com/manual/administration/install-community/ for details. I also recommend installing MongoDB Compass Community (https://docs.mongodb.com/compass/master/install/), which is basically a GUI for Mongo. I prefer Compass over the traditional way of interacting with Mongo, which is via the command line.
+
+By default, Mongo will run on port 27017, so don't change that because that's what the code references right now.
+
+When you open MongoDB Compass, it'll ask you to enter the `Connection String`. Here are what my settings look like:
+
+![Mongo settings](mongo.png)
+
+I don't use my local instance of MongoDB for any intense dev work, which is why I don't have anything selected for the Authentication field.
