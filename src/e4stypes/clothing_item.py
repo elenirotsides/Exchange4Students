@@ -11,7 +11,7 @@ myclient = pymongo.MongoClient('mongodb://localhost:27017/')
 db = myclient.exchange4students
 
 # create book collection
-clothing_col = db.book
+clothing_col = db.clothing
 
 
 class ClothingGender(Enum):

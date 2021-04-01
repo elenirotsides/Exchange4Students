@@ -2,7 +2,15 @@ from decimal import Decimal
 from typing import List
 
 from item import Item
+import pymongo
 
+# establish connection with database
+myclient = pymongo.MongoClient('mongodb://localhost:27017/')
+# create the databse if it doesn't already exist
+db = myclient.exchange4students
+
+# create book collection
+electronic_col = db.electronic
 
 class ElectronicItem(Item):
     def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
