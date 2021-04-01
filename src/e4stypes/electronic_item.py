@@ -9,7 +9,7 @@ myclient = pymongo.MongoClient('mongodb://localhost:27017/')
 # create the databse if it doesn't already exist
 db = myclient.exchange4students
 
-# create book collection
+# create electronic collection if it doesn't already exist
 electronic_col = db.electronic
 
 
