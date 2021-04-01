@@ -1,6 +1,6 @@
 from decimal import Decimal
 from item import Item
-# from bson import ObjectId
+
 import pymongo
 
 # establish connection with database
