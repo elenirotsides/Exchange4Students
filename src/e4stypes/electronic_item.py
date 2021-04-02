@@ -23,4 +23,3 @@ class ElectronicItem(Item):
 
     def get_dimensions(self) -> List[int]:
         return self._dimensions
-
