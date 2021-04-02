@@ -7,8 +7,8 @@ from clothing_item import ClothingGender, ClothingSize
 
 class SportsGearItem(Item):
     def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
-                 weight: float, seller: str, gear_type: str, size: ClothingSize,
-                 gender: ClothingGender):
+                 weight: float, seller: str, gear_type: str,
+                 size: ClothingSize, gender: ClothingGender):
         super().__init__(item_id, title, desc, price, weight, seller)
 
         # Private instance attributes
