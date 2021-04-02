@@ -1,13 +1,13 @@
 from typing import List
 from decimal import Decimal
-from item import Item
+from .item import Item
 from bson import ObjectId
 import pymongo
-from book_item import BookItem
-from clothing_item import ClothingItem, ClothingGender, ClothingSize
-from electronic_item import ElectronicItem
-from furniture_item import FurnitureItem
-from sports_gear_item import SportsGearItem
+from .book_item import BookItem
+from .clothing_item import ClothingItem, ClothingGender, ClothingSize
+from .electronic_item import ElectronicItem
+from .furniture_item import FurnitureItem
+from .sports_gear_item import SportsGearItem
 
 # establish connection with database
 myclient = pymongo.MongoClient('mongodb://localhost:27017/')
@@ -44,36 +44,36 @@ class Database:
         if get_clothing:
             return ClothingItem(get_clothing["_id"], get_clothing["title"],
                                 get_clothing["desc"],
-                                Decimal(get_clothing["price"]),
+                                Decimal(str(get_clothing["price"])),
                                 get_clothing["weight"], get_clothing["seller"],
                                 get_clothing["garment_type"],
                                 ClothingSize(get_clothing["size"]),
                                 ClothingGender(get_clothing["gender"]),
                                 get_clothing["color"])
         if get_book:
-            return BookItem(get_book["_id"],
-                            get_book["title"], get_book["desc"],
-                            Decimal(get_book["price"]), get_book["weight"],
-                            get_book["seller"], get_book["book_title"],
-                            get_book["edition"], get_book["course_number"])
+            return BookItem(get_book["_id"], get_book["title"],
+                            get_book["desc"], Decimal(str(get_book["price"])),
+                            get_book["weight"], get_book["seller"],
+                            get_book["book_title"], get_book["edition"],
+                            get_book["course_number"])
         if get_furniture:
             return FurnitureItem(
                 get_furniture["_id"],
                 get_furniture["title"], get_furniture["desc"],
-                Decimal(get_furniture["price"]), get_furniture["weight"],
+                Decimal(str(get_furniture["price"])), get_furniture["weight"],
                 get_furniture["seller"], get_furniture["furnishing_type"],
                 get_furniture["color"], get_furniture["dimensions"])
         if get_electronic:
             return ElectronicItem(
-                get_electronic["_id"],
-                get_electronic["title"], get_electronic["desc"],
-                Decimal(get_electronic["price"]), get_electronic["weight"],
-                get_electronic["seller"], get_electronic["electronic_type"],
-                get_electronic["model"], get_electronic["dimensions"])
+                get_electronic["_id"], get_electronic["title"],
+                get_electronic["desc"], Decimal(str(get_electronic["price"])),
+                get_electronic["weight"], get_electronic["seller"],
+                get_electronic["electronic_type"], get_electronic["model"],
+                get_electronic["dimensions"])
         if get_sports:
             return SportsGearItem(get_sports["_id"], get_sports["title"],
                                   get_sports["desc"],
-                                  Decimal(get_sports["price"]),
+                                  Decimal(str(get_sports["price"])),
                                   get_sports["weight"], get_sports["seller"],
                                   get_sports["gear_type"],
                                   ClothingSize(get_sports["size"]),
@@ -96,7 +96,7 @@ class Database:
                 items.append(
                     ClothingItem(item_dict["_id"],
                                  item_dict["title"], item_dict["desc"],
-                                 Decimal(item_dict["price"]),
+                                 Decimal(str(item_dict["price"])),
                                  item_dict["weight"], item_dict["seller"],
                                  item_dict["garment_type"],
                                  ClothingSize(item_dict["size"]),
@@ -109,7 +109,7 @@ class Database:
                 items.append(
                     BookItem(item_dict["_id"],
                              item_dict["title"], item_dict["desc"],
-                             Decimal(item_dict["price"]), item_dict["weight"],
+                             Decimal(str(item_dict["price"])), item_dict["weight"],
                              item_dict["seller"], item_dict["book_title"],
                              item_dict["edition"], item_dict["course_number"]))
         elif category == 'Furniture':
@@ -118,7 +118,7 @@ class Database:
                 items.append(
                     FurnitureItem(item_dict["_id"],
                                   item_dict["title"], item_dict["desc"],
-                                  Decimal(item_dict["price"]),
+                                  Decimal(str(item_dict["price"])),
                                   item_dict["weight"], item_dict["seller"],
                                   item_dict["furnishing_type"],
                                   item_dict["color"], item_dict["dimensions"]))
@@ -128,7 +128,7 @@ class Database:
                 items.append(
                     ElectronicItem(item_dict["_id"], item_dict["title"],
                                    item_dict["desc"],
-                                   Decimal(item_dict["price"]),
+                                   Decimal(str(item_dict["price"])),
                                    item_dict["weight"], item_dict["seller"],
                                    item_dict["electronic_type"],
                                    item_dict["model"],
@@ -139,7 +139,7 @@ class Database:
                 items.append(
                     SportsGearItem(item_dict["_id"], item_dict["title"],
                                    item_dict["desc"],
-                                   Decimal(item_dict["price"]),
+                                   Decimal(str(item_dict["price"])),
                                    item_dict["weight"], item_dict["seller"],
                                    item_dict["gear_type"],
                                    ClothingSize(item_dict["size"]),

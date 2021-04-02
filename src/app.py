@@ -1,11 +1,12 @@
 from flask import Flask, render_template
+from e4stypes.database import Database
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def get_home():
-    return render_template('/home.html')
+    return render_template('/home.html', items=Database.get_all())
 
 
 @app.route('/books')
