@@ -13,10 +13,10 @@ electronic_col = db.electronic
 
 
 class ElectronicItem(Item):
-    def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
-                 weight: float, seller: str, electronic_type: str, model: str,
+    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
+                 seller: str, electronic_type: str, model: str,
                  dimensions: List[int]):
-        super().__init__(item_id, title, desc, price, weight, seller)
+        super().__init__(title, desc, price, weight, seller)
 
         # Private instance attributes
         self._electronic_type: str = electronic_type
