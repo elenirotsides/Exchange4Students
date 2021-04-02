@@ -16,10 +16,10 @@ sports_gear_col = db.sports_gear
 
 
 class SportsGearItem(Item):
-    def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
-                 weight: float, seller: str, gear_type: str,
-                 size: ClothingSize, gender: ClothingGender):
-        super().__init__(item_id, title, desc, price, weight, seller)
+    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
+                 seller: str, gear_type: str, size: ClothingSize,
+                 gender: ClothingGender):
+        super().__init__(title, desc, price, weight, seller)
 
         # Private instance attributes
         self._gear_type: str = gear_type
