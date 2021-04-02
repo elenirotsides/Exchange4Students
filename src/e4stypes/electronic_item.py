@@ -41,4 +41,3 @@ class ElectronicItem(Item):
 
         # making insertion
         electronic_col.insert_one(electronic)
-        

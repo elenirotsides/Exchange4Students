@@ -40,4 +40,3 @@ class BookItem(Item):
 
         # making insertion
         book_col.insert_one(book)
-
