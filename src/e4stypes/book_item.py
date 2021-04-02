@@ -50,5 +50,3 @@ class BookItem(Item):
 
         # making insertion
         book_col.insert_one(book)
-        # not sure what needs to be returned here?
-        return
