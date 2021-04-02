@@ -1,5 +1,5 @@
 from decimal import Decimal
-from enum import Enum
+from enum import IntEnum
 
 from item import Item
 
@@ -14,13 +14,13 @@ db = myclient.exchange4students
 clothing_col = db.clothing
 
 
-class ClothingGender(Enum):
+class ClothingGender(IntEnum):
     UNISEX = 0
     FEMALE = 1
     MALE = 2
 
 
-class ClothingSize(Enum):
+class ClothingSize(IntEnum):
     SMALL = 0
     MEDIUM = 1
     LARGE = 2
