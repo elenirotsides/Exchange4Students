@@ -48,4 +48,3 @@ class ClothingItem(Item):
 
     def get_color(self) -> str:
         return self._color
-

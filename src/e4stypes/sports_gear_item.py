@@ -34,4 +34,3 @@ class SportsGearItem(Item):
 
     def get_gender(self) -> List[int]:
         return self._gender
-

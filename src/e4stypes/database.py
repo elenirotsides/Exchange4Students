@@ -155,7 +155,7 @@ class Database:
         book_dict = {
             'title': book.get_title(),
             'description': book.get_description(),
-            'price': book.get_price(),
+            'price': float(book.get_price()),
             'weight': book.get_weight(),
             'seller': book.get_seller(),
             'book_title': book.get_book_title(),
@@ -173,7 +173,7 @@ class Database:
         clothing_dict = {
             'title': clothing.get_title(),
             'description': clothing.get_description(),
-            'price': clothing.get_price(),
+            'price': float(clothing.get_price()),
             'weight': clothing.get_weight(),
             'seller': clothing.get_seller(),
             'garment_type': clothing.get_garment_type(),
@@ -184,7 +184,7 @@ class Database:
 
         # making insertion
         clothing_col.insert_one(clothing_dict)
-    
+
     @classmethod
     def add_electronic(cls, electronic: ElectronicItem) -> type(None):
         # create electronic dict that will be added to the database
@@ -192,7 +192,7 @@ class Database:
         electronic_dict = {
             'title': electronic.get_title(),
             'description': electronic.get_description(),
-            'price': electronic.get_price(),
+            'price': float(electronic.get_price()),
             'weight': electronic.get_weight(),
             'seller': electronic.get_seller(),
             'electronic_type': electronic.get_electronic_type(),
@@ -210,7 +210,7 @@ class Database:
         furniture_dict = {
             'title': furniture.get_title(),
             'description': furniture.get_description(),
-            'price': furniture.get_price(),
+            'price': float(furniture.get_price()),
             'weight': furniture.get_weight(),
             'seller': furniture.get_seller(),
             'furnishing_type': furniture.get_furnishing_type(),
@@ -228,7 +228,7 @@ class Database:
         sports_gear_dict = {
             'title': sports_gear.get_title(),
             'description': sports_gear.get_description(),
-            'price': sports_gear.get_price(),
+            'price': float(sports_gear.get_price()),
             'weight': sports_gear.get_weight(),
             'seller': sports_gear.get_seller(),
             'gear_type': sports_gear.get_gear_type(),
@@ -238,3 +238,18 @@ class Database:
 
         # making insertion
         sports_gear_col.insert_one(sports_gear_dict)
+
+    @classmethod
+    def add_item(cls, item: Item) -> type(None):
+        if isinstance(item, ClothingItem):
+            Database.add_clothing(item)
+        elif isinstance(item, BookItem):
+            Database.add_book(item)
+        elif isinstance(item, FurnitureItem):
+            Database.add_furniture(item)
+        elif isinstance(item, ElectronicItem):
+            Database.add_electronic(item)
+        elif isinstance(item, SportsGearItem):
+            Database.add_sports_gear(item)
+        else:
+            raise RuntimeError("add_item: unknown item subclass")
