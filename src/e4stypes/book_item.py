@@ -13,10 +13,10 @@ book_col = db.book
 
 
 class BookItem(Item):
-    def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
-                 weight: float, seller: str, book_title: str, edition: int,
+    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
+                 seller: str, book_title: str, edition: int,
                  course_number: int):
-        super().__init__(item_id, title, desc, price, weight, seller)
+        super().__init__(title, desc, price, weight, seller)
 
         # Private instance attributes
         self._book_title: str = book_title
