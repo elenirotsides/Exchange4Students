@@ -22,6 +22,9 @@ class Item:
     def get_item_id(self) -> str:
         return self._item_id
 
+    def set_item_id(self, item_id: str) -> type(None):
+        self._item_id = item_id
+
     def get_title(self) -> str:
         return self._title
 
