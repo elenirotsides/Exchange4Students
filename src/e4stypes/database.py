@@ -94,8 +94,8 @@ class Database:
                 # fields of the item dict and then append
                 # it to the running array
                 items.append(
-                    ClothingItem(item_dict["_id"],
-                                 item_dict["title"], item_dict["desc"],
+                    ClothingItem(item_dict["_id"], item_dict["title"],
+                                 item_dict["desc"],
                                  Decimal(str(item_dict["price"])),
                                  item_dict["weight"], item_dict["seller"],
                                  item_dict["garment_type"],
@@ -109,15 +109,16 @@ class Database:
                 items.append(
                     BookItem(item_dict["_id"],
                              item_dict["title"], item_dict["desc"],
-                             Decimal(str(item_dict["price"])), item_dict["weight"],
-                             item_dict["seller"], item_dict["book_title"],
-                             item_dict["edition"], item_dict["course_number"]))
+                             Decimal(str(item_dict["price"])),
+                             item_dict["weight"], item_dict["seller"],
+                             item_dict["book_title"], item_dict["edition"],
+                             item_dict["course_number"]))
         elif category == 'Furniture':
             item_dicts = furniture_col.find({})
             for item_dict in item_dicts:
                 items.append(
-                    FurnitureItem(item_dict["_id"],
-                                  item_dict["title"], item_dict["desc"],
+                    FurnitureItem(item_dict["_id"], item_dict["title"],
+                                  item_dict["desc"],
                                   Decimal(str(item_dict["price"])),
                                   item_dict["weight"], item_dict["seller"],
                                   item_dict["furnishing_type"],
