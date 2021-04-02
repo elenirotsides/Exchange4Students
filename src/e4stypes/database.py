@@ -104,7 +104,7 @@ class Database:
                                  item_dict["color"]))
             return items
         elif category == 'Book':
-            item_dicts = book_col.find()
+            item_dicts = book_col.find({})
             for item_dict in item_dicts:
                 items.append(
                     BookItem(item_dict["_id"],
