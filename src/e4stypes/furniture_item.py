@@ -5,10 +5,10 @@ from item import Item
 
 
 class FurnitureItem(Item):
-    def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
-                 weight: float, seller: str, furnishing_type: str, color: str,
+    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
+                 seller: str, furnishing_type: str, color: str,
                  dimensions: List[int]):
-        super().__init__(item_id, title, desc, price, weight, seller)
+        super().__init__(title, desc, price, weight, seller)
 
         # Private instance attributes
         self._furnishing_type: str = furnishing_type

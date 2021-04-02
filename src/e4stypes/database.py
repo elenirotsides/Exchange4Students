@@ -42,42 +42,49 @@ class Database:
 
         # Returns the Item if a item was found with the given item_id
         if get_clothing:
-            return ClothingItem(get_clothing["_id"], get_clothing["title"],
-                                get_clothing["desc"],
+            item = ClothingItem(get_clothing["title"], get_clothing["desc"],
                                 Decimal(get_clothing["price"]),
                                 get_clothing["weight"], get_clothing["seller"],
                                 get_clothing["garment_type"],
                                 ClothingSize(get_clothing["size"]),
                                 ClothingGender(get_clothing["gender"]),
                                 get_clothing["color"])
+            item.set_item_id(get_clothing["_id"])
+            return item
         if get_book:
-            return BookItem(get_book["_id"],
-                            get_book["title"], get_book["desc"],
+            item = BookItem(get_book["title"], get_book["desc"],
                             Decimal(get_book["price"]), get_book["weight"],
                             get_book["seller"], get_book["book_title"],
                             get_book["edition"], get_book["course_number"])
+            item.set_item_id(get_book["_id"])
+            return item
         if get_furniture:
-            return FurnitureItem(
-                get_furniture["_id"],
-                get_furniture["title"], get_furniture["desc"],
-                Decimal(get_furniture["price"]), get_furniture["weight"],
-                get_furniture["seller"], get_furniture["furnishing_type"],
-                get_furniture["color"], get_furniture["dimensions"])
+            item = FurnitureItem(get_furniture["title"], get_furniture["desc"],
+                                 Decimal(get_furniture["price"]),
+                                 get_furniture["weight"],
+                                 get_furniture["seller"],
+                                 get_furniture["furnishing_type"],
+                                 get_furniture["color"],
+                                 get_furniture["dimensions"])
+            item.set_item_id(get_furniture["_id"])
+            return item
         if get_electronic:
-            return ElectronicItem(
-                get_electronic["_id"],
+            item = ElectronicItem(
                 get_electronic["title"], get_electronic["desc"],
                 Decimal(get_electronic["price"]), get_electronic["weight"],
                 get_electronic["seller"], get_electronic["electronic_type"],
                 get_electronic["model"], get_electronic["dimensions"])
+            item.set_item_id(get_electronic["_id"])
+            return item
         if get_sports:
-            return SportsGearItem(get_sports["_id"], get_sports["title"],
-                                  get_sports["desc"],
+            item = SportsGearItem(get_sports["title"], get_sports["desc"],
                                   Decimal(get_sports["price"]),
                                   get_sports["weight"], get_sports["seller"],
                                   get_sports["gear_type"],
                                   ClothingSize(get_sports["size"]),
                                   ClothingGender(get_sports["gender"]))
+            item.set_item_id(get_sports["_id"])
+            return item
         raise RuntimeError(
             "get_item_by_id: could not find item with passed id")
 
@@ -93,57 +100,59 @@ class Database:
                 # instantiate a ClothingItem based on the
                 # fields of the item dict and then append
                 # it to the running array
-                items.append(
-                    ClothingItem(item_dict["_id"],
-                                 item_dict["title"], item_dict["desc"],
-                                 Decimal(item_dict["price"]),
-                                 item_dict["weight"], item_dict["seller"],
-                                 item_dict["garment_type"],
-                                 ClothingSize(item_dict["size"]),
-                                 ClothingGender(item_dict["gender"]),
-                                 item_dict["color"]))
+                item = ClothingItem(item_dict["title"], item_dict["desc"],
+                                    Decimal(item_dict["price"]),
+                                    item_dict["weight"], item_dict["seller"],
+                                    item_dict["garment_type"],
+                                    ClothingSize(item_dict["size"]),
+                                    ClothingGender(item_dict["gender"]),
+                                    item_dict["color"])
+                item.set_item_id(item_dict["_id"])
+                items.append(item)
             return items
         elif category == 'Book':
             item_dicts = book_col.find({})
             for item_dict in item_dicts:
-                items.append(
-                    BookItem(item_dict["_id"],
-                             item_dict["title"], item_dict["desc"],
-                             Decimal(item_dict["price"]), item_dict["weight"],
-                             item_dict["seller"], item_dict["book_title"],
-                             item_dict["edition"], item_dict["course_number"]))
+                item = BookItem(item_dict["title"], item_dict["desc"],
+                                Decimal(item_dict["price"]),
+                                item_dict["weight"], item_dict["seller"],
+                                item_dict["book_title"], item_dict["edition"],
+                                item_dict["course_number"])
+                item.set_item_id(item_dict["_id"])
+                items.append(item)
         elif category == 'Furniture':
             item_dicts = furniture_col.find({})
             for item_dict in item_dicts:
-                items.append(
-                    FurnitureItem(item_dict["_id"],
-                                  item_dict["title"], item_dict["desc"],
-                                  Decimal(item_dict["price"]),
-                                  item_dict["weight"], item_dict["seller"],
-                                  item_dict["furnishing_type"],
-                                  item_dict["color"], item_dict["dimensions"]))
+                item = FurnitureItem(item_dict["title"], item_dict["desc"],
+                                     Decimal(item_dict["price"]),
+                                     item_dict["weight"], item_dict["seller"],
+                                     item_dict["furnishing_type"],
+                                     item_dict["color"],
+                                     item_dict["dimensions"])
+                item.set_item_id(item_dict["_id"])
+                items.append(item)
         elif category == 'Electronic':
             item_dicts = electronic_col.find({})
             for item_dict in item_dicts:
-                items.append(
-                    ElectronicItem(item_dict["_id"], item_dict["title"],
-                                   item_dict["desc"],
-                                   Decimal(item_dict["price"]),
-                                   item_dict["weight"], item_dict["seller"],
-                                   item_dict["electronic_type"],
-                                   item_dict["model"],
-                                   item_dict["dimensions"]))
+                item = ElectronicItem(item_dict["title"], item_dict["desc"],
+                                      Decimal(item_dict["price"]),
+                                      item_dict["weight"], item_dict["seller"],
+                                      item_dict["electronic_type"],
+                                      item_dict["model"],
+                                      item_dict["dimensions"])
+                item.set_item_id(item_dict["_id"])
+                items.append(item)
         elif category == 'Sports Gear':
             item_dicts = sports_gear_col.find({})
             for item_dict in item_dicts:
-                items.append(
-                    SportsGearItem(item_dict["_id"], item_dict["title"],
-                                   item_dict["desc"],
-                                   Decimal(item_dict["price"]),
-                                   item_dict["weight"], item_dict["seller"],
-                                   item_dict["gear_type"],
-                                   ClothingSize(item_dict["size"]),
-                                   ClothingGender(item_dict["gender"])))
+                item = SportsGearItem(item_dict["title"], item_dict["desc"],
+                                      Decimal(item_dict["price"]),
+                                      item_dict["weight"], item_dict["seller"],
+                                      item_dict["gear_type"],
+                                      ClothingSize(item_dict["size"]),
+                                      ClothingGender(item_dict["gender"]))
+                item.set_item_id(item_dict["_id"])
+                items.append(item)
         else:
             raise RuntimeError("get_item_by_category: category undefined")
         return items
