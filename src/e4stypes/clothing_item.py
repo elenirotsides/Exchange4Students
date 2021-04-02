@@ -3,16 +3,6 @@ from enum import IntEnum
 
 from item import Item
 
-import pymongo
-
-# establish connection with database
-myclient = pymongo.MongoClient('mongodb://localhost:27017/')
-# create the databse if it doesn't already exist
-db = myclient.exchange4students
-
-# create clothing collection if it doesn't already exist
-clothing_col = db.clothing
-
 
 class ClothingGender(IntEnum):
     UNISEX = 0

@@ -4,16 +4,6 @@ from typing import List
 from item import Item
 from clothing_item import ClothingGender, ClothingSize
 
-import pymongo
-
-# establish connection with database
-myclient = pymongo.MongoClient('mongodb://localhost:27017/')
-# create the databse if it doesn't already exist
-db = myclient.exchange4students
-
-# create sports gear collection if it doesn't already exist
-sports_gear_col = db.sports_gear
-
 
 class SportsGearItem(Item):
     def __init__(self, item_id: str, title: str, desc: str, price: Decimal,
