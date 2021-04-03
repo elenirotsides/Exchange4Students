@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -49,16 +49,24 @@ def get_sports():
 def get_furniture():
     return render_template('/furniture.html')
 
-
 @app.route('/sell', methods=['GET', 'POST'])
 def get_sell():
+    print("howdy")
+    if request.method == 'POST':
+        quantity = request.form['quantity_val']
+        print("hello")
+        print(quantity)
+    return render_template('/sell.html')
+
+@app.route('/photosub', methods=['GET', 'POST'])
+def get_photosub():
     form = UploadForm()
     if form.validate_on_submit():
         filename = photos.save(form.photo.data)
         file_url = photos.url(filename)
     else:
         file_url = None
-    return render_template('/sell.html', form=form, file_url=file_url)
+    return render_template('/photosub.html', form=form, file_url=file_url)
 
 
 @app.route('/view')

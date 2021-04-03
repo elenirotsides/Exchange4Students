@@ -1,225 +1,436 @@
 <!doctype html>
 <html lang="en">
-  <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        <title>Exchange for Students</title>
 
-        <!--extra styles-->
-        <style>
-            .bd-placeholder-img {
-              font-size: 1.125rem;
-              text-anchor: middle;
-              -webkit-user-select: none;
-              -moz-user-select: none;
-              user-select: none;
-            }
-      
-            @media (min-width: 768px) {
-              .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-              }
-            }
-          </style>
-    </head>
-    <body>
-        <header>
-            <!-- Navigation bar -->   
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/books">Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
-                        </li>
-                    <!-- I CANT GET DROPDOWN TO WORK :(
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/books">Books</a></li>
-                        <li><a class="dropdown-item" href="/clothes">Clothes</a></li>
-                        <li><a class="dropdown-item" href="/electronics">Electronics</a></li>
-                        <li><a class="dropdown-item" href="/sports">Sports Gear</a></li>
-                        <li><a class="dropdown-item" href="/furniture">Furniture</a></li>
-                        </ul>
-                    </li>
-                -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Account
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    </ul>
-                    <form class="d-flex">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <title>Exchange for Students</title>
+
+  <!--extra styles-->
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/books">Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
+            </li>
+            <!-- Account dropdown not implemented -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Account
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- Search - unimplemented -->
+          <!-- <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-                </div>
-            </nav>
-        </header>
-       <main>
+                    </form> -->
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
 
-            <section class="py-5 text-center container">
-              <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                  <h1 class="fw-light">Post your item for sale here:</h1>
-                </div>
-              </div>
-            </section>
-          
-            <div class="album py-5 bg-light">
-              <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <form class="p-3">                       
-                        <div class="form-group">
-                          <label for="category_drop">Choose a Category</label>
-                          <select class="form-control" id="category_drop">
-                                <option value="no">Select</option>
-                                <option value="books">Books</option>
-                                <option value="clothes">Clothes</option>
-                                <option value="furniture">Furniture</option>
-                                <option value="electronics">Electronics</option>
-                                <option value="sports">Sports Gear</option>
-                          </select>
-                        </div>
-                        
-                        <div class="form-group">
-                          <label for="price">Price</label>
-                          <textarea class="form-control" id="price" rows="1">$</textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                          <label for="seeAnotherFieldGroup">Do You Want To See Another Group of Fields?</label>
-                          <select class="form-control" id="seeAnotherFieldGroup">
-                                <option value="no">Not Particularly.</option>
-                                <option value="yes">I Guess!</option>
-                          </select>
-                        </div>
-                        
-                        <div class="form-group" id="otherFieldGroupDiv">
-                          <div class="row">
-                            <div class="col-6">
-                              <label for="otherField1">Group: Heres One!</label>
-                              <input type="text" class="form-control w-100" id="otherField1">
-                            </div>
-                            <div class="col-6">
-                              <label for="otherField2">Group: Another One!</label>
-                              <input type="text" class="form-control w-100" id="otherField2">
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div class="form-group">
-                          <label for="comments">Description</label>
-                          <textarea class="form-control" id="comments" rows="3"></textarea>
-                      </div>
-                      <h4>Upload a Photo</h3>
-                      <form method="POST" enctype="multipart/form-data" id="photo">
-                        {{ form.hidden_tag() }}
-                        {{ form.photo }}
-                        {% for error in form.photo.errors %}
-                            <span style="color: red;">{{ error }}</span>
-                        {% endfor %}
-                        {{ form.submit }}
-                      </form>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Post your item for sale here:</h1>
+        </div>
+      </div>
+    </section>
 
-                    {% if file_url %}
-                    <br>
-                    <img src="{{ file_url }}">
-                    {% endif %}
-                    
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <button class="btn btn-primary" type="submit">Submit</button>
-                          </div>
-                        </div>
-                      </div>
+    <div class="album py-5 bg-light" id="item_box">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <form class="p-3" method="POST" id="sellitem" action="/sell">
+                <div class="form-group">
+                  <label for="category_drop">Choose a Category</label>
+                  <select class="form-control" id="category_drop">
+                    <option value="no">Select</option>
+                    <option value="books">Books</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="sports">Sports Gear</option>
+                  </select>
+                </div>
+
+                <!-- Price -->
+                <div class="form-group" id="price">
+                  <label for="price">Price</label>
+                  <input type="text" name="price_val" id="price_val">
+                </div>
+
+                <!-- Book Properties -->
+                <div class="form-group" id="book_title_ed">
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="ed_val">Book Title</label>
+                      <input type="text" name="title_val" id="title_val">
+                    </div>
+                    <div class="col-6">
+                      <label for="ed_val">Book Edition</label>
+                      <input type="text" name="ed_val" id="ed_val">
                     </div>
                   </div>
                 </div>
+
+                <div class="form-group" id="dimensions">
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="height_val">Height</label>
+                      <input type="text" name="height_val" id="height_val">
+                    </div>
+                    <div class="col-6">
+                      <label for="width_val">Width</label>
+                      <input type="text" name="width_val" id="width_val">
+                    </div>
+                    <div class="col-6">
+                      <label for="length_val">Length</label>
+                      <input type="text" name="length_val" id="length_val">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" id="condition">
+                  <label for="condition">Condition</label>
+                  <select class="form-control">
+                    <option>Select</option>
+                    <option>Perfect</option>
+                    <option>Good</option>
+                    <option>Rough</option>
+                  </select>
+                </div>
+
+                <div class="form-group" id="quantity">
+                  <label for="quantity_val">Quantity</label>
+                  <input type="text" name="quantity_val" id="quantity_val">
+                </div>
+
+                <div class="form-group" id="weight">
+                  <label for="weight_val">Weight (lbs)</label>
+                  <input type="text" name="weight_val" id="weight_val">
+                </div>
+
+                <div class="form-group" id="color">
+                  <label for="color_val">Color</label>
+                  <input type="text" name="color_val" id="color_val">
+                </div>
+
+                <div class="form-group" id="type">
+                  <label for="type_val">Type</label>
+                  <input type="text" name="type_val" id="type_val">
+                </div>
+
+                <div class="form-group" id="course_num">
+                  <label for="course_num_val">Course Number</label>
+                  <input type="text" name="course_num_val" id="course_num_val">
+                </div>
+
+                <div class="form-group" id="size">
+                  <label for="size_val">Size</label>
+                  <input type="text" name="size_val" id="size_val">
+                </div>
+
+                <div class="form-group" id="gender">
+                  <label for="gender">Gender</label>
+                  <select class="form-control">
+                    <option>Select</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Unisex</option>
+                  </select>
+                </div>
+
+                <div class="form-group" id="model">
+                  <label for="model">Model</label>
+                  <input type="text" name="model_val" id="model_val">
+                </div>
+
+                <div class="form-group" id="comments">
+                  <label for="comments_val">Description</label>
+                  <input type="text" name="comments_val" id="comments_val">
+                </div>
+
+                <input type="submit" value="Next">
+              </form>
+              <!-- <form method="POST" action="/photosub" id="subBTM">
+                      <input type="submit" value="Next">
+                     </form> -->
+
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center"></div>
+
               </div>
             </div>
-          
-          </main>
-      <!-- jquery stuff-->
-    <script>
-      $("#choose_category").change(function() {
-        if ($(this).val() == "books") {
-          $('#price').show();
-          $('#photo').show();
-          $('#otherField').attr('required', '');
-          $('#otherField').attr('data-error', 'This field is required.');
-        }
-        if ($(this).val() == "yes") {
-          $('#price').show();
-          $('#otherField').attr('required', '');
-          $('#otherField').attr('data-error', 'This field is required.');
-        }
-         else {
-          $('#otherFieldDiv').hide();
-          $('#otherField').removeAttr('required');
-          $('#otherField').removeAttr('data-error');
-        }
-      });
-      $("#seeAnotherField").trigger("change");
-      
-      $("#seeAnotherFieldGroup").change(function() {
-        if ($(this).val() == "yes") {
-          $('#otherFieldGroupDiv').show();
-          $('#otherField1').attr('required', '');
-          $('#otherField1').attr('data-error', 'This field is required.');
-          $('#otherField2').attr('required', '');
-          $('#otherField2').attr('data-error', 'This field is required.');
-        } else {
-          $('#otherFieldGroupDiv').hide();
-          $('#otherField1').removeAttr('required');
-          $('#otherField1').removeAttr('data-error');
-          $('#otherField2').removeAttr('required');
-          $('#otherField2').removeAttr('data-error');
-        }
-      });
-      $("#seeAnotherFieldGroup").trigger("change");
-    </script>
-    </body>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </main>
+  <!-- jquery stuff-->
+  <script>
+
+    $("#category_drop").change(function () {
+      //required
+      $('#book_title_ed').attr('required', '');
+      $('#weight').attr('required', '');
+      $('#price').attr('required', '');
+      $('#quantity').attr('required', '');
+      $('#condition').attr('required', '');
+      $('#comments').attr('required', '');
+      $('#type').attr('required', '');
+      $('#size').attr('required', '');
+      $('#gender').attr('required', '');
+      $('#model').attr('required', '');
+      $('#dimensions').attr('required', '');
+      $('#color').attr('required', '');
+      //$('#course_num').attr('required', '');
+      //data errors
+      $('#book_title_ed').attr('data-error', 'This field is required.');
+      $('#weight').attr('data-error', 'This field is required.');
+      $('#price').attr('data-error', 'This field is required.');
+      $('#quantity').attr('data-error', 'This field is required.');
+      $('#condition').attr('data-error', 'This field is required.');
+      $('#comments').attr('data-error', 'This field is required.');
+      $('#type').attr('data-error', 'This field is required.');
+      $('#size').attr('data-error', 'This field is required.');
+      $('#gender').attr('data-error', 'This field is required.');
+      $('#model').attr('data-error', 'This field is required.');
+      $('#dimensions').attr('data-error', 'This field is required.');
+      $('#color').attr('data-error', 'This field is required.');
+
+      if ($(this).val() == "books") {
+        $('#book_title_ed').show();
+        $('#weight').show();
+        $('#price').show();
+        $('#quantity').show();
+        $('#condition').show();
+        $('#comments').show();
+        $('#type').show();
+        $('#course_num').show();
+        //hidden
+        $('#size').hide();
+        $('#gender').hide();
+        $('#model').hide();
+        $('#dimensions').hide();
+        $('#color').hide();
+        //not required
+        $('#size').removeAttr('required');
+        $('#gender').removeAttr('required');
+        $('#model').removeAttr('required');
+        $('#dimensions').removeAttr('required');
+        $('#color').removeAttr('required');
+        //data error
+        $('#size').removeAttr('data-error', 'This field is required.');
+        $('#gender').removeAttr('data-error', 'This field is required.');
+        $('#model').removeAttr('data-error', 'This field is required.');
+        $('#dimensions').removeAttr('data-error', 'This field is required.');
+        $('#color').removeAttr('data-error', 'This field is required.');
+
+      }
+      else if ($(this).val() == "furniture") {
+        $('#dimensions').show();
+        $('#weight').show();
+        $('#type').show();
+        $('#color').show();
+        $('#price').show();
+        $('#quantity').show();
+        $('#condition').show();
+        $('#comments').show();
+        //hidden
+        $('#book_title_ed').hide();
+        $('#size').hide();
+        $('#gender').hide();
+        $('#model').hide();
+        $('#course_num').hide();
+        //not required
+        $('#book_title_ed').removeAttr('required');
+        $('#gender').removeAttr('required');
+        $('#model').removeAttr('required');
+        $('#size').removeAttr('required');
+
+      }
+      else if ($(this).val() == "clothes") {
+        $('#type').show();
+        $('#weight').show();
+        $('#price').show();
+        $('#size').show();
+        $('#quantity').show();
+        $('#condition').show();
+        $('#gender').show();
+        $('#color').show();
+        $('#comments').show();
+        //hidden
+        $('#book_title_ed').hide();
+        $('#dimensions').hide();
+        $('#model').hide();
+        $('#course_num').hide();
+        //not required
+        $('#book_title_ed').removeAttr('required');
+        $('#dimensions').removeAttr('required');
+        $('#model').removeAttr('required');
+      }
+      else if ($(this).val() == "electronics") {
+        $('#type').show();
+        $('#model').show();
+        $('#weight').show();
+        $('#price').show();
+        $('#dimensions').show();
+        $('#quantity').show();
+        $('#condition').show();
+        $('#comments').show();
+        //hidden
+        $('#book_title_ed').hide();
+        $('#size').hide();
+        $('#gender').hide();
+        $('#color').hide();
+        $('#course_num').hide();
+        //not required
+        $('#book_title_ed').removeAttr('required');
+        $('#gender').removeAttr('required');
+        $('#size').removeAttr('required');
+        $('#color').removeAttr('required');
+      }
+      else if ($(this).val() == "sports") {
+        $('#type').show();
+        $('#size').show();
+        $('#weight').show();
+        $('#gender').show();
+        $('#price').show();
+        $('#quantity').show();
+        $('#condition').show();
+        $('#comments').show();
+        //hidden
+        $('#book_title_ed').hide();
+        $('#model').hide();
+        $('#dimensions').hide();
+        $('#color').hide();
+        $('#course_num').hide();
+        //not required
+        $('#book_title_ed').removeAttr('required');
+        $('#dimensions').removeAttr('required');
+        $('#model').removeAttr('required');
+        $('#color').removeAttr('required');
+      }
+      else {
+        $('#book_title_ed').hide();
+        $('#dimensions').hide();
+        $('#price').hide();
+        $('#color').hide();
+        $('#weight').hide();
+        $('#quantity').hide();
+        $('#condition').hide();
+        $('#comments').hide();
+        $('#type').hide();
+        $('#size').hide();
+        $('#gender').hide();
+        $('#model').hide();
+        $('#course_num').hide();
+      }
+    });
+    $("#category_drop").trigger("change");
+
+    // $( document ).ready(function() {
+    // $('#subBTM').on('click',function(e){
+    //     e.preventDefault();
+    //     var empty = false;
+    //     $('#sellitem').find( 'select, textarea, input' ).each(function(){
+    //       var attr = $(this).attr('required');
+    //         console.log($(this).toArray());
+    //         if($(this).val()==''){
+    //           console.log(attr);
+    //         }
+    //         if((typeof attr != 'undefined' && attr != false) && $(this).val()==''){
+    //             console.log("empty req");
+    //             empty = false;
+    //             return false;
+    //         } else empty = true;
+    //     });
+    //   if(!empty){
+    //     alert("All fields required.");
+    //     return false;
+    //   }
+    //   else{
+    //     $('form').submit();
+    //   }
+    // }); 
+
+    // $('#subBTM').on('click',function(){
+    //     $('form').submit();
+    // });
+  //});
+  </script>
+</body>
+
 </html>
-     

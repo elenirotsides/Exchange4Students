@@ -60,7 +60,7 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
                         </li>
-              
+                      <!-- Account dropdown not implemented -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
@@ -73,7 +73,7 @@
                         </ul>
                     </li>
                     </ul>
-                     <!-- Search, not implemented -->
+                    <!-- Search - unimplemented -->
                     <!-- <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -87,28 +87,48 @@
             <section class="py-5 text-center container">
               <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                  <h1 class="fw-light">Item Name</h1>
+                  <h1 class="fw-light">Post your item for sale here:</h1>
                 </div>
               </div>
             </section>
           
-            <div class="album py-5 bg-light">
+            <div class="album py-5 bg-light" id="item_box">
               <div class="container">
-
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                   <div class="col">
                     <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
                       <div class="card-body">
-                        <p class="card-text">Sample Item</p>
                         <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
+                            <h4>Upload a Photo</h4>
+                            <form method="POST" enctype="multipart/form-data">
+                                {{ form.hidden_tag() }}
+                                {{ form.photo }}
+                                <!-- error handling later -->
+                                <!-- {% for error in form.photo.errors %}
+                                    <span style="color: red;">{{ error }}</span>
+                                {% endfor %} -->
+                                {{ form.submit }}
+                           </form>
+                        
+                        
                         </div>
+                        <div>
+                            {% if file_url %}
+                            <br>
+                            <h3 style="color:green">Success!</h4>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            {% if file_url %}
+                            <br>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/sell">Post another Item</a>
+                            </p>
+                
+                            {% endif %}
+                           </div>
+
                       </div>
                     </div>
                   </div>
@@ -117,6 +137,7 @@
             </div>
           
           </main>
+      
     </body>
 </html>
      
