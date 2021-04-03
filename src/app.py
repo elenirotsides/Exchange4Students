@@ -1,9 +1,12 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, url_for, request
+from flask_pymongo import PyMongo
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
+from werkzeug.utils import secure_filename
+import db as d #this needs to change, db should be the mongodb Eleni makes. This is just so I can write line 31
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -19,6 +22,22 @@ patch_request_class(app)  # set maximum file size, default is 16MB
 class UploadForm(FlaskForm):
     photo = FileField(validators=[FileAllowed(photos, 'Image only!'), FileRequired('File was empty!')])
     submit = SubmitField('Upload')
+
+@app.route('/uploads', methods=['POST'])
+def get_imgs():
+    target = os.path.join(basedir, 'uploads')
+    if not os.path.isdir(target):
+        os.mkdir(target)                #makes a folder if one doesn't already exists
+    img_db_table = d.mongo.db.images    # database table name
+    if request.method == 'POST':
+        for upload in request.files.getlist("uploads"): #multiple image handle
+            filename = secure_filename(upload.filename)
+            destination = "/".join([target, filename])
+            upload.save(destination)
+            img_db_table.insert({'uploads': filename})  #insert into database
+
+        return 'Image Upload Succesful'
+
 
 @app.route('/')
 def get_home():
