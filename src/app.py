@@ -53,7 +53,12 @@ def get_furniture():
 def get_sell():
     print("howdy")
     if request.method == 'POST':
+        price = request.form['price_val']
         quantity = request.form['quantity_val']
+        title = request.form['title_val']
+        edition = request.form['ed_val']
+        height = request.form['height_val']
+        length = request.form['length_val']
         print("hello")
         print(quantity)
     return render_template('/sell.html')
