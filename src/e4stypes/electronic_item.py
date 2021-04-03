@@ -1,14 +1,13 @@
 from decimal import Decimal
 from typing import List
-
-from item import Item
+from .item import Item
 
 
 class ElectronicItem(Item):
-    def __init__(self, item_id: int, title: str, desc: str, price: Decimal,
-                 weight: float, seller: str, electronic_type: str, model: str,
+    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
+                 seller: str, electronic_type: str, model: str,
                  dimensions: List[int]):
-        super().__init__(item_id, title, desc, price, weight, seller)
+        super().__init__(title, desc, price, weight, seller)
 
         # Private instance attributes
         self._electronic_type: str = electronic_type

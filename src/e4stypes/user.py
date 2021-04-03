@@ -41,11 +41,11 @@ class User:
     def register(cls):
         pass
 
-    def post_item(self, item_id: int) -> type(None):
+    def post_item(self, item_id: str) -> type(None):
         """Implements Seller.post_item()"""
         pass
 
-    def edit_item(self, item_id: int) -> type(None):
+    def edit_item(self, item_id: str) -> type(None):
         """Implements Seller.edit_item()"""
         pass
 
@@ -53,6 +53,6 @@ class User:
         """Implements Customer.send_message_to_seller()"""
         pass
 
-    def purchase_item(self, item_id: int) -> type(None):
+    def purchase_item(self, item_id: str) -> type(None):
         """Implements Customer.purchase_item()"""
         pass
