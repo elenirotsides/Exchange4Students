@@ -1,8 +1,8 @@
 from decimal import Decimal
 from typing import List
 
-from item import Item
-from clothing_item import ClothingGender, ClothingSize
+from .item import Item
+from .clothing_item import ClothingGender, ClothingSize
 
 
 class SportsGearItem(Item):

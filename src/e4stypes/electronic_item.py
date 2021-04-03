@@ -1,7 +1,6 @@
 from decimal import Decimal
 from typing import List
-
-from item import Item
+from .item import Item
 
 
 class ElectronicItem(Item):

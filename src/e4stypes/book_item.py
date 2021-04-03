@@ -1,5 +1,5 @@
 from decimal import Decimal
-from item import Item
+from .item import Item
 
 
 class BookItem(Item):

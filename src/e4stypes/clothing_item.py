@@ -1,7 +1,7 @@
 from decimal import Decimal
 from enum import IntEnum
 
-from item import Item
+from .item import Item
 
 
 class ClothingGender(IntEnum):

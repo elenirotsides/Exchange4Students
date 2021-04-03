@@ -1,36 +1,42 @@
 from flask import Flask, render_template
+from e4stypes.database import Database
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def get_home():
-    return render_template('/home.html')
+    return render_template('/home.html', items=Database.get_all())
 
 
 @app.route('/books')
 def get_books():
-    return render_template('/books.html')
+    return render_template('/books.html',
+                           items=Database.get_item_by_category("Book"))
 
 
 @app.route('/clothes')
 def get_clothes():
-    return render_template('/clothes.html')
+    return render_template('/clothes.html',
+                           items=Database.get_item_by_category("Clothing"))
 
 
 @app.route('/electronics')
 def get_electronics():
-    return render_template('/electronics.html')
+    return render_template('/electronics.html',
+                           items=Database.get_item_by_category("Electronic"))
 
 
 @app.route('/sports')
 def get_sports():
-    return render_template('/sports.html')
+    return render_template('/sports.html',
+                           items=Database.get_item_by_category("Sports Gear"))
 
 
 @app.route('/furniture')
 def get_furniture():
-    return render_template('/furniture.html')
+    return render_template('/furniture.html',
+                           items=Database.get_item_by_category("Furniture"))
 
 
 @app.route('/sell')
