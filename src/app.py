@@ -117,27 +117,32 @@ def get_sell():
                 BookItem(post_title, description, Decimal(price.strip()),
                          float(weight.strip()), seller, title, edition,
                          course_num))
+             return redirect('/photosub')
         elif category == 'furniture':
             Database.add_item(
                 FurnitureItem(post_title, description, Decimal(price.strip()),
                               float(weight.strip()), seller, type_val, color,
                               dimensions))
+             return redirect('/photosub')
         elif category == 'clothes':
             Database.add_item(
                 ClothingItem(post_title, description, Decimal(price.strip()),
                              float(weight.strip()), seller, type_val, size,
                              gender, color))
+             return redirect('/photosub')
         elif category == 'sports':
             Database.add_item(
                 SportsGearItem(post_title, description, Decimal(price.strip()),
                                float(weight.strip()), seller, type_val, size,
                                gender))
+             return redirect('/photosub')
         elif category == 'electronics':
             Database.add_item(
                 ElectronicItem(post_title, description, Decimal(price.strip()),
                                float(weight.strip()), seller, type_val, model,
                                dimensions))
-        return redirect('/photosub')
+             return redirect('/photosub')
+        return "<An error message here>"
 
     return render_template('/sell.html')
 
