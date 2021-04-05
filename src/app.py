@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 from flask_pymongo import PyMongo
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
@@ -7,6 +7,13 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
 from werkzeug.utils import secure_filename
 from e4stypes.database import Database
+from e4stypes.book_item import BookItem
+from e4stypes.clothing_item import ClothingItem
+from e4stypes.electronic_item import ElectronicItem
+from e4stypes.furniture_item import FurnitureItem
+from e4stypes.sports_gear_item import SportsGearItem
+import math
+from decimal import Decimal
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -75,16 +82,46 @@ def get_furniture():
 
 @app.route('/sell', methods=['GET', 'POST'])
 def get_sell():
-    print("howdy")
     if request.method == 'POST':
+        #grab form data in order they appear in sell.html
+        category = request.form['category_drop_val']
+        post_title = request.form['post_title_val']
         price = request.form['price_val']
-        quantity = request.form['quantity_val']
         title = request.form['title_val']
         edition = request.form['ed_val']
         height = request.form['height_val']
+        width = request.form['width_val']
         length = request.form['length_val']
-        print("hello")
-        print(quantity)
+        quantity = request.form['quantity_val']
+        weight = request.form['weight_val']
+        color = request.form['color_val']
+        #type is a key word
+        type_val = request.form['type_val']
+        course_num = request.form['course_num_val']
+        size = request.form['size_val']
+        gender = request.form['gender_val']
+        model = request.form['model_val']
+        description = request.form['comments_val']
+        seller = request.form['seller_val']
+
+        # create item and add item to database
+        if category == 'books':
+            book = BookItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, title, edition, course_num)
+            Database.add_item(book)
+        elif category == 'furniture':
+            furniture = FurnitureItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, type_val, color, [int(height), int(width), int(length)])
+            Database.add_item(furniture)
+        elif category == 'clothes':
+            clothing = ClothingItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, type_val, size, gender, color)
+            Database.add_item(clothing)
+        elif category == 'sports':
+            sports = SportsGearItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, type_val, size, gender)
+            Database.add_item(sports)
+        elif category == 'electronics':
+            electronic = ElectronicItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, type_val, model, [int(height), int(width), int(length)])
+        
+        return redirect('/photosub')
+    
     return render_template('/sell.html')
 
 @app.route('/photosub', methods=['GET', 'POST'])

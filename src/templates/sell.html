@@ -113,7 +113,7 @@
               <form class="p-3" method="POST" id="sellitem" action="/sell">
                 <div class="form-group">
                   <label for="category_drop">Choose a Category</label>
-                  <select class="form-control" id="category_drop">
+                  <select class="form-control" name="category_drop_val" id="category_drop">
                     <option value="no">Select</option>
                     <option value="books">Books</option>
                     <option value="clothes">Clothes</option>
@@ -123,9 +123,15 @@
                   </select>
                 </div>
 
+                <!--Post Title-->
+                <div class="form-group" id="post_title">
+                  <label for="post_title_val">Title for Post</label>
+                  <input type="text" name="post_title_val" id="post_title_val">
+                </div>
+
                 <!-- Price -->
                 <div class="form-group" id="price">
-                  <label for="price">Price</label>
+                  <label for="price">Price ($)</label>
                   <input type="text" name="price_val" id="price_val">
                 </div>
 
@@ -133,7 +139,7 @@
                 <div class="form-group" id="book_title_ed">
                   <div class="row">
                     <div class="col-6">
-                      <label for="ed_val">Book Title</label>
+                      <label for="title_val">Book Title</label>
                       <input type="text" name="title_val" id="title_val">
                     </div>
                     <div class="col-6">
@@ -146,28 +152,18 @@
                 <div class="form-group" id="dimensions">
                   <div class="row">
                     <div class="col-6">
-                      <label for="height_val">Height</label>
+                      <label for="height_val">Height (in.)</label>
                       <input type="text" name="height_val" id="height_val">
                     </div>
                     <div class="col-6">
-                      <label for="width_val">Width</label>
+                      <label for="width_val">Width(in.)</label>
                       <input type="text" name="width_val" id="width_val">
                     </div>
                     <div class="col-6">
-                      <label for="length_val">Length</label>
+                      <label for="length_val">Length (in.)</label>
                       <input type="text" name="length_val" id="length_val">
                     </div>
                   </div>
-                </div>
-
-                <div class="form-group" id="condition">
-                  <label for="condition">Condition</label>
-                  <select class="form-control">
-                    <option>Select</option>
-                    <option>Perfect</option>
-                    <option>Good</option>
-                    <option>Rough</option>
-                  </select>
                 </div>
 
                 <div class="form-group" id="quantity">
@@ -202,7 +198,7 @@
 
                 <div class="form-group" id="gender">
                   <label for="gender">Gender</label>
-                  <select class="form-control">
+                  <select class="form-control" id="gender_val" name="gender_val">
                     <option>Select</option>
                     <option>Male</option>
                     <option>Female</option>
@@ -219,6 +215,11 @@
                   <label for="comments_val">Description</label>
                   <input type="text" name="comments_val" id="comments_val">
                 </div>
+
+                <div class="form-group" id="seller">
+                  <label for="seller_val">Your Name (Seller Name)</label>
+                  <input type="text" name="seller_val" id="seller_val">
+                </div>              
 
                 <input type="submit" value="Next">
               </form>
@@ -243,113 +244,115 @@
 
     $("#category_drop").change(function () {
       //required
-      $('#book_title_ed').attr('required', '');
-      $('#weight').attr('required', '');
-      $('#price').attr('required', '');
-      $('#quantity').attr('required', '');
-      $('#condition').attr('required', '');
-      $('#comments').attr('required', '');
-      $('#type').attr('required', '');
-      $('#size').attr('required', '');
-      $('#gender').attr('required', '');
-      $('#model').attr('required', '');
-      $('#dimensions').attr('required', '');
-      $('#color').attr('required', '');
+      // $('#book_title_ed').attr('required', '');
+      // $('#weight').attr('required', '');
+      // $('#price').attr('required', '');
+      // $('#quantity').attr('required', '');
+      // $('#comments').attr('required', '');
+      // $('#type').attr('required', '');
+      // $('#size').attr('required', '');
+      // $('#gender').attr('required', '');
+      // $('#model').attr('required', '');
+      // $('#dimensions').attr('required', '');
+      // $('#color').attr('required', '');
       //$('#course_num').attr('required', '');
       //data errors
-      $('#book_title_ed').attr('data-error', 'This field is required.');
-      $('#weight').attr('data-error', 'This field is required.');
-      $('#price').attr('data-error', 'This field is required.');
-      $('#quantity').attr('data-error', 'This field is required.');
-      $('#condition').attr('data-error', 'This field is required.');
-      $('#comments').attr('data-error', 'This field is required.');
-      $('#type').attr('data-error', 'This field is required.');
-      $('#size').attr('data-error', 'This field is required.');
-      $('#gender').attr('data-error', 'This field is required.');
-      $('#model').attr('data-error', 'This field is required.');
-      $('#dimensions').attr('data-error', 'This field is required.');
-      $('#color').attr('data-error', 'This field is required.');
+      // $('#book_title_ed').attr('data-error', 'This field is required.');
+      // $('#weight').attr('data-error', 'This field is required.');
+      // $('#price').attr('data-error', 'This field is required.');
+      // $('#quantity').attr('data-error', 'This field is required.');
+      // $('#comments').attr('data-error', 'This field is required.');
+      // $('#type').attr('data-error', 'This field is required.');
+      // $('#size').attr('data-error', 'This field is required.');
+      // $('#gender').attr('data-error', 'This field is required.');
+      // $('#model').attr('data-error', 'This field is required.');
+      // $('#dimensions').attr('data-error', 'This field is required.');
+      // $('#color').attr('data-error', 'This field is required.');
 
       if ($(this).val() == "books") {
+        $('#post_title').show();
         $('#book_title_ed').show();
         $('#weight').show();
         $('#price').show();
-        $('#quantity').show();
-        $('#condition').show();
         $('#comments').show();
-        $('#type').show();
         $('#course_num').show();
+        $('#seller').show();
         //hidden
+        $('#quantity').hide();
         $('#size').hide();
+        $('#type').hide();
         $('#gender').hide();
         $('#model').hide();
         $('#dimensions').hide();
         $('#color').hide();
         //not required
-        $('#size').removeAttr('required');
-        $('#gender').removeAttr('required');
-        $('#model').removeAttr('required');
-        $('#dimensions').removeAttr('required');
-        $('#color').removeAttr('required');
-        //data error
-        $('#size').removeAttr('data-error', 'This field is required.');
-        $('#gender').removeAttr('data-error', 'This field is required.');
-        $('#model').removeAttr('data-error', 'This field is required.');
-        $('#dimensions').removeAttr('data-error', 'This field is required.');
-        $('#color').removeAttr('data-error', 'This field is required.');
+        // $('#size').removeAttr('required');
+        // $('#gender').removeAttr('required');
+        // $('#model').removeAttr('required');
+        // $('#dimensions').removeAttr('required');
+        // $('#color').removeAttr('required');
+        // //data error
+        // $('#size').removeAttr('data-error', 'This field is required.');
+        // $('#gender').removeAttr('data-error', 'This field is required.');
+        // $('#model').removeAttr('data-error', 'This field is required.');
+        // $('#dimensions').removeAttr('data-error', 'This field is required.');
+        // $('#color').removeAttr('data-error', 'This field is required.');
 
       }
       else if ($(this).val() == "furniture") {
+        $('#post_title').show();
         $('#dimensions').show();
         $('#weight').show();
         $('#type').show();
         $('#color').show();
         $('#price').show();
-        $('#quantity').show();
-        $('#condition').show();
         $('#comments').show();
+        $('#seller').show();
         //hidden
+        $('#quantity').hide();
         $('#book_title_ed').hide();
         $('#size').hide();
         $('#gender').hide();
         $('#model').hide();
         $('#course_num').hide();
         //not required
-        $('#book_title_ed').removeAttr('required');
-        $('#gender').removeAttr('required');
-        $('#model').removeAttr('required');
-        $('#size').removeAttr('required');
+        // $('#book_title_ed').removeAttr('required');
+        // $('#gender').removeAttr('required');
+        // $('#model').removeAttr('required');
+        // $('#size').removeAttr('required');
 
       }
       else if ($(this).val() == "clothes") {
+        $('#post_title').show();
         $('#type').show();
         $('#weight').show();
         $('#price').show();
         $('#size').show();
-        $('#quantity').show();
-        $('#condition').show();
         $('#gender').show();
         $('#color').show();
         $('#comments').show();
+        $('#seller').show();
         //hidden
+        $('#quantity').hide();
         $('#book_title_ed').hide();
         $('#dimensions').hide();
         $('#model').hide();
         $('#course_num').hide();
         //not required
-        $('#book_title_ed').removeAttr('required');
-        $('#dimensions').removeAttr('required');
-        $('#model').removeAttr('required');
+        // $('#book_title_ed').removeAttr('required');
+        // $('#dimensions').removeAttr('required');
+        // $('#model').removeAttr('required');
       }
       else if ($(this).val() == "electronics") {
+        $('#post_title').show();
         $('#type').show();
         $('#model').show();
         $('#weight').show();
         $('#price').show();
         $('#dimensions').show();
         $('#quantity').show();
-        $('#condition').show();
         $('#comments').show();
+        $('#seller').show();
         //hidden
         $('#book_title_ed').hide();
         $('#size').hide();
@@ -357,46 +360,48 @@
         $('#color').hide();
         $('#course_num').hide();
         //not required
-        $('#book_title_ed').removeAttr('required');
-        $('#gender').removeAttr('required');
-        $('#size').removeAttr('required');
-        $('#color').removeAttr('required');
+        // $('#book_title_ed').removeAttr('required');
+        // $('#gender').removeAttr('required');
+        // $('#size').removeAttr('required');
+        // $('#color').removeAttr('required');
       }
       else if ($(this).val() == "sports") {
+        $('#post_title').show();
         $('#type').show();
         $('#size').show();
         $('#weight').show();
         $('#gender').show();
         $('#price').show();
-        $('#quantity').show();
-        $('#condition').show();
         $('#comments').show();
+        $('#seller').show();
         //hidden
+        $('#quantity').hide();
         $('#book_title_ed').hide();
         $('#model').hide();
         $('#dimensions').hide();
         $('#color').hide();
         $('#course_num').hide();
         //not required
-        $('#book_title_ed').removeAttr('required');
-        $('#dimensions').removeAttr('required');
-        $('#model').removeAttr('required');
-        $('#color').removeAttr('required');
+        // $('#book_title_ed').removeAttr('required');
+        // $('#dimensions').removeAttr('required');
+        // $('#model').removeAttr('required');
+        // $('#color').removeAttr('required');
       }
       else {
+        $('#post_title').hide();
         $('#book_title_ed').hide();
         $('#dimensions').hide();
         $('#price').hide();
         $('#color').hide();
         $('#weight').hide();
         $('#quantity').hide();
-        $('#condition').hide();
         $('#comments').hide();
         $('#type').hide();
         $('#size').hide();
         $('#gender').hide();
         $('#model').hide();
         $('#course_num').hide();
+        $('#seller').hide();
       }
     });
     $("#category_drop").trigger("change");
