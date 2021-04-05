@@ -97,11 +97,12 @@ def get_sell():
         price = request.form['price_val']
         title = request.form['title_val']
         edition = request.form['ed_val']
-        dimensions = [
-            int(request.form['length_val']),
-            int(request.form['width_val']),
-            int(request.form['height_val'])
-        ]
+        if request.form['length_val'] != "":
+            dimensions = [
+                int(request.form['length_val']),
+                int(request.form['width_val']),
+                int(request.form['height_val'])
+            ]
         weight = request.form['weight_val']
         color = request.form['color_val']
         #type is a key word
@@ -127,13 +128,13 @@ def get_sell():
         elif category == 'clothes':
             Database.add_item(
                 ClothingItem(post_title, description, Decimal(price.strip()),
-                             float(weight.strip()), seller, type_val, size,
-                             gender, color))
+                             float(weight.strip()), seller, type_val,
+                             int(size), int(gender), color))
         elif category == 'sports':
             Database.add_item(
                 SportsGearItem(post_title, description, Decimal(price.strip()),
-                               float(weight.strip()), seller, type_val, size,
-                               gender))
+                               float(weight.strip()), seller, type_val,
+                               int(size), int(gender)))
         elif category == 'electronics':
             Database.add_item(
                 ElectronicItem(post_title, description, Decimal(price.strip()),
