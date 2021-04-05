@@ -33,7 +33,8 @@ class UploadForm(FlaskForm):
     ])
     submit = SubmitField('Upload')
 
-# commenting out for pylint 
+
+# commenting out for pylint
 # @app.route('/uploads', methods=['POST'])
 # def get_imgs():
 #     target = os.path.join(basedir, 'uploads')
