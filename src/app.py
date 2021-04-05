@@ -20,24 +20,30 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'Howdy D6'
-app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, 'uploads') # you'll need to create a folder named uploads
+app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(
+    basedir, 'uploads')  # you'll need to create a folder named uploads
 
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 patch_request_class(app)  # set maximum file size, default is 16MB
 
+
 class UploadForm(FlaskForm):
-    photo = FileField(validators=[FileAllowed(photos, 'Image only!'), FileRequired('File was empty!')])
+    photo = FileField(validators=[
+        FileAllowed(photos, 'Image only!'),
+        FileRequired('File was empty!')
+    ])
     submit = SubmitField('Upload')
+
 
 @app.route('/uploads', methods=['POST'])
 def get_imgs():
     target = os.path.join(basedir, 'uploads')
     if not os.path.isdir(target):
-        os.mkdir(target)                #makes a folder if one doesn't already exists
-    img_db_table = d.mongo.db.images    # database table name
+        os.mkdir(target)  #makes a folder if one doesn't already exists
+    img_db_table = d.mongo.db.images  # database table name
     if request.method == 'POST':
-        for upload in request.files.getlist("uploads"): #multiple image handle
+        for upload in request.files.getlist("uploads"):  #multiple image handle
             filename = secure_filename(upload.filename)
             destination = "/".join([target, filename])
             upload.save(destination)
@@ -80,6 +86,7 @@ def get_furniture():
     return render_template('/furniture.html',
                            items=Database.get_item_by_category("Furniture"))
 
+
 @app.route('/sell', methods=['GET', 'POST'])
 def get_sell():
     if request.method == 'POST':
@@ -106,23 +113,38 @@ def get_sell():
 
         # create item and add item to database
         if category == 'books':
-            book = BookItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, title, edition, course_num)
+            book = BookItem(post_title, description, Decimal(price.strip()),
+                            float(weight.strip()), seller, title, edition,
+                            course_num)
             Database.add_item(book)
         elif category == 'furniture':
-            furniture = FurnitureItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, type_val, color, [int(height), int(width), int(length)])
+            furniture = FurnitureItem(
+                post_title, description, Decimal(price.strip()),
+                float(weight.strip()), seller, type_val, color,
+                [int(height), int(width), int(length)])
             Database.add_item(furniture)
         elif category == 'clothes':
-            clothing = ClothingItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, type_val, size, gender, color)
+            clothing = ClothingItem(post_title, description,
+                                    Decimal(price.strip()),
+                                    float(weight.strip()), seller, type_val,
+                                    size, gender, color)
             Database.add_item(clothing)
         elif category == 'sports':
-            sports = SportsGearItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, type_val, size, gender)
+            sports = SportsGearItem(post_title, description,
+                                    Decimal(price.strip()),
+                                    float(weight.strip()), seller, type_val,
+                                    size, gender)
             Database.add_item(sports)
         elif category == 'electronics':
-            electronic = ElectronicItem(post_title, description, Decimal(price.strip()), float(weight.strip()), seller, type_val, model, [int(height), int(width), int(length)])
-        
+            electronic = ElectronicItem(
+                post_title, description, Decimal(price.strip()),
+                float(weight.strip()), seller, type_val, model,
+                [int(height), int(width), int(length)])
+
         return redirect('/photosub')
-    
+
     return render_template('/sell.html')
+
 
 @app.route('/photosub', methods=['GET', 'POST'])
 def get_photosub():
