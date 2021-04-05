@@ -5,7 +5,7 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_cl
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
-from werkzeug.utils import secure_filename
+# from werkzeug.utils import secure_filename
 from e4stypes.database import Database
 from e4stypes.book_item import BookItem
 from e4stypes.clothing_item import ClothingItem
