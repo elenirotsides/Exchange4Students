@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'Howdy D6'
 if not os.path.exists(os.path.join(basedir, 'uploads')):
-    os.mkdir('uploads')
+    os.mkdir(os.path.join(basedir, 'uploads'))
 app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(
     basedir, 'uploads')  # you'll need to create a folder named uploads
 
