@@ -192,17 +192,23 @@
                 </div>
 
                 <div class="form-group" id="size">
-                  <label for="size_val">Size</label>
-                  <input type="text" name="size_val" id="size_val">
+                  <label for="size">Size</label>
+                  <select class="form-control" id="size_val" name="size_val">
+                    <option>Select</option>
+                    <option value=0>Small</option>
+                    <option value=1>Medium</option>
+                    <option value=2>Large</option>
+                    <option value=3>Extra Large</option>
+                  </select>
                 </div>
 
                 <div class="form-group" id="gender">
                   <label for="gender">Gender</label>
                   <select class="form-control" id="gender_val" name="gender_val">
                     <option>Select</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Unisex</option>
+                    <option value=0>Unisex</option>
+                    <option value=1>Female</option>
+                    <option value=2>Male</option>
                   </select>
                 </div>
 
