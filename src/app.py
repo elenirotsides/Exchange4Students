@@ -128,13 +128,13 @@ def get_sell():
         elif category == 'clothes':
             Database.add_item(
                 ClothingItem(post_title, description, Decimal(price.strip()),
-                             float(weight.strip()), seller, type_val, int(size),
-                             int(gender), color))
+                             float(weight.strip()), seller, type_val,
+                             int(size), int(gender), color))
         elif category == 'sports':
             Database.add_item(
                 SportsGearItem(post_title, description, Decimal(price.strip()),
-                               float(weight.strip()), seller, type_val, int(size),
-                               int(gender)))
+                               float(weight.strip()), seller, type_val,
+                               int(size), int(gender)))
         elif category == 'electronics':
             Database.add_item(
                 ElectronicItem(post_title, description, Decimal(price.strip()),
