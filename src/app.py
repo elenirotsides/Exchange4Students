@@ -1,6 +1,6 @@
 import os
-from flask import Flask, render_template, url_for, request, redirect
-from flask_pymongo import PyMongo
+from decimal import Decimal
+from flask import Flask, render_template, request, redirect
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -12,8 +12,6 @@ from e4stypes.clothing_item import ClothingItem
 from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
-import math
-from decimal import Decimal
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -41,7 +39,7 @@ def get_imgs():
     target = os.path.join(basedir, 'uploads')
     if not os.path.isdir(target):
         os.mkdir(target)  #makes a folder if one doesn't already exists
-    img_db_table = d.mongo.db.images  # database table name
+    img_db_table = Database.mongo.db.images  # database table name
     if request.method == 'POST':
         for upload in request.files.getlist("uploads"):  #multiple image handle
             filename = secure_filename(upload.filename)
@@ -50,6 +48,7 @@ def get_imgs():
             img_db_table.insert({'uploads': filename})  #insert into database
 
         return 'Image Upload Succesful'
+    return 'None'
 
 
 @app.route('/')
@@ -96,11 +95,11 @@ def get_sell():
         price = request.form['price_val']
         title = request.form['title_val']
         edition = request.form['ed_val']
-        height = request.form['height_val']
-        width = request.form['width_val']
-        length = request.form['length_val']
-        quantity = request.form['quantity_val']
-        weight = request.form['weight_val']
+        dimensions = [
+            int(request.form['length_val']),
+            int(request.form['width_val']),
+            int(request.form['height_val'])
+        ]
         color = request.form['color_val']
         #type is a key word
         type_val = request.form['type_val']
@@ -113,34 +112,30 @@ def get_sell():
 
         # create item and add item to database
         if category == 'books':
-            book = BookItem(post_title, description, Decimal(price.strip()),
-                            float(weight.strip()), seller, title, edition,
-                            course_num)
-            Database.add_item(book)
+            Database.add_item(
+                BookItem(post_title, description, Decimal(price.strip()),
+                         float(weight.strip()), seller, title, edition,
+                         course_num))
         elif category == 'furniture':
-            furniture = FurnitureItem(
-                post_title, description, Decimal(price.strip()),
-                float(weight.strip()), seller, type_val, color,
-                [int(height), int(width), int(length)])
-            Database.add_item(furniture)
+            Database.add_item(
+                FurnitureItem(post_title, description, Decimal(price.strip()),
+                              float(weight.strip()), seller, type_val, color,
+                              dimensions))
         elif category == 'clothes':
-            clothing = ClothingItem(post_title, description,
-                                    Decimal(price.strip()),
-                                    float(weight.strip()), seller, type_val,
-                                    size, gender, color)
-            Database.add_item(clothing)
+            Database.add_item(
+                ClothingItem(post_title, description, Decimal(price.strip()),
+                             float(weight.strip()), seller, type_val, size,
+                             gender, color))
         elif category == 'sports':
-            sports = SportsGearItem(post_title, description,
-                                    Decimal(price.strip()),
-                                    float(weight.strip()), seller, type_val,
-                                    size, gender)
-            Database.add_item(sports)
+            Database.add_item(
+                SportsGearItem(post_title, description, Decimal(price.strip()),
+                               float(weight.strip()), seller, type_val, size,
+                               gender))
         elif category == 'electronics':
-            electronic = ElectronicItem(
-                post_title, description, Decimal(price.strip()),
-                float(weight.strip()), seller, type_val, model,
-                [int(height), int(width), int(length)])
-
+            Database.add_item(
+                ElectronicItem(post_title, description, Decimal(price.strip()),
+                               float(weight.strip()), seller, type_val, model,
+                               dimensions))
         return redirect('/photosub')
 
     return render_template('/sell.html')
