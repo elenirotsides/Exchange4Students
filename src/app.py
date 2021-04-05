@@ -33,22 +33,22 @@ class UploadForm(FlaskForm):
     ])
     submit = SubmitField('Upload')
 
+# commenting out for pylint 
+# @app.route('/uploads', methods=['POST'])
+# def get_imgs():
+#     target = os.path.join(basedir, 'uploads')
+#     if not os.path.isdir(target):
+#         os.mkdir(target)  #makes a folder if one doesn't already exists
+#     img_db_table = Database.mongo.db.images  # database table name
+#     if request.method == 'POST':
+#         for upload in request.files.getlist("uploads"):  #multiple image handle
+#             filename = secure_filename(upload.filename)
+#             destination = "/".join([target, filename])
+#             upload.save(destination)
+#             img_db_table.insert({'uploads': filename})  #insert into database
 
-@app.route('/uploads', methods=['POST'])
-def get_imgs():
-    target = os.path.join(basedir, 'uploads')
-    if not os.path.isdir(target):
-        os.mkdir(target)  #makes a folder if one doesn't already exists
-    img_db_table = Database.mongo.db.images  # database table name
-    if request.method == 'POST':
-        for upload in request.files.getlist("uploads"):  #multiple image handle
-            filename = secure_filename(upload.filename)
-            destination = "/".join([target, filename])
-            upload.save(destination)
-            img_db_table.insert({'uploads': filename})  #insert into database
-
-        return 'Image Upload Succesful'
-    return 'None'
+#         return 'Image Upload Succesful'
+#     return 'None'
 
 
 @app.route('/')
@@ -100,6 +100,7 @@ def get_sell():
             int(request.form['width_val']),
             int(request.form['height_val'])
         ]
+        weight = request.form['weight_val']
         color = request.form['color_val']
         #type is a key word
         type_val = request.form['type_val']
