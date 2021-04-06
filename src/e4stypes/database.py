@@ -264,7 +264,7 @@ class Database:
             raise RuntimeError("add_item: unknown item subclass")
 
     @classmethod
-    def search_item(cls, search_term) -> type(None):
+    def search_item(cls, search_term) -> List[Item]:
         search_term.strip()
         result = []
         database_content = Database.get_all()
