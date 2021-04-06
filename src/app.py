@@ -166,7 +166,8 @@ def get_book_view(item):
 @app.route('/view/clothing/<item>')
 def get_clothing_view(item):
     db_item = Database.get_item_by_id(item)
-    # this might not be the most efficient way to do this, but I was tired when I wrote this; we can fix this later
+    # this might not be the most efficient way to do this,
+    # but I was tired when I wrote this; we can fix this later
     if db_item.get_size() == 0 and db_item.get_gender() == 0:
         return render_template('/view_clothing.html',
                                item=db_item,
@@ -238,7 +239,8 @@ def get_electronic_view(item):
 @app.route('/view/sports-gear/<item>')
 def get_sports_gear_view(item):
     db_item = Database.get_item_by_id(item)
-    # this might not be the most efficient way to do this, but I was tired when I wrote this; we can fix this later
+    # this might not be the most efficient way to do this,
+    # but I was tired when I wrote this; we can fix this later
     if db_item.get_size() == 0 and db_item.get_gender() == 0:
         return render_template('/view_sports_gear.html',
                                item=db_item,
