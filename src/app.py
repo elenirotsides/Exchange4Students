@@ -160,161 +160,37 @@ def get_photosub():
 def get_view(item_id):
     item = Database.get_item_by_id(item_id)
     if isinstance(item, ClothingItem):
-        if item.get_size() == 0 and item.get_gender() == 0:
-            return render_template('/view.html',
-                                   item=item,
-                                   small=True,
-                                   unisex=True,
-                                   clothing=True)
-        if item.get_size() == 0 and item.get_gender() == 1:
-            return render_template('/view.html',
-                                   item=item,
-                                   small=True,
-                                   female=True,
-                                   clothing=True)
-        if item.get_size() == 0 and item.get_gender() == 2:
-            return render_template('/view.html',
-                                   item=item,
-                                   small=True,
-                                   male=True,
-                                   clothing=True)
-        if item.get_size() == 1 and item.get_gender() == 0:
-            return render_template('/view.html',
-                                   item=item,
-                                   medium=True,
-                                   unisex=True,
-                                   clothing=True)
-        if item.get_size() == 1 and item.get_gender() == 1:
-            return render_template('/view.html',
-                                   item=item,
-                                   medium=True,
-                                   female=True,
-                                   clothing=True)
-        if item.get_size() == 1 and item.get_gender() == 2:
-            return render_template('/view.html',
-                                   item=item,
-                                   medium=True,
-                                   male=True,
-                                   clothing=True)
-        if item.get_size() == 2 and item.get_gender() == 0:
-            return render_template('/view.html',
-                                   item=item,
-                                   large=True,
-                                   unisex=True,
-                                   clothing=True)
-        if item.get_size() == 2 and item.get_gender() == 1:
-            return render_template('/view.html',
-                                   item=item,
-                                   large=True,
-                                   female=True,
-                                   clothing=True)
-        if item.get_size() == 2 and item.get_gender() == 2:
-            return render_template('/view.html',
-                                   item=item,
-                                   large=True,
-                                   male=True,
-                                   clothing=True)
-        if item.get_size() == 3 and item.get_gender() == 0:
-            return render_template('/view.html',
-                                   item=item,
-                                   xlarge=True,
-                                   unisex=True,
-                                   clothing=True)
-        if item.get_size() == 3 and item.get_gender() == 1:
-            return render_template('/view.html',
-                                   item=item,
-                                   xlarge=True,
-                                   female=True,
-                                   clothing=True)
-        if item.get_size() == 3 and item.get_gender() == 2:
-            return render_template('/view.html',
-                                   item=item,
-                                   xlarge=True,
-                                   male=True,
-                                   clothing=True)
+        return render_template('/view.html',
+                               item=item,
+                               small=item.get_size() == 0,
+                               medium=item.get_size() == 1,
+                               large=item.get_size() == 2,
+                               xlarge=item.get_size() == 3,
+                               unisex=item.get_gender() == 0,
+                               female=item.get_gender() == 1,
+                               male=item.get_gender() == 2,
+                               clothing=True)
 
-    elif isinstance(item, BookItem):
+    if isinstance(item, BookItem):
         return render_template('/view.html', item=item, book=True)
 
-    elif isinstance(item, FurnitureItem):
+    if isinstance(item, FurnitureItem):
         return render_template('/view.html', item=item, furn=True)
 
-    elif isinstance(item, ElectronicItem):
+    if isinstance(item, ElectronicItem):
         return render_template('/view.html', item=item, elect=True)
 
-    elif isinstance(item, SportsGearItem):
-        if item.get_size() == 0 and item.get_gender() == 0:
-            return render_template('/view.html',
-                                   item=item,
-                                   small=True,
-                                   unisex=True,
-                                   sports=True)
-        if item.get_size() == 0 and item.get_gender() == 1:
-            return render_template('/view.html',
-                                   item=item,
-                                   small=True,
-                                   female=True,
-                                   sports=True)
-        if item.get_size() == 0 and item.get_gender() == 2:
-            return render_template('/view.html',
-                                   item=item,
-                                   small=True,
-                                   male=True,
-                                   sports=True)
-        if item.get_size() == 1 and item.get_gender() == 0:
-            return render_template('/view.html',
-                                   item=item,
-                                   medium=True,
-                                   unisex=True,
-                                   sports=True)
-        if item.get_size() == 1 and item.get_gender() == 1:
-            return render_template('/view.html',
-                                   item=item,
-                                   medium=True,
-                                   female=True,
-                                   sports=True)
-        if item.get_size() == 1 and item.get_gender() == 2:
-            return render_template('/view.html',
-                                   item=item,
-                                   medium=True,
-                                   male=True,
-                                   sports=True)
-        if item.get_size() == 2 and item.get_gender() == 0:
-            return render_template('/view.html',
-                                   item=item,
-                                   large=True,
-                                   unisex=True,
-                                   sports=True)
-        if item.get_size() == 2 and item.get_gender() == 1:
-            return render_template('/view.html',
-                                   item=item,
-                                   large=True,
-                                   female=True,
-                                   sports=True)
-        if item.get_size() == 2 and item.get_gender() == 2:
-            return render_template('/view.html',
-                                   item=item,
-                                   large=True,
-                                   male=True,
-                                   sports=True)
-        if item.get_size() == 3 and item.get_gender() == 0:
-            return render_template('/view.html',
-                                   item=item,
-                                   xlarge=True,
-                                   unisex=True,
-                                   sports=True)
-        if item.get_size() == 3 and item.get_gender() == 1:
-            return render_template('/view.html',
-                                   item=item,
-                                   xlarge=True,
-                                   female=True,
-                                   sports=True)
-        if item.get_size() == 3 and item.get_gender() == 2:
-            return render_template('/view.html',
-                                   item=item,
-                                   xlarge=True,
-                                   male=True,
-                                   sports=True)
+    if isinstance(item, SportsGearItem):
+        return render_template('/view.html',
+                               item=item,
+                               small=item.get_size() == 0,
+                               medium=item.get_size() == 1,
+                               large=item.get_size() == 2,
+                               xlarge=item.get_size() == 3,
+                               unisex=item.get_gender() == 0,
+                               female=item.get_gender() == 1,
+                               male=item.get_gender() == 2,
+                               sports=True)
 
 
 @app.errorhandler(404)
