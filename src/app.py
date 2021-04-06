@@ -316,8 +316,6 @@ def get_view(item_id):
                                    male=True,
                                    sports=True)
 
-        # return render_template('/view.html', item=item, sports=True)
-
 
 @app.errorhandler(404)
 def page_not_found(error):
