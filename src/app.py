@@ -61,8 +61,7 @@ def get_home():
 @app.route('/books')
 def get_books():
     return render_template('/books.html',
-                           items=Database.get_item_by_category("Book"),
-                           database=Database)
+                           items=Database.get_item_by_category("Book"))
 
 
 @app.route('/clothes')
