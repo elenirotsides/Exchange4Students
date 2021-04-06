@@ -141,6 +141,7 @@ def get_sell():
                                float(weight.strip()), seller, type_val, model,
                                dimensions))
         return redirect('/photosub')
+        #pass the item id to the redirect
 
     return render_template('/sell.html')
 
@@ -150,10 +151,15 @@ def get_photosub():
     form = UploadForm()
     if form.validate_on_submit():
         filename = photos.save(form.photo.data)
-        file_url = photos.url(filename)
+        file_url = photos.url(filename)     #url 
+        file_path = os.path.join(basedir, 'uploads')
+        file_path+= "\\" + filename
+        print(file_path)
     else:
         file_url = None
+
     return render_template('/photosub.html', form=form, file_url=file_url)
+
 
 
 @app.route('/view')
