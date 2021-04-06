@@ -167,6 +167,7 @@ class Database:
             'price': float(book.get_price()),
             'weight': book.get_weight(),
             'seller': book.get_seller(),
+            'img' : book.get_img(),
             'book_title': book.get_book_title(),
             'edition': book.get_edition(),
             'course_number': book.get_course_number()
@@ -189,6 +190,7 @@ class Database:
             'size': clothing.get_size(),
             'gender': clothing.get_gender(),
             'color': clothing.get_color()
+
         }
 
         # making insertion

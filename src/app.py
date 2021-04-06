@@ -1,6 +1,6 @@
 import os
 from decimal import Decimal
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -114,53 +114,41 @@ def get_sell():
         description = request.form['comments_val']
         seller = request.form['seller_val']
 
+        #photo upload
+        file = request.files['file']
+        f_name = file.filename
+        print(f_name)
+        file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], f_name))
+        file_path = os.path.join(basedir, 'uploads')
+        file_path += "\\" + f_name
+        
         # create item and add item to database
         if category == 'books':
-            Database.add_item(
-                BookItem(post_title, description, Decimal(price.strip()),
-                         float(weight.strip()), seller, title, edition,
-                         course_num))
+            item = BookItem(post_title, description, Decimal(price.strip()),
+                         float(weight.strip()), seller, file_path, title, edition,
+                         course_num)
+            Database.add_item(item)
         elif category == 'furniture':
-            Database.add_item(
-                FurnitureItem(post_title, description, Decimal(price.strip()),
+            item = FurnitureItem(post_title, description, Decimal(price.strip()),
                               float(weight.strip()), seller, type_val, color,
-                              dimensions))
+                              dimensions)
+            Database.add_item(item)
         elif category == 'clothes':
-            Database.add_item(
-                ClothingItem(post_title, description, Decimal(price.strip()),
+            item = ClothingItem(post_title, description, Decimal(price.strip()),
                              float(weight.strip()), seller, type_val,
-                             int(size), int(gender), color))
+                             int(size), int(gender), color)
+            Database.add_item(item)
         elif category == 'sports':
-            Database.add_item(
-                SportsGearItem(post_title, description, Decimal(price.strip()),
+            Database.add_item(SportsGearItem(post_title, description, Decimal(price.strip()),
                                float(weight.strip()), seller, type_val,
                                int(size), int(gender)))
         elif category == 'electronics':
-            Database.add_item(
-                ElectronicItem(post_title, description, Decimal(price.strip()),
+            item = ElectronicItem(post_title, description, Decimal(price.strip()),
                                float(weight.strip()), seller, type_val, model,
-                               dimensions))
-        return redirect('/photosub')
-        #pass the item id to the redirect
-
+                               dimensions)
+            Database.add_item(item)
+        return render_template('/sell.html')
     return render_template('/sell.html')
-
-
-@app.route('/photosub', methods=['GET', 'POST'])
-def get_photosub():
-    form = UploadForm()
-    if form.validate_on_submit():
-        filename = photos.save(form.photo.data)
-        file_url = photos.url(filename)     #url 
-        file_path = os.path.join(basedir, 'uploads')
-        file_path+= "\\" + filename
-        print(file_path)
-    else:
-        file_url = None
-
-    return render_template('/photosub.html', form=form, file_url=file_url)
-
-
 
 @app.route('/view')
 def get_view():

@@ -4,9 +4,9 @@ from .item import Item
 
 class BookItem(Item):
     def __init__(self, title: str, desc: str, price: Decimal, weight: float,
-                 seller: str, book_title: str, edition: int,
+                 seller: str, img: str, book_title: str, edition: int,
                  course_number: int):
-        super().__init__(title, desc, price, weight, seller)
+        super().__init__(title, desc, price, weight, seller, img)
 
         # Private instance attributes
         self._book_title: str = book_title
