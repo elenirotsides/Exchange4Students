@@ -308,15 +308,15 @@ def get_furniture_view(item):
 
 
 @app.errorhandler(404)
-def page_not_found(e):
-    print(e)
+def page_not_found(error):
+    print(error)
     return render_template('/404.html'), 404
 
 
 @app.errorhandler(500)
-def internal_server_error(e):
+def internal_server_error(error):
     # will only be triggered when debug mode is off, this is default flask behaivior
-    print(e)
+    print(error)
     return render_template('/500.html'), 500
 
 
