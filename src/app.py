@@ -117,38 +117,44 @@ def get_sell():
         #photo upload
         file = request.files['file']
         f_name = file.filename
-        print(f_name)
         file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], f_name))
         file_path = os.path.join(basedir, 'uploads')
         file_path += "\\" + f_name
-        
+
+        print(str(file_path))
+
         # create item and add item to database
         if category == 'books':
             item = BookItem(post_title, description, Decimal(price.strip()),
-                         float(weight.strip()), seller, file_path, title, edition,
-                         course_num)
+                            float(weight.strip()), seller, str(file_path), title,
+                            edition, course_num)
             Database.add_item(item)
         elif category == 'furniture':
-            item = FurnitureItem(post_title, description, Decimal(price.strip()),
-                              float(weight.strip()), seller, type_val, color,
-                              dimensions)
+            item = FurnitureItem(post_title,
+                                 description, Decimal(price.strip()),
+                                 float(weight.strip()), seller, type_val,
+                                 color, dimensions)
             Database.add_item(item)
         elif category == 'clothes':
-            item = ClothingItem(post_title, description, Decimal(price.strip()),
-                             float(weight.strip()), seller, type_val,
-                             int(size), int(gender), color)
+            item = ClothingItem(post_title,
+                                description, Decimal(price.strip()),
+                                float(weight.strip()), seller, type_val,
+                                int(size), int(gender), color)
             Database.add_item(item)
         elif category == 'sports':
-            Database.add_item(SportsGearItem(post_title, description, Decimal(price.strip()),
+            Database.add_item(
+                SportsGearItem(post_title, description, Decimal(price.strip()),
                                float(weight.strip()), seller, type_val,
                                int(size), int(gender)))
         elif category == 'electronics':
-            item = ElectronicItem(post_title, description, Decimal(price.strip()),
-                               float(weight.strip()), seller, type_val, model,
-                               dimensions)
+            item = ElectronicItem(post_title, description,
+                                  Decimal(price.strip()),
+                                  float(weight.strip()), seller, type_val,
+                                  model, dimensions)
             Database.add_item(item)
         return render_template('/sell.html')
     return render_template('/sell.html')
+
 
 @app.route('/view')
 def get_view():
