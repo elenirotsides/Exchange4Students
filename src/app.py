@@ -160,11 +160,12 @@ def get_photosub():
 def get_view():
     return render_template('/view.html')
 
+
 @app.route('/search', methods=['GET', 'POST'])
 def get_search():
     if request.method == 'POST':
         term = request.form['search_term']
-    return render_template('/results.html', items =Database.search_item(term))
+    return render_template('/results.html', items=Database.search_item(term))
 
 
 if __name__ == "__main__":
