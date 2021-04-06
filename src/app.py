@@ -156,9 +156,54 @@ def get_photosub():
     return render_template('/photosub.html', form=form, file_url=file_url)
 
 
-@app.route('/view')
-def get_view():
-    return render_template('/view.html')
+@app.route('/view/<item_id>')
+def get_view(item_id):
+    item = Database.get_item_by_id(item_id)
+    if isinstance(item, ClothingItem):
+        return render_template('/view.html',
+                               item=item,
+                               small=item.get_size() == 0,
+                               medium=item.get_size() == 1,
+                               large=item.get_size() == 2,
+                               xlarge=item.get_size() == 3,
+                               unisex=item.get_gender() == 0,
+                               female=item.get_gender() == 1,
+                               male=item.get_gender() == 2,
+                               clothing=True)
+
+    if isinstance(item, BookItem):
+        return render_template('/view.html', item=item, book=True)
+
+    if isinstance(item, FurnitureItem):
+        return render_template('/view.html', item=item, furn=True)
+
+    if isinstance(item, ElectronicItem):
+        return render_template('/view.html', item=item, elect=True)
+
+    if isinstance(item, SportsGearItem):
+        return render_template('/view.html',
+                               item=item,
+                               small=item.get_size() == 0,
+                               medium=item.get_size() == 1,
+                               large=item.get_size() == 2,
+                               xlarge=item.get_size() == 3,
+                               unisex=item.get_gender() == 0,
+                               female=item.get_gender() == 1,
+                               male=item.get_gender() == 2,
+                               sports=True)
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    print(error)
+    return render_template('/404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    # will only be triggered when debug mode is off, this is default flask behaivior
+    print(error)
+    return render_template('/500.html'), 500
 
 
 @app.route('/search', methods=['GET', 'POST'])

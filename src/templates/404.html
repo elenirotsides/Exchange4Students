@@ -50,25 +50,25 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/books">Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/furniture">Furniture</a>
-                        </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/books">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
+                    </li>
+
                     <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
@@ -82,10 +82,10 @@
                     </li> -->
                     </ul>
                     <!-- Search, not implemented -->
-                    <form class="d-flex" method="POST" id="search_term" action="/search">
-                      <input  name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <!-- <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form> -->
                 </div>
                 </div>
             </nav>
@@ -95,40 +95,13 @@
             <section class="py-5 text-center container">
               <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                  <h1 class="fw-light">Furniture</h1>
+                  <h1 class="fw-light">Exchange4Students</h1>
+                  <p class="lead text-muted">Stevens Institute of Technology's Premier Exchange Marketplace</p>
+                  <h3>ERROR 404: RESOURCE NOT FOUND</h3>
+                  <h4>The page you are looking for does not exist, please try again.</h4>
                 </div>
               </div>
             </section>
-          
-            <div class="album py-5 bg-light">
-              <div class="container-fluid">
-
-                <div class="row justify-content-center">
-                  {% for item in items %}
-                  <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
-                    <div class="card shadow-sm" style="width: 18rem;">
-                      <!-- TODO: retrieve uploaded item images somehow -->
-                      {% if False %} <div></div>
-                        <img src="{{item.img}}" width="100%" height="225"></img>
-                      {% else %}
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-                      {% endif %}
-                      <div class="card-body">
-                        <p class="card-text">{{item.get_title()}}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view/{{item.get_item_id()}}">View</a>
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
-                          </div>
-                          <span class="text-muted" style="font-size: medium;">${{item.get_price()}}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
           
           </main>
     </body>
