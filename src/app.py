@@ -61,7 +61,8 @@ def get_home():
 @app.route('/books')
 def get_books():
     return render_template('/books.html',
-                           items=Database.get_item_by_category("Book"))
+                           items=Database.get_item_by_category("Book"),
+                           database=Database)
 
 
 @app.route('/clothes')
@@ -156,9 +157,165 @@ def get_photosub():
     return render_template('/photosub.html', form=form, file_url=file_url)
 
 
-@app.route('/view')
-def get_view():
-    return render_template('/view.html')
+@app.route('/view/book/<item>')
+def get_book_view(item):
+    return render_template('/view_book.html',
+                           item=Database.get_item_by_id(item))
+
+
+@app.route('/view/clothing/<item>')
+def get_clothing_view(item):
+    db_item = Database.get_item_by_id(item)
+    # this might not be the most efficient way to do this, but I was tired when I wrote this; we can fix this later
+    if db_item.get_size() == 0 and db_item.get_gender() == 0:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               small=True,
+                               unisex=True)
+    if db_item.get_size() == 0 and db_item.get_gender() == 1:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               small=True,
+                               female=True)
+    if db_item.get_size() == 0 and db_item.get_gender() == 2:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               small=True,
+                               male=True)
+    if db_item.get_size() == 1 and db_item.get_gender() == 0:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               medium=True,
+                               unisex=True)
+    if db_item.get_size() == 1 and db_item.get_gender() == 1:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               medium=True,
+                               female=True)
+    if db_item.get_size() == 1 and db_item.get_gender() == 2:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               medium=True,
+                               male=True)
+    if db_item.get_size() == 2 and db_item.get_gender() == 0:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               large=True,
+                               unisex=True)
+    if db_item.get_size() == 2 and db_item.get_gender() == 1:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               large=True,
+                               female=True)
+    if db_item.get_size() == 2 and db_item.get_gender() == 2:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               large=True,
+                               male=True)
+    if db_item.get_size() == 3 and db_item.get_gender() == 0:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               xlarge=True,
+                               unisex=True)
+    if db_item.get_size() == 3 and db_item.get_gender() == 1:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               xlarge=True,
+                               female=True)
+    if db_item.get_size() == 3 and db_item.get_gender() == 2:
+        return render_template('/view_clothing.html',
+                               item=db_item,
+                               xlarge=True,
+                               male=True)
+
+
+@app.route('/view/electronic/<item>')
+def get_electronic_view(item):
+    return render_template('/view_electronic.html',
+                           item=Database.get_item_by_id(item))
+
+
+@app.route('/view/sports-gear/<item>')
+def get_sports_gear_view(item):
+    db_item = Database.get_item_by_id(item)
+    # this might not be the most efficient way to do this, but I was tired when I wrote this; we can fix this later
+    if db_item.get_size() == 0 and db_item.get_gender() == 0:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               small=True,
+                               unisex=True)
+    if db_item.get_size() == 0 and db_item.get_gender() == 1:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               small=True,
+                               female=True)
+    if db_item.get_size() == 0 and db_item.get_gender() == 2:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               small=True,
+                               male=True)
+    if db_item.get_size() == 1 and db_item.get_gender() == 0:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               medium=True,
+                               unisex=True)
+    if db_item.get_size() == 1 and db_item.get_gender() == 1:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               medium=True,
+                               female=True)
+    if db_item.get_size() == 1 and db_item.get_gender() == 2:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               medium=True,
+                               male=True)
+    if db_item.get_size() == 2 and db_item.get_gender() == 0:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               large=True,
+                               unisex=True)
+    if db_item.get_size() == 2 and db_item.get_gender() == 1:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               large=True,
+                               female=True)
+    if db_item.get_size() == 2 and db_item.get_gender() == 2:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               large=True,
+                               male=True)
+    if db_item.get_size() == 3 and db_item.get_gender() == 0:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               xlarge=True,
+                               unisex=True)
+    if db_item.get_size() == 3 and db_item.get_gender() == 1:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               xlarge=True,
+                               female=True)
+    if db_item.get_size() == 3 and db_item.get_gender() == 2:
+        return render_template('/view_sports_gear.html',
+                               item=db_item,
+                               xlarge=True,
+                               male=True)
+
+
+@app.route('/view/furniture/<item>')
+def get_furniture_view(item):
+    return render_template('/view_furniture.html',
+                           item=Database.get_item_by_id(item))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('/404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    # will only be triggered when debug mode is off, this is default flask behaivior
+    return render_template('/500.html'), 500
 
 
 if __name__ == "__main__":

@@ -24,14 +24,6 @@
               -moz-user-select: none;
               user-select: none;
             }
-            
-            .col {
-              max-width: 15em;
-              max-height: 30em;
-              margin-right: 3em;
-              margin-left: 3.5em;
-              margin-bottom: 1.5em;
-            }
       
             @media (min-width: 768px) {
               .bd-placeholder-img-lg {
@@ -54,7 +46,7 @@
                             <a class="nav-link" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/books">Books</a>
+                            <a class="nav-link" aria-current="page" href="/books">Books</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
@@ -68,7 +60,7 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
                         </li>
-                    
+              
                     <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
@@ -92,40 +84,66 @@
         </header>
        <main>
 
-            <section class="py-5 text-center container">
-              <div class="row py-lg-5">
+            <section class="py-2 text-center container">
+              <div class="row py-lg-2">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                  <h1 class="fw-light">Books</h1>
+                  {% if item %} 
+                  <h1 class="fw-light">{{item.get_electronic_type()}}</h1>
                 </div>
               </div>
             </section>
           
-            <div class="album py-5 bg-light">
+            <div class="album py-2 bg-light">
               <div class="container">
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                  {% for item in items %}
                   <div class="col">
                     <div class="card shadow-sm">
-                      <!-- TODO: retrieve uploaded item images somehow -->
-                      {% if False %} <div></div>
-                        <img src="{{item.img}}" width="100%" height="225"></img>
-                      {% else %}
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-                      {% endif %}
+                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
                       <div class="card-body">
-                        <p class="card-text">{{item.get_title()}}</p>
+                      <h3 class="card-text text-center">{{item.get_title()}}</h3>
+                      <div class="list-group">
+                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Description</h5>
+                          </div>
+                          <p class="mb-1">{{item.get_description()}}</p>
+                        </a>
+                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Model</h5>
+                          </div>
+                          <p class="mb-1">{{item.get_model()}}</p>
+                        </a>
+                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Dimensions <span style="font-size: x-small;">[L,W,H]</span></h5>
+                          </div>
+                          <p class="mb-1">{{item.get_dimensions()}}</p>
+                        </a>
+                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Weight <span style="font-size: x-small;">lbs</span></h5>
+                          </div>
+                          <p class="mb-1">{{item.get_weight()}}</p>
+                        </a>
+                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Seller</h5>
+                          </div>
+                          <p class="mb-1">{{item.get_seller()}}</p>
+                        </a>
+                      </div>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view/book/{{item.get_item_id()}}">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
+                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
                           </div>
-                          <small class="text-muted">${{item.get_price()}}</small>
+                          <span class="text-muted" style="font-size: large;">${{item.get_price()}}</span>
                         </div>
                       </div>
+                      {% endif %}
                     </div>
                   </div>
-                  {% endfor %}
                 </div>
               </div>
             </div>
