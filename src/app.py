@@ -206,5 +206,12 @@ def internal_server_error(error):
     return render_template('/500.html'), 500
 
 
+@app.route('/search', methods=['GET', 'POST'])
+def get_search():
+    if request.method == 'POST':
+        term = request.form['search_term']
+    return render_template('/results.html', items=Database.search_item(term))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
