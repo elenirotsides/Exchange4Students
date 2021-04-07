@@ -49,4 +49,3 @@ class Item:
 
     # def update_img(self, img_name: str):
     #     self._img = "/uploads" + img_name
-
