@@ -86,7 +86,6 @@ def get_sell():
         # #file_path = os.path.join(basedir, 'uploads')
         # file_path = "../uploads/" + f_name
 
-
         # create item and add item to database
         if category == 'books':
             item = BookItem(post_title, description, Decimal(price.strip()),
