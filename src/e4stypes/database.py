@@ -273,10 +273,8 @@ class Database:
 
         for word in database_content:
             current_item = word
-            term_list = current_item.get_title()
-            for term in term_list:
-                current_term = term
-                current_term.lower()
+            title_string = current_item.get_title().lower()
+            term_list = title_string.split()
             if search_term.lower() in term_list:
                 result.append(current_item)
         return result
