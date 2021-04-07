@@ -19,8 +19,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Howdy D6'
 if not os.path.exists(os.path.join(basedir, 'uploads')):
     os.mkdir(os.path.join(basedir, 'uploads'))
-app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(
-    basedir, 'uploads')  
+app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, 'uploads')
 
 
 @app.route('/')
@@ -85,19 +84,19 @@ def get_sell():
         seller = request.form['seller_val']
 
         #photo upload
-        file = request.files['file']
-        f_name = file.filename
-        file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], f_name))
-        #file_path = os.path.join(basedir, 'uploads')
-        file_path = "../uploads/" + f_name
+        # file = request.files['file']
+        # f_name = file.filename
+        # file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], f_name))
+        # #file_path = os.path.join(basedir, 'uploads')
+        # file_path = "../uploads/" + f_name
 
         print(str(file_path))
 
         # create item and add item to database
         if category == 'books':
             item = BookItem(post_title, description, Decimal(price.strip()),
-                            float(weight.strip()), seller, str(file_path), title,
-                            edition, course_num)
+                            float(weight.strip()), seller, "", title, edition,
+                            course_num)
             Database.add_item(item)
         elif category == 'furniture':
             item = FurnitureItem(post_title,
