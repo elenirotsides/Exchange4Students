@@ -6,7 +6,7 @@ class BookItem(Item):
     def __init__(self, title: str, desc: str, price: Decimal, weight: float,
                  seller: str, book_title: str, edition: int,
                  course_number: int):
-        super().__init__(title, desc, price, weight, 
+        super().__init__(title, desc, price, weight, seller)
 
         # Private instance attributes
         self._book_title: str = book_title
