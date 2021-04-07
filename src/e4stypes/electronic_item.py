@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import List
+from typing import List, Dict
 from .item import Item
 
 
@@ -22,3 +22,15 @@ class ElectronicItem(Item):
 
     def get_dimensions(self) -> List[int]:
         return self._dimensions
+
+    def to_dict(self) -> Dict:
+        return {
+            'title': self.get_title(),
+            'desc': self.get_description(),
+            'price': float(self.get_price()),
+            'weight': self.get_weight(),
+            'seller': self.get_seller(),
+            'electronic_type': self.get_electronic_type(),
+            'model': self.get_model(),
+            'dimensions': self.get_dimensions()
+        }

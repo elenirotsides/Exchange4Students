@@ -1,5 +1,6 @@
 from decimal import Decimal
 from enum import IntEnum
+from typing import Dict
 
 from .item import Item
 
@@ -38,3 +39,16 @@ class ClothingItem(Item):
 
     def get_color(self) -> str:
         return self._color
+
+    def to_dict(self) -> Dict:
+        return {
+            'title': self.get_title(),
+            'desc': self.get_description(),
+            'price': float(self.get_price()),
+            'weight': self.get_weight(),
+            'seller': self.get_seller(),
+            'garment_type': self.get_garment_type(),
+            'size': self.get_size(),
+            'gender': self.get_gender(),
+            'color': self.get_color()
+        }

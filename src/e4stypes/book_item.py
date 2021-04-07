@@ -1,4 +1,5 @@
 from decimal import Decimal
+from typing import Dict
 from .item import Item
 
 
@@ -21,3 +22,16 @@ class BookItem(Item):
 
     def get_course_number(self) -> str:
         return self._course_number
+
+    def to_dict(self) -> Dict:
+        return {
+            'title': self.get_title(),
+            'desc': self.get_description(),
+            'price': float(self.get_price()),
+            'weight': self.get_weight(),
+            'seller': self.get_seller(),
+            # 'img': self.get_img(),
+            'book_title': self.get_book_title(),
+            'edition': self.get_edition(),
+            'course_number': self.get_course_number()
+        }
