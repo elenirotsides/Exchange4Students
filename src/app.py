@@ -1,10 +1,6 @@
 import os
 from decimal import Decimal
-from flask import Flask, render_template, request, redirect
-from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import SubmitField
+from flask import Flask, render_template, request
 from e4stypes.database import Database
 from e4stypes.book_item import BookItem
 from e4stypes.clothing_item import ClothingItem
@@ -19,38 +15,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Howdy D6'
 if not os.path.exists(os.path.join(basedir, 'uploads')):
     os.mkdir(os.path.join(basedir, 'uploads'))
-app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(
-    basedir, 'uploads')  # you'll need to create a folder named uploads
-
-photos = UploadSet('photos', IMAGES)
-configure_uploads(app, photos)
-patch_request_class(app)  # set maximum file size, default is 16MB
-
-
-class UploadForm(FlaskForm):
-    photo = FileField(validators=[
-        FileAllowed(photos, 'Image only!'),
-        FileRequired('File was empty!')
-    ])
-    submit = SubmitField('Upload')
-
-
-# commenting out for pylint
-# @app.route('/uploads', methods=['POST'])
-# def get_imgs():
-#     target = os.path.join(basedir, 'uploads')
-#     if not os.path.isdir(target):
-#         os.mkdir(target)  #makes a folder if one doesn't already exists
-#     img_db_table = Database.mongo.db.images  # database table name
-#     if request.method == 'POST':
-#         for upload in request.files.getlist("uploads"):  #multiple image handle
-#             filename = secure_filename(upload.filename)
-#             destination = "/".join([target, filename])
-#             upload.save(destination)
-#             img_db_table.insert({'uploads': filename})  #insert into database
-
-#         return 'Image Upload Succesful'
-#     return 'None'
+app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, 'uploads')
 
 
 @app.route('/')
@@ -114,46 +79,44 @@ def get_sell():
         description = request.form['comments_val']
         seller = request.form['seller_val']
 
+        #photo upload
+        # file = request.files['file']
+        # f_name = file.filename
+        # file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], f_name))
+        # #file_path = os.path.join(basedir, 'uploads')
+        # file_path = "../uploads/" + f_name
+
         # create item and add item to database
         if category == 'books':
-            Database.add_item(
-                BookItem(post_title, description, Decimal(price.strip()),
-                         float(weight.strip()), seller, title, edition,
-                         course_num))
+            item = BookItem(post_title, description, Decimal(price.strip()),
+                            float(weight.strip()), seller, "", title, edition,
+                            course_num)
+            Database.add_item(item)
         elif category == 'furniture':
-            Database.add_item(
-                FurnitureItem(post_title, description, Decimal(price.strip()),
-                              float(weight.strip()), seller, type_val, color,
-                              dimensions))
+            item = FurnitureItem(post_title,
+                                 description, Decimal(price.strip()),
+                                 float(weight.strip()), seller, type_val,
+                                 color, dimensions)
+            Database.add_item(item)
         elif category == 'clothes':
-            Database.add_item(
-                ClothingItem(post_title, description, Decimal(price.strip()),
-                             float(weight.strip()), seller, type_val,
-                             int(size), int(gender), color))
+            item = ClothingItem(post_title,
+                                description, Decimal(price.strip()),
+                                float(weight.strip()), seller, type_val,
+                                int(size), int(gender), color)
+            Database.add_item(item)
         elif category == 'sports':
             Database.add_item(
                 SportsGearItem(post_title, description, Decimal(price.strip()),
                                float(weight.strip()), seller, type_val,
                                int(size), int(gender)))
         elif category == 'electronics':
-            Database.add_item(
-                ElectronicItem(post_title, description, Decimal(price.strip()),
-                               float(weight.strip()), seller, type_val, model,
-                               dimensions))
-        return redirect('/photosub')
-
+            item = ElectronicItem(post_title, description,
+                                  Decimal(price.strip()),
+                                  float(weight.strip()), seller, type_val,
+                                  model, dimensions)
+            Database.add_item(item)
+        return render_template('/sell.html')
     return render_template('/sell.html')
-
-
-@app.route('/photosub', methods=['GET', 'POST'])
-def get_photosub():
-    form = UploadForm()
-    if form.validate_on_submit():
-        filename = photos.save(form.photo.data)
-        file_url = photos.url(filename)
-    else:
-        file_url = None
-    return render_template('/photosub.html', form=form, file_url=file_url)
 
 
 @app.route('/view/<item_id>')

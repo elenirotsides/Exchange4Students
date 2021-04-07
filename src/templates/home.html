@@ -113,9 +113,9 @@
                     <div class="card shadow-sm" style="width: 18rem;">
                       <!-- TODO: retrieve uploaded item images somehow -->
                       {% if False %} <div></div>
-                        <img src="{{item.img}}" width="100%" height="225"></img>
+                        <img src="{{item.get_img()}}" width="100%" height="225">
                       {% else %}
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
                       {% endif %}
                       <div class="card-body">
                         <p class="card-text">{{item.get_title()}}</p>

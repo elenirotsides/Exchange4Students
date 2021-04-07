@@ -109,7 +109,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div class="col">
             <div class="card shadow-sm">
-              <form class="p-3" method="POST" id="sellitem" action="/sell">
+              <form class="p-3" method="POST" id="sellitem" action="/sell" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="category_drop">Choose a Category</label>
                   <select class="form-control" name="category_drop_val" id="category_drop">
@@ -224,13 +224,24 @@
                 <div class="form-group" id="seller">
                   <label for="seller_val">Your Name (Seller Name)</label>
                   <input type="text" name="seller_val" id="seller_val">
-                </div>              
+                </div>
+
+                <div class="form-group" id="photo">
+                  <label for="photo">Photos</label>
+
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <span class="btn btn-primary btn-file">
+                        Browse… <input type="file" id="fileupload" name="file" multiple>
+                      </span>
+                    </span>
+                    <!-- <input type="text" class="form-control" readonly> -->
+                  </div>
+
+                </div>
 
                 <input type="submit" value="Next">
               </form>
-              <!-- <form method="POST" action="/photosub" id="subBTM">
-                      <input type="submit" value="Next">
-                     </form> -->
 
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center"></div>
@@ -282,6 +293,7 @@
         $('#comments').show();
         $('#course_num').show();
         $('#seller').show();
+        $('#photo').show();
         //hidden
         $('#quantity').hide();
         $('#size').hide();
@@ -313,6 +325,7 @@
         $('#price').show();
         $('#comments').show();
         $('#seller').show();
+        $('#photo').show();
         //hidden
         $('#quantity').hide();
         $('#book_title_ed').hide();
@@ -337,6 +350,7 @@
         $('#color').show();
         $('#comments').show();
         $('#seller').show();
+        $('#photo').show();
         //hidden
         $('#quantity').hide();
         $('#book_title_ed').hide();
@@ -358,6 +372,7 @@
         $('#quantity').show();
         $('#comments').show();
         $('#seller').show();
+        $('#photo').show();
         //hidden
         $('#book_title_ed').hide();
         $('#size').hide();
@@ -379,6 +394,7 @@
         $('#price').show();
         $('#comments').show();
         $('#seller').show();
+        $('#photo').show();
         //hidden
         $('#quantity').hide();
         $('#book_title_ed').hide();
@@ -407,6 +423,7 @@
         $('#model').hide();
         $('#course_num').hide();
         $('#seller').hide();
+        $('#photo').hide();
       }
     });
     $("#category_drop").trigger("change");

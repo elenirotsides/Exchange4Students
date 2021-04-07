@@ -54,8 +54,9 @@ class Database:
         if get_book:
             item = BookItem(get_book["title"], get_book["desc"],
                             Decimal(get_book["price"]), get_book["weight"],
-                            get_book["seller"], get_book["book_title"],
-                            get_book["edition"], get_book["course_number"])
+                            get_book["seller"], get_book["img"],
+                            get_book["book_title"], get_book["edition"],
+                            get_book["course_number"])
             item.set_item_id(get_book["_id"])
             return item
         if get_furniture:
@@ -116,7 +117,8 @@ class Database:
                 item = BookItem(item_dict["title"], item_dict["desc"],
                                 Decimal(item_dict["price"]),
                                 item_dict["weight"], item_dict["seller"],
-                                item_dict["book_title"], item_dict["edition"],
+                                item_dict["img"], item_dict["book_title"],
+                                item_dict["edition"],
                                 item_dict["course_number"])
                 item.set_item_id(item_dict["_id"])
                 items.append(item)
@@ -167,6 +169,7 @@ class Database:
             'price': float(book.get_price()),
             'weight': book.get_weight(),
             'seller': book.get_seller(),
+            'img': book.get_img(),
             'book_title': book.get_book_title(),
             'edition': book.get_edition(),
             'course_number': book.get_course_number()

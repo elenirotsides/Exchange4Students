@@ -15,6 +15,7 @@ class Item:
         self._weight: float = weight
         self._seller: str = seller
         self._condition: str = ""
+        #self._img: str = img
 
         # Public instance attributes
         self.quantity: int = 1
@@ -42,3 +43,9 @@ class Item:
 
     def get_condition(self) -> str:
         return self._condition
+
+    # def get_img(self) -> str:
+    #      return self._img
+
+    # def update_img(self, img_name: str):
+    #     self._img = "/uploads" + img_name
