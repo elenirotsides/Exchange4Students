@@ -1,10 +1,6 @@
 import os
 from decimal import Decimal
-from flask import Flask, render_template, request, redirect
-from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import SubmitField
+from flask import Flask, render_template, request
 from e4stypes.database import Database
 from e4stypes.book_item import BookItem
 from e4stypes.clothing_item import ClothingItem
@@ -90,7 +86,6 @@ def get_sell():
         # #file_path = os.path.join(basedir, 'uploads')
         # file_path = "../uploads/" + f_name
 
-        print(str(file_path))
 
         # create item and add item to database
         if category == 'books':
