@@ -265,3 +265,19 @@ class Database:
             Database.add_sports_gear(item)
         else:
             raise RuntimeError("add_item: unknown item subclass")
+
+    @classmethod
+    def search_item(cls, search_term) -> List[Item]:
+        search_term.strip()
+        result = []
+        database_content = Database.get_all()
+        current_item = {}
+        term_list = []
+
+        for word in database_content:
+            current_item = word
+            title_string = current_item.get_title().lower()
+            term_list = title_string.split()
+            if search_term.lower() in term_list:
+                result.append(current_item)
+        return result

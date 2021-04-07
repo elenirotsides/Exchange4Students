@@ -50,25 +50,25 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/books">Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/furniture">Furniture</a>
-                        </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/books">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
+                    </li>
+
                     <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
@@ -83,8 +83,8 @@
                     </ul>
                     <!-- Search, not implemented -->
                     <form class="d-flex" method="POST" id="search_term" action="/search">
-                      <input  name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input  name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
                 </div>
@@ -95,14 +95,19 @@
             <section class="py-5 text-center container">
               <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                  <h1 class="fw-light">Furniture</h1>
+                  <h1 class="fw-light">Exchange4Students</h1>
+                  <p class="lead text-muted">Stevens Institute of Technology's Premier Exchange Marketplace</p>
+                  <p>
+                    <a class="btn btn-primary btn-lg" href="/sell">Sell an Item</a>
+                  </p>
                 </div>
               </div>
             </section>
           
             <div class="album py-5 bg-light">
+              <h2 class="fw-light text-center">Search Results</h2>
               <div class="container-fluid">
-
+                
                 <div class="row justify-content-center">
                   {% for item in items %}
                   <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
