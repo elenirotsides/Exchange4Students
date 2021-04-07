@@ -89,7 +89,7 @@ def get_sell():
         # create item and add item to database
         if category == 'books':
             item = BookItem(post_title, description, Decimal(price.strip()),
-                            float(weight.strip()), seller, "", title, edition,
+                            float(weight.strip()), seller, title, edition,
                             course_num)
             Database.add_item(item)
         elif category == 'furniture':
@@ -177,4 +177,4 @@ def get_search():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
