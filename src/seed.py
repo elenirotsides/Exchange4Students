@@ -12,9 +12,10 @@ Purpose: every time the database gets edited/refactored, the exchange4students d
          reflected....that's an unnecessarily lengthy process. It wastes time and draws the
          focus away from what's important.
 How to use: There is no neeed to manually delete and insert items. Simply run this file to do
-            all the work for you. When the db schema gets edited, you can simply make any corresponding
-            edits here as well to reflect that, and then the file can be run again. Running the file
-            will delete the db for you, and will create a new one with data in a matter of seconds.
+            all the work for you. When the db schema gets edited, you can simply make any
+            corresponding edits here as well to reflect that, and then the file can be run
+            again. Running the file will delete the db for you, and will create a new one with
+            data in a matter of seconds.
 
 Let me know if there are any questions,
 ~Eleni :)
