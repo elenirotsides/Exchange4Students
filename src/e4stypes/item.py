@@ -15,7 +15,7 @@ class Item:
         self._weight: float = weight
         self._seller: str = seller
         self._condition: str = ""
-        self._img: str = ""
+        self._img: str = img
 
         # Public instance attributes
         self.quantity: int = 1
