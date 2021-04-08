@@ -21,6 +21,12 @@ furniture_col = db.furniture
 electronic_col = db.electronic
 sports_gear_col = db.sports_gear
 
+class Category(Enum):
+    CLOTHING = "Clothing"
+    BOOK = "Book"
+    FURNITURE = "Furniture"
+    ELECTRONIC = "Electronic"
+    SPORTS_GEAR = "Sports Gear"
 
 class Database:
     @classmethod
