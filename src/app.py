@@ -1,7 +1,7 @@
 import os
 from decimal import Decimal
 from flask import Flask, render_template, request
-from e4stypes.database import Database
+from e4stypes.database import Category, Database
 from e4stypes.book_item import BookItem
 from e4stypes.clothing_item import ClothingItem
 from e4stypes.electronic_item import ElectronicItem
@@ -26,31 +26,35 @@ def get_home():
 @app.route('/books')
 def get_books():
     return render_template('/books.html',
-                           items=Database.get_item_by_category("Book"))
+                           items=Database.get_item_by_category(Category.BOOK))
 
 
 @app.route('/clothes')
 def get_clothes():
     return render_template('/clothes.html',
-                           items=Database.get_item_by_category("Clothing"))
+                           items=Database.get_item_by_category(
+                               Category.CLOTHING))
 
 
 @app.route('/electronics')
 def get_electronics():
     return render_template('/electronics.html',
-                           items=Database.get_item_by_category("Electronic"))
+                           items=Database.get_item_by_category(
+                               Category.ELECTRONIC))
 
 
 @app.route('/sports')
 def get_sports():
     return render_template('/sports.html',
-                           items=Database.get_item_by_category("Sports Gear"))
+                           items=Database.get_item_by_category(
+                               Category.SPORTS_GEAR))
 
 
 @app.route('/furniture')
 def get_furniture():
     return render_template('/furniture.html',
-                           items=Database.get_item_by_category("Furniture"))
+                           items=Database.get_item_by_category(
+                               Category.FURNITURE))
 
 
 @app.route('/sell', methods=['GET', 'POST'])

@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import List
+from typing import List, Dict
 
 from .item import Item
 from .clothing_item import ClothingGender, ClothingSize
@@ -24,3 +24,15 @@ class SportsGearItem(Item):
 
     def get_gender(self) -> List[int]:
         return self._gender
+
+    def to_dict(self) -> Dict:
+        return {
+            'title': self.get_title(),
+            'desc': self.get_description(),
+            'price': float(self.get_price()),
+            'weight': self.get_weight(),
+            'seller': self.get_seller(),
+            'gear_type': self.get_gear_type(),
+            'size': self.get_size(),
+            'gender': self.get_gender()
+        }
