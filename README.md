@@ -55,3 +55,25 @@ Then, hit Connect to connect to the database.
 FYI: I don't use my local instance of MongoDB for any intense dev work, which is why I don't have anything selected for the Authentication field.
 
 **I recommend saving your connection string as a favorite in Compass, so you don't have to keep typing stuff in each time you want to connect to the database**
+
+## Seed your Database
+
+### What is it?
+
+Its always easiest to have a script you can run that will 'seed' the database for you with fake data when in the development stage (which is all the time). A seed file is like a script you can run that will populate the database with fake data so the focus can remain on the coding and less on needing to get data in the database.
+
+### How do I run it?
+
+You run the seed file from the src folder
+
+`python src/seed.py` or `python3 src/seed.py`
+
+Watch your terminal as the seed file executes. Blink and you'll miss it!
+
+**You do not need to delete your existing database, as this script will do it for you!**
+
+If by any chance something fails, that means the database schema has been changed and you'll need to slightly edit the file. See the next section for details on that.
+
+### What if the database schema gets updated?
+
+No worries, you can edit the seed file! Example: if we decide to add a timestamp field to the database, then the functions in the seed file will need the timestamp argument to be provided. So, you'll just go in and add that little piece to each function. This is much easier than having to write all the functions from scratch to get fake data in the db so you can proceed with coding.
