@@ -19,9 +19,18 @@ class ClothingSize(IntEnum):
 
 
 class ClothingItem(Item):
-    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
-                 seller: str, garment_type: str, size: ClothingSize,
-                 gender: ClothingGender, color: str):
+    def __init__(
+        self,
+        title: str,
+        desc: str,
+        price: Decimal,
+        weight: float,
+        seller: str,
+        garment_type: str,
+        size: ClothingSize,
+        gender: ClothingGender,
+        color: str,
+    ):
         super().__init__(title, desc, price, weight, seller)
         self._garment_type = garment_type
         self._size = size
@@ -42,13 +51,13 @@ class ClothingItem(Item):
 
     def to_dict(self) -> Dict:
         return {
-            'title': self.get_title(),
-            'desc': self.get_description(),
-            'price': float(self.get_price()),
-            'weight': self.get_weight(),
-            'seller': self.get_seller(),
-            'garment_type': self.get_garment_type(),
-            'size': self.get_size(),
-            'gender': self.get_gender(),
-            'color': self.get_color()
+            "title": self.get_title(),
+            "desc": self.get_description(),
+            "price": float(self.get_price()),
+            "weight": self.get_weight(),
+            "seller": self.get_seller(),
+            "garment_type": self.get_garment_type(),
+            "size": self.get_size(),
+            "gender": self.get_gender(),
+            "color": self.get_color(),
         }
