@@ -13,11 +13,11 @@ jobs:
         steps:
             - uses: actions/checkout@v2
              
-            - name: Install yapf
-              run: pip3 install yapf
+            - name: Install black
+              run: pip3 install black
             
             - name: Enforce formatting with yapf
-              run: test -z $(python3 -m yapf -rd . | tr -d "\n\t ")
+              run: python3 -m black --check
 
             - name: Install pylint
               run: pip3 install pylint
