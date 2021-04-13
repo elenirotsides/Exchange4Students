@@ -4,9 +4,17 @@ from .item import Item
 
 
 class BookItem(Item):
-    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
-                 seller: str, book_title: str, edition: int,
-                 course_number: int):
+    def __init__(
+        self,
+        title: str,
+        desc: str,
+        price: Decimal,
+        weight: float,
+        seller: str,
+        book_title: str,
+        edition: int,
+        course_number: int,
+    ):
         super().__init__(title, desc, price, weight, seller)
 
         # Private instance attributes
@@ -25,13 +33,13 @@ class BookItem(Item):
 
     def to_dict(self) -> Dict:
         return {
-            'title': self.get_title(),
-            'desc': self.get_description(),
-            'price': float(self.get_price()),
-            'weight': self.get_weight(),
-            'seller': self.get_seller(),
+            "title": self.get_title(),
+            "desc": self.get_description(),
+            "price": float(self.get_price()),
+            "weight": self.get_weight(),
+            "seller": self.get_seller(),
             # 'img': self.get_img(),
-            'book_title': self.get_book_title(),
-            'edition': self.get_edition(),
-            'course_number': self.get_course_number()
+            "book_title": self.get_book_title(),
+            "edition": self.get_edition(),
+            "course_number": self.get_course_number(),
         }

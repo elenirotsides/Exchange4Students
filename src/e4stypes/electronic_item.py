@@ -4,9 +4,17 @@ from .item import Item
 
 
 class ElectronicItem(Item):
-    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
-                 seller: str, electronic_type: str, model: str,
-                 dimensions: List[int]):
+    def __init__(
+        self,
+        title: str,
+        desc: str,
+        price: Decimal,
+        weight: float,
+        seller: str,
+        electronic_type: str,
+        model: str,
+        dimensions: List[int],
+    ):
         super().__init__(title, desc, price, weight, seller)
 
         # Private instance attributes
@@ -25,12 +33,12 @@ class ElectronicItem(Item):
 
     def to_dict(self) -> Dict:
         return {
-            'title': self.get_title(),
-            'desc': self.get_description(),
-            'price': float(self.get_price()),
-            'weight': self.get_weight(),
-            'seller': self.get_seller(),
-            'electronic_type': self.get_electronic_type(),
-            'model': self.get_model(),
-            'dimensions': self.get_dimensions()
+            "title": self.get_title(),
+            "desc": self.get_description(),
+            "price": float(self.get_price()),
+            "weight": self.get_weight(),
+            "seller": self.get_seller(),
+            "electronic_type": self.get_electronic_type(),
+            "model": self.get_model(),
+            "dimensions": self.get_dimensions(),
         }

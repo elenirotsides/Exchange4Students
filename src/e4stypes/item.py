@@ -5,8 +5,10 @@ class Item:
     """
     An item listed by a user on the site.
     """
-    def __init__(self, title: str, desc: str, price: Decimal, weight: float,
-                 seller: str):
+
+    def __init__(
+        self, title: str, desc: str, price: Decimal, weight: float, seller: str
+    ):
         # Private instance attributes
         self._item_id: str = ""
         self._title: str = title
@@ -15,7 +17,7 @@ class Item:
         self._weight: float = weight
         self._seller: str = seller
         self._condition: str = ""
-        #self._img: str = img
+        # self._img: str = img
 
         # Public instance attributes
         self.quantity: int = 1
