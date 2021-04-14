@@ -1,3 +1,4 @@
+from pathlib import Path
 from pymongo import MongoClient
 from e4stypes.database import Database
 from e4stypes.book_item import BookItem
@@ -5,7 +6,6 @@ from e4stypes.clothing_item import ClothingItem, ClothingGender, ClothingSize
 from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
-
 """
 This is a file you can run to seed your database!
 Purpose: every time the database gets edited/refactored, the exchange4students db needs to be
@@ -35,6 +35,9 @@ def add_clothing():
     """Adds 5 clothing documents to the clothing collection"""
     print("Attempting to seed the clothing collection.....")
     print()
+
+    shirt_path = Path("shirt.png")
+
     shirt = ClothingItem(
         "Lightly worn Hollister shirt",
         "Really cute, lightweight, and comfortable shirt! In good condition and selling \
@@ -47,8 +50,10 @@ def add_clothing():
         ClothingGender.FEMALE,
         "olive green",
     )
+    shirt.set_image_filepath(shirt_path)
     Database.add_item(shirt)
     print("Shirt has been successfully added")
+
     jeans = ClothingItem(
         "A pair of cute Levi's",
         "Classic wash jeans, well taken care of. They just don't fit me anymore hahah!",
@@ -60,8 +65,10 @@ def add_clothing():
         ClothingGender.FEMALE,
         "classic blue wash",
     )
+    jeans.set_image_filepath(shirt_path)
     Database.add_item(jeans)
     print("Jeans have been successfully added")
+
     blazer = ClothingItem(
         "A professional blazer",
         "Its interview season! You probably need something to wear, so why not this cute \
@@ -74,8 +81,10 @@ def add_clothing():
         ClothingGender.UNISEX,
         "black",
     )
+    blazer.set_image_filepath(shirt_path)
     Database.add_item(blazer)
     print("Blazer has been successfully added")
+
     sweater = ClothingItem(
         "Fluffy sweater",
         "So snuggly and warm, my grandma knitted it",
@@ -87,8 +96,10 @@ def add_clothing():
         ClothingGender.UNISEX,
         "Orange",
     )
+    sweater.set_image_filepath(shirt_path)
     Database.add_item(sweater)
     print("Sweater has been successfully added")
+
     jacket = ClothingItem(
         "Leather jacket, vintage",
         "Really cool vintage leather jacket. A bit worn but that's the point",
@@ -100,8 +111,10 @@ def add_clothing():
         ClothingGender.MALE,
         "black",
     )
+    jacket.set_image_filepath(shirt_path)
     Database.add_item(jacket)
     print("Leather jacket has been successfully added")
+
     print()
     print("Done seeding the clothing collection!")
     print("----------------------------------------------")
@@ -111,6 +124,9 @@ def add_books():
     """Adds 5 book documents to the book collection"""
     print("Attempting to seed the book collection.....")
     print()
+
+    book_path = Path("book.png")
+
     book1 = BookItem(
         "Harry Potter pack for sale",
         "All 7 books! Come and get 'em!",
@@ -121,8 +137,10 @@ def add_books():
         3,
         "-",
     )
+    book1.set_image_filepath(book_path)
     Database.add_item(book1)
     print("book1 has been successfully added")
+
     book2 = BookItem(
         "Econ textbook, never used",
         "Idk why I bought this to begin with. Never used it.",
@@ -133,8 +151,10 @@ def add_books():
         7,
         "ECON-235",
     )
+    book2.set_image_filepath(book_path)
     Database.add_item(book2)
     print("book2 has been successfully added")
+
     book3 = BookItem(
         "Comp Sci book for Prof Lowe's class",
         "Good condition, you're gonna need this for his class...",
@@ -145,8 +165,10 @@ def add_books():
         12,
         "CS-550",
     )
+    book3.set_image_filepath(book_path)
     Database.add_item(book3)
     print("book3 has been successfully added")
+
     book4 = BookItem(
         "Chemistry textbook, freshman I'm looking at you!",
         "For freshman year chem, selling for much cheaper than other students.",
@@ -157,8 +179,10 @@ def add_books():
         2,
         "CH-115",
     )
+    book4.set_image_filepath(book_path)
     Database.add_item(book4)
     print("book4 has been successfully added")
+
     book5 = BookItem(
         "Calculus textbook",
         "A little worn out, but still usable.",
@@ -169,8 +193,10 @@ def add_books():
         3,
         "MA-111",
     )
+    book5.set_image_filepath(book_path)
     Database.add_item(book5)
     print("book5 has been successfully added")
+
     print()
     print("Done seeding the book collection!")
     print("----------------------------------------------")
@@ -180,6 +206,9 @@ def add_electronics():
     """Adds 5 electronic documents to the electronic collection"""
     print("Attempting to seed the electronic collection.....")
     print()
+
+    electronic_path = Path("electronic.png")
+
     ps1 = ElectronicItem(
         "Archaic PS1, come get herrrrr",
         "Classic, worth a lot of moolah, don't miss out!",
@@ -190,8 +219,10 @@ def add_electronics():
         "First one ever",
         [10, 20, 10],
     )
+    ps1.set_image_filepath(electronic_path)
     Database.add_item(ps1)
     print("ps1 has been successfully added")
+
     ps2 = ElectronicItem(
         "Calling all vintage video game console collectors! Selling PS2!!!",
         "An oldie but a goodie.",
@@ -202,8 +233,10 @@ def add_electronics():
         "2nd",
         [10, 20, 10],
     )
+    ps2.set_image_filepath(electronic_path)
     Database.add_item(ps2)
     print("ps2 have been successfully added")
+
     ps3 = ElectronicItem(
         "PS3",
         "Still works like a charm!",
@@ -214,8 +247,10 @@ def add_electronics():
         "3rd",
         [10, 20, 10],
     )
+    ps3.set_image_filepath(electronic_path)
     Database.add_item(ps3)
     print("ps3 has been successfully added")
+
     ps4 = ElectronicItem(
         "PS4",
         "Selling for cheaper than you can get it at the stores!",
@@ -226,8 +261,10 @@ def add_electronics():
         "4th",
         [10, 20, 10],
     )
+    ps4.set_image_filepath(electronic_path)
     Database.add_item(ps4)
     print("ps4 has been successfully added")
+
     ps5 = ElectronicItem(
         "PS5! YES YOU READ THAT CORRECTLY!",
         "You know what this is bois",
@@ -238,8 +275,10 @@ def add_electronics():
         "5th",
         [10, 20, 10],
     )
+    ps5.set_image_filepath(electronic_path)
     Database.add_item(ps5)
     print("ps5 has been successfully added")
+
     print()
     print("Done seeding the electronic collection!")
     print("----------------------------------------------")
@@ -249,6 +288,9 @@ def add_sports_gear():
     """Adds 5 sports gear documents to the sports collection"""
     print("Attempting to seed the sports collection.....")
     print()
+
+    football_path = Path("football.png")
+
     skiis = SportsGearItem(
         "Used skiis",
         "In great condition, also a great price!",
@@ -259,8 +301,10 @@ def add_sports_gear():
         ClothingSize.MEDIUM,
         ClothingGender.UNISEX,
     )
+    skiis.set_image_filepath(football_path)
     Database.add_item(skiis)
     print("skiis have been successfully added")
+
     helmet = SportsGearItem(
         "Bicycle helmet",
         "I have a small head, like a child.",
@@ -271,8 +315,10 @@ def add_sports_gear():
         ClothingSize.SMALL,
         ClothingGender.UNISEX,
     )
+    helmet.set_image_filepath(football_path)
     Database.add_item(helmet)
     print("helmet has been successfully added")
+
     snowboard = SportsGearItem(
         "Snowboard, no longer need it",
         "My mom bought me a new one for my birthday, so I no longer need this. Great condition.",
@@ -283,8 +329,10 @@ def add_sports_gear():
         ClothingSize.SMALL,
         ClothingGender.UNISEX,
     )
+    snowboard.set_image_filepath(football_path)
     Database.add_item(snowboard)
     print("snowboard has been successfully added")
+
     tennis_racket = SportsGearItem(
         "Tennis Racket, signed by Serena Williams",
         "Its signed!!!",
@@ -295,8 +343,10 @@ def add_sports_gear():
         ClothingSize.MEDIUM,
         ClothingGender.UNISEX,
     )
+    tennis_racket.set_image_filepath(football_path)
     Database.add_item(tennis_racket)
     print("tennis racket has been successfully added")
+
     roller_skates = SportsGearItem(
         "Roller skates, great condition",
         "Super cute and sparkly!",
@@ -307,8 +357,10 @@ def add_sports_gear():
         ClothingSize.LARGE,
         ClothingGender.UNISEX,
     )
+    roller_skates.set_image_filepath(football_path)
     Database.add_item(roller_skates)
     print("roller skates have been successfully added")
+
     print()
     print("Done seeding the sports collection!")
     print("----------------------------------------------")
@@ -318,6 +370,9 @@ def add_furniture():
     """Adds 5 furniture documents to the furniture collection"""
     print("Attempting to seed the furniture collection.....")
     print()
+
+    chair_path = Path("chair.png")
+
     couch = FurnitureItem(
         "Comfy couch",
         "Well loved, but still in pretty good condition",
@@ -328,8 +383,10 @@ def add_furniture():
         "beige",
         [50, 20, 10],
     )
+    couch.set_image_filepath(chair_path)
     Database.add_item(couch)
     print("couch has been successfully added")
+
     table = FurnitureItem(
         "Dining room table",
         "Wooden dining room table. Has a few scuffs, but not bad!",
@@ -340,8 +397,10 @@ def add_furniture():
         "wood",
         [40, 20, 40],
     )
+    table.set_image_filepath(chair_path)
     Database.add_item(table)
     print("table has been successfully added")
+
     bed = FurnitureItem(
         "Bed Frame",
         "Just selling the bed frame, you'll have \
@@ -353,8 +412,10 @@ def add_furniture():
         "white",
         [10, 20, 10],
     )
+    bed.set_image_filepath(chair_path)
     Database.add_item(bed)
     print("bed has been successfully added")
+
     desk = FurnitureItem(
         "Ikea desk, no longer need it",
         "In great condition, this is truly a steal",
@@ -365,8 +426,10 @@ def add_furniture():
         "navy",
         [20, 20, 30],
     )
+    desk.set_image_filepath(chair_path)
     Database.add_item(desk)
     print("desk has been successfully added")
+
     shelf = FurnitureItem(
         "Book shelf, never used",
         "Brand new",
@@ -377,8 +440,10 @@ def add_furniture():
         "black",
         [10, 20, 100],
     )
+    shelf.set_image_filepath(chair_path)
     Database.add_item(shelf)
     print("shelf has been successfully added")
+
     print()
     print("Done seeding the furniture collection!")
     print("----------------------------------------------")
