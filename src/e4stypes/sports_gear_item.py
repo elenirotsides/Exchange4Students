@@ -43,4 +43,5 @@ class SportsGearItem(Item):
             "gear_type": self.get_gear_type(),
             "size": self.get_size(),
             "gender": self.get_gender(),
+            "img": str(self.get_image_filepath()),
         }

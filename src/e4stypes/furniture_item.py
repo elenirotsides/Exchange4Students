@@ -42,4 +42,5 @@ class FurnitureItem(Item):
             "furnishing_type": self.get_furnishing_type(),
             "color": self.get_color(),
             "dimensions": self.get_dimensions(),
+            "img": str(self.get_image_filepath()),
         }

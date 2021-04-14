@@ -41,4 +41,5 @@ class ElectronicItem(Item):
             "electronic_type": self.get_electronic_type(),
             "model": self.get_model(),
             "dimensions": self.get_dimensions(),
+            "img": str(self.get_image_filepath()),
         }

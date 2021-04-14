@@ -60,4 +60,5 @@ class ClothingItem(Item):
             "size": self.get_size(),
             "gender": self.get_gender(),
             "color": self.get_color(),
+            "img": str(self.get_image_filepath()),
         }

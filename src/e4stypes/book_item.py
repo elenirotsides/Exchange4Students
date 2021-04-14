@@ -42,4 +42,5 @@ class BookItem(Item):
             "book_title": self.get_book_title(),
             "edition": self.get_edition(),
             "course_number": self.get_course_number(),
+            "img": str(self.get_image_filepath()),
         }
