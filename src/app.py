@@ -1,6 +1,7 @@
-import os
+from pathlib import Path
 from decimal import Decimal
 from flask import Flask, render_template, request
+from werkzeug.utils import secure_filename
 from e4stypes.database import Category, Database
 from e4stypes.book_item import BookItem
 from e4stypes.clothing_item import ClothingItem
@@ -8,14 +9,15 @@ from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = Path.cwd()
+uploadsdir = basedir.joinpath("uploads")
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "Howdy D6"
-if not os.path.exists(os.path.join(basedir, "uploads")):
-    os.mkdir(os.path.join(basedir, "uploads"))
-app.config["UPLOADED_PHOTOS_DEST"] = os.path.join(basedir, "uploads")
+if not uploadsdir.exists():
+    uploadsdir.mkdir()
+app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
 
 @app.route("/")
@@ -85,11 +87,10 @@ def get_sell():
         seller = request.form["seller_val"]
 
         # photo upload
-        # file = request.files['file']
-        # f_name = file.filename
-        # file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], f_name))
-        # #file_path = os.path.join(basedir, 'uploads')
-        # file_path = "../uploads/" + f_name
+        image_file = request.files["file"]
+        filename = secure_filename(image_file.filename)
+        image_filepath = uploadsdir.joinpath(filename)
+        image_file.save(str(image_filepath))
 
         # create item and add item to database
         if category == "books":
@@ -103,6 +104,7 @@ def get_sell():
                 edition,
                 course_num,
             )
+            item.set_image_filepath(image_filepath)
             Database.add_item(item)
         elif category == "furniture":
             item = FurnitureItem(
@@ -115,6 +117,7 @@ def get_sell():
                 color,
                 dimensions,
             )
+            item.set_image_filepath(image_filepath)
             Database.add_item(item)
         elif category == "clothes":
             item = ClothingItem(
@@ -128,20 +131,21 @@ def get_sell():
                 int(gender),
                 color,
             )
+            item.set_image_filepath(image_filepath)
             Database.add_item(item)
         elif category == "sports":
-            Database.add_item(
-                SportsGearItem(
-                    post_title,
-                    description,
-                    Decimal(price.strip()),
-                    float(weight.strip()),
-                    seller,
-                    type_val,
-                    int(size),
-                    int(gender),
-                )
+            item = SportsGearItem(
+                post_title,
+                description,
+                Decimal(price.strip()),
+                float(weight.strip()),
+                seller,
+                type_val,
+                int(size),
+                int(gender),
             )
+            item.set_image_filepath(image_filepath)
+            Database.add_item(item)
         elif category == "electronics":
             item = ElectronicItem(
                 post_title,
@@ -153,6 +157,7 @@ def get_sell():
                 model,
                 dimensions,
             )
+            item.set_image_filepath(image_filepath)
             Database.add_item(item)
         return render_template("/sell.html")
     return render_template("/sell.html")

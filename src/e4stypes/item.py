@@ -1,4 +1,5 @@
 from decimal import Decimal
+from pathlib import Path
 
 
 class Item:
@@ -17,7 +18,7 @@ class Item:
         self._weight: float = weight
         self._seller: str = seller
         self._condition: str = ""
-        # self._img: str = img
+        self._image = Path()
 
         # Public instance attributes
         self.quantity: int = 1
@@ -46,8 +47,8 @@ class Item:
     def get_condition(self) -> str:
         return self._condition
 
-    # def get_img(self) -> str:
-    #      return self._img
+    def get_image_filepath(self) -> type(None):
+        return self._image
 
-    # def update_img(self, img_name: str):
-    #     self._img = "/uploads" + img_name
+    def set_image_filepath(self, filepath: Path) -> type(None):
+        self._image = filepath

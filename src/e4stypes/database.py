@@ -49,6 +49,7 @@ def _first_found_item(clo_query, book_query, furn_query, elec_query, spo_query) 
             clo_query["color"],
         )
         item.set_item_id(clo_query["_id"])
+        item.set_image_filepath(clo_query["img"])
         return item
     if book_query:
         item = BookItem(
@@ -62,6 +63,7 @@ def _first_found_item(clo_query, book_query, furn_query, elec_query, spo_query) 
             book_query["course_number"],
         )
         item.set_item_id(book_query["_id"])
+        item.set_image_filepath(book_query["img"])
         return item
     if furn_query:
         item = FurnitureItem(
@@ -75,6 +77,7 @@ def _first_found_item(clo_query, book_query, furn_query, elec_query, spo_query) 
             furn_query["dimensions"],
         )
         item.set_item_id(furn_query["_id"])
+        item.set_image_filepath(furn_query["img"])
         return item
     if elec_query:
         item = ElectronicItem(
@@ -88,6 +91,7 @@ def _first_found_item(clo_query, book_query, furn_query, elec_query, spo_query) 
             elec_query["dimensions"],
         )
         item.set_item_id(elec_query["_id"])
+        item.set_image_filepath(elec_query["img"])
         return item
     if spo_query:
         item = SportsGearItem(
@@ -101,6 +105,7 @@ def _first_found_item(clo_query, book_query, furn_query, elec_query, spo_query) 
             ClothingGender(spo_query["gender"]),
         )
         item.set_item_id(spo_query["_id"])
+        item.set_image_filepath(spo_query["img"])
         return item
     raise RuntimeError("get_item_by_id: could not find item with passed id")
 
@@ -124,6 +129,7 @@ def _all_items_from_item_dicts(item_dicts, category):
                 item_dict["color"],
             )
             item.set_item_id(item_dict["_id"])
+            item.set_image_filepath(item_dict["img"])
             items.append(item)
         return items
     if category == Category.BOOK:
