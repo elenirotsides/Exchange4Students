@@ -11,8 +11,12 @@ class Seller(metaclass=ABCMeta):
     def edit_item(item_id: int) -> None:
 
     """
+
     @classmethod
     def __subclasshook__(cls, subclass):
-        return (hasattr(subclass, 'post_item') and callable(subclass.post_item)
-                and hasattr(subclass, 'edit_item')
-                and callable(subclass.edit_item))
+        return (
+            hasattr(subclass, "post_item")
+            and callable(subclass.post_item)
+            and hasattr(subclass, "edit_item")
+            and callable(subclass.edit_item)
+        )

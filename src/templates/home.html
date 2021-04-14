@@ -24,6 +24,14 @@
               -moz-user-select: none;
               user-select: none;
             }
+
+            .col {
+              max-width: 15em;
+              max-height: 30em;
+              margin-right: 3em;
+              margin-left: 3.5em;
+              margin-bottom: 1.5em;
+            }
       
             @media (min-width: 768px) {
               .bd-placeholder-img-lg {
@@ -60,21 +68,8 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
                     </li>
-                     <!-- I CANT GET DROPDOWN TO WORK :(
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/books">Books</a></li>
-                        <li><a class="dropdown-item" href="/clothes">Clothes</a></li>
-                        <li><a class="dropdown-item" href="/electronics">Electronics</a></li>
-                        <li><a class="dropdown-item" href="/sports">Sports Gear</a></li>
-                        <li><a class="dropdown-item" href="/furniture">Furniture</a></li>
-                        </ul>
-                    </li>
-                    -->
-                    <li class="nav-item dropdown">
+
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
                         </a>
@@ -84,12 +79,12 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     </ul>
-                    <!-- <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form> -->
+                    <form class="d-flex" method="POST" id="search_term" action="/search">
+                      <input  name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
                 </div>
             </nav>
@@ -109,158 +104,35 @@
             </section>
           
             <div class="album py-5 bg-light">
-              <div class="container">
-                <h2 class="fw-light">*New Items*</h2>
+              <h2 class="fw-light text-center">All Items</h2>
+              <div class="container-fluid">
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
+                <div class="row justify-content-center">
+                  {% for item in items %}
+                  <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
+                    <div class="card shadow-sm" style="width: 18rem;">
+                      <!-- TODO: retrieve uploaded item images somehow -->
+                      {% if False %} <div></div>
+                        <img src="{{item.get_img()}}" width="100%" height="225">
+                      {% else %}
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+                      {% endif %}
                       <div class="card-body">
-                        <p class="card-text">Sample Item</p>
+                        <p class="card-text">{{item.get_title()}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
+                            <a class="btn btn-sm btn-outline-secondary" href="/view/{{item.get_item_id()}}">View</a>
+                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
                           </div>
-                          <small class="text-muted">$x.xx</small>
+                          <span class="text-muted" style="font-size: medium;">${{item.get_price()}}</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
-                      <div class="card-body">
-                        <p class="card-text">Sample Item</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
-                      <div class="card-body">
-                        <p class="card-text">Sample Item</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-          
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
-                      <div class="card-body">
-                        <p class="card-text">Sample Item</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
-                      <div class="card-body">
-                        <p class="card-text">Sample Item</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
-                      <div class="card-body">
-                        <p class="card-text">Sample Item</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-          
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
-                      <div class="card-body">
-                        <p class="card-text">Sample Item</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
-                      <div class="card-body">
-                        <p class="card-text">Sample Item</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">img goes here</text></svg>
-          
-                      <div class="card-body">
-                        <p class="card-text">Sample Item</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                          </div>
-                          <small class="text-muted">$x.xx</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
+              
             </div>
           
           </main>

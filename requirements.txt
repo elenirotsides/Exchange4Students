@@ -2,3 +2,5 @@ Flask
 Flask-Login
 Flask-WTF
 pymongo
+flask_uploads
+werkzeug==0.16.0
