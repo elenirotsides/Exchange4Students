@@ -3,4 +3,9 @@
 __pycache__
 *.pyc
 env
-**/static
+src/static/*.png
+!src/static/book.png
+!src/static/chair.png
+!src/static/electronic.png
+!src/static/football.png
+!src/static/shirt.png
