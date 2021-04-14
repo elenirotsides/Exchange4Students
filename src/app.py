@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from decimal import Decimal
 from flask import Flask, render_template, request
@@ -9,8 +10,8 @@ from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
 
-basedir = Path.cwd()
-uploadsdir = basedir.joinpath("uploads")
+basedir = Path(os.path.dirname(os.path.realpath(__file__)))
+uploadsdir = basedir.joinpath("static")
 
 app = Flask(__name__)
 
@@ -104,7 +105,7 @@ def get_sell():
                 edition,
                 course_num,
             )
-            item.set_image_filepath(image_filepath)
+            item.set_image_filepath(filename)
             Database.add_item(item)
         elif category == "furniture":
             item = FurnitureItem(
@@ -117,7 +118,7 @@ def get_sell():
                 color,
                 dimensions,
             )
-            item.set_image_filepath(image_filepath)
+            item.set_image_filepath(filename)
             Database.add_item(item)
         elif category == "clothes":
             item = ClothingItem(
@@ -131,7 +132,7 @@ def get_sell():
                 int(gender),
                 color,
             )
-            item.set_image_filepath(image_filepath)
+            item.set_image_filepath(filename)
             Database.add_item(item)
         elif category == "sports":
             item = SportsGearItem(
@@ -144,7 +145,7 @@ def get_sell():
                 int(size),
                 int(gender),
             )
-            item.set_image_filepath(image_filepath)
+            item.set_image_filepath(filename)
             Database.add_item(item)
         elif category == "electronics":
             item = ElectronicItem(
@@ -157,7 +158,7 @@ def get_sell():
                 model,
                 dimensions,
             )
-            item.set_image_filepath(image_filepath)
+            item.set_image_filepath(filename)
             Database.add_item(item)
         return render_template("/sell.html")
     return render_template("/sell.html")

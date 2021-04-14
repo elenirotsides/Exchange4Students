@@ -145,6 +145,7 @@ def _all_items_from_item_dicts(item_dicts, category):
                 item_dict["course_number"],
             )
             item.set_item_id(item_dict["_id"])
+            item.set_image_filepath(item_dict["img"])
             items.append(item)
         return items
     if category == Category.FURNITURE:
@@ -161,6 +162,7 @@ def _all_items_from_item_dicts(item_dicts, category):
                 item_dict["dimensions"],
             )
             item.set_item_id(item_dict["_id"])
+            item.set_image_filepath(item_dict["img"])
             items.append(item)
         return items
     if category == Category.ELECTRONIC:
@@ -176,6 +178,7 @@ def _all_items_from_item_dicts(item_dicts, category):
                 item_dict["dimensions"],
             )
             item.set_item_id(item_dict["_id"])
+            item.set_image_filepath(item_dict["img"])
             items.append(item)
         return items
     if category == Category.SPORTS_GEAR:
@@ -191,6 +194,7 @@ def _all_items_from_item_dicts(item_dicts, category):
                 ClothingGender(item_dict["gender"]),
             )
             item.set_item_id(item_dict["_id"])
+            item.set_image_filepath(item_dict["img"])
             items.append(item)
         return items
     raise RuntimeError("get_item_by_category: category undefined")
