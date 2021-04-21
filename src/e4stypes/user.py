@@ -1,3 +1,4 @@
+from typing import Dict
 """
 Contains a User class.
 """
@@ -19,6 +20,13 @@ class User:
         self.venmo_user = ""
         self.allows_shipping = False
         self.allows_pickup = True
+
+    def to_dict(self) -> Dict:
+        return {
+            "display name" : self.get_display_name(), 
+            "email" : self.get_email(),
+            "password" : self.get_password()
+        }
 
     def get_display_name(self) -> str:
         return self._display_name

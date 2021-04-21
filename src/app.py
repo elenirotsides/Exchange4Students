@@ -1,4 +1,5 @@
 import os
+import pyrebase
 from pathlib import Path
 from decimal import Decimal
 from flask import Flask, render_template, request
@@ -9,6 +10,28 @@ from e4stypes.clothing_item import ClothingItem
 from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
+
+
+# For Firebase JS SDK v7.20.0 and later, measurementId is optional
+firebaseConfig = {
+  "apiKey": "AIzaSyDDpKjPvPYcGrxT_XAmcv2Q9BQp_ltP2UY",
+  "authDomain": "exchange4students-a371f.firebaseapp.com",
+  "databaseURL": "https://exchange4students-a371f-default-rtdb.firebaseio.com",
+  "projectId": "exchange4students-a371f",
+  "storageBucket": "exchange4students-a371f.appspot.com",
+  "messagingSenderId": "708735395176",
+  "appId": "1:708735395176:web:ec634ff7035d10860b62dd",
+  "measurementId": "G-9GF7BMTJZW"
+}
+
+#provider = pyrebase.auth.GoogleAuthProvider()
+firebase = pyrebase.initialize_app(firebaseConfig)
+auth = firebase.auth()
+email = input("PLease enter your email\n")
+password = input("Please enter your password\n")
+user = auth.create_user_with_email_and_password(email, password)
+auth.get_account_info(user['idToken'])
+
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")

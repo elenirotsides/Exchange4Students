@@ -6,6 +6,7 @@ from e4stypes.clothing_item import ClothingItem, ClothingGender, ClothingSize
 from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
+from e4stypes.user import User
 """
 This is a file you can run to seed your database!
 Purpose: every time the database gets edited/refactored, the exchange4students db needs to be
@@ -448,6 +449,16 @@ def add_furniture():
     print("Done seeding the furniture collection!")
     print("----------------------------------------------")
 
+def add_user():
+    ''' Adds 1 user to the database.'''
+    print("Attempting to add user to database...")
+    print()
+
+    user1 = User("Grace Miguel", "gracem730@gmail.com", "12345")
+    Database.add_user(user1)
+    print("User 1 has been successfully added.")
+
+
 
 # Calling the functions
 drop_db()
@@ -456,4 +467,5 @@ add_books()
 add_electronics()
 add_sports_gear()
 add_furniture()
+add_user()
 print("DATABASE SEEDING COMPLETE")
