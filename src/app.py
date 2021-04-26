@@ -1,8 +1,13 @@
 import os
-import pyrebase
+#from pyrebase import auth
 from pathlib import Path
 from decimal import Decimal
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, abort, redirect
+import google
+from google_auth_oauthlib.flow import Flow
+from pip._vendor import cachecontrol, requests
+from google.oauth2 import id_token
+import google.auth.transport.requests
 from werkzeug.utils import secure_filename
 from e4stypes.database import Category, Database
 from e4stypes.book_item import BookItem
@@ -10,27 +15,33 @@ from e4stypes.clothing_item import ClothingItem
 from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
+import pathlib
+
+
+
+
 
 
 # For Firebase JS SDK v7.20.0 and later, measurementId is optional
-firebaseConfig = {
-  "apiKey": "AIzaSyDDpKjPvPYcGrxT_XAmcv2Q9BQp_ltP2UY",
-  "authDomain": "exchange4students-a371f.firebaseapp.com",
-  "databaseURL": "https://exchange4students-a371f-default-rtdb.firebaseio.com",
-  "projectId": "exchange4students-a371f",
-  "storageBucket": "exchange4students-a371f.appspot.com",
-  "messagingSenderId": "708735395176",
-  "appId": "1:708735395176:web:ec634ff7035d10860b62dd",
-  "measurementId": "G-9GF7BMTJZW"
-}
+# firebaseConfig = {
+#   "apiKey": "AIzaSyDDpKjPvPYcGrxT_XAmcv2Q9BQp_ltP2UY",
+#   "authDomain": "exchange4students-a371f.firebaseapp.com",
+#   "databaseURL": "https://exchange4students-a371f-default-rtdb.firebaseio.com",
+#   "projectId": "exchange4students-a371f",
+#   "storageBucket": "exchange4students-a371f.appspot.com",
+#   "messagingSenderId": "708735395176",
+#   "appId": "1:708735395176:web:ec634ff7035d10860b62dd",
+#   "measurementId": "G-9GF7BMTJZW"
+# }
 
-#provider = pyrebase.auth.GoogleAuthProvider()
-firebase = pyrebase.initialize_app(firebaseConfig)
-auth = firebase.auth()
-email = input("PLease enter your email\n")
-password = input("Please enter your password\n")
-user = auth.create_user_with_email_and_password(email, password)
-auth.get_account_info(user['idToken'])
+
+# firebase = pyrebase.initialize_app(firebaseConfig)
+# auth = firebase.auth()
+# #provider = firebase.auth.GoogleAuthProvider()
+# email = input("PLease enter your email\n")
+# password = input("Please enter your password\n")
+# user = auth.create_user_with_email_and_password(email, password)
+# auth.get_account_info(user['idToken'])
 
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -43,7 +54,57 @@ if not uploadsdir.exists():
     uploadsdir.mkdir()
 app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
+#REPLACE THIS WITH YOUR PERSONAL GOOGLE CLIENT ID TO TEST
+GOOGLE_CLIENT_ID = ""
+client_secrets_file  = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"]= "1"
+flow = Flow.from_client_secrets_file(client_secrets_file=client_secrets_file,
+        scopes = [ "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+        redirect_uri = "http://127.0.0.1:5000/callback")   
+def login_is_required(function):    #protect site by requiring login
+    def wrapper(*args, **kwargs):   
+        if "google_id" not in session:  #checks to see if google user is logged in
+            return abort(401) #authorization required
+        else:
+            return function()
+    return wrapper
 
+@app.route("/login")
+def login():
+    authorization_url, state = flow.authorization_url() #the state is a security feature, a random var that will be sent back from the authorization server.
+    session["state"] = state
+    return redirect(authorization_url)
+
+@app.route("/callback")
+def callback():
+    flow.fetch_token(authorization_response=request.url)
+
+    if not session["state"] == request.args["state"]:
+        abort(500)      #state doesn't match
+    
+    credentials = flow.credentials
+    request_session = requests.session()
+    cached_session = cachecontrol.CacheControl(request_session)
+    token_request = google.auth.transport.requests.Request(session=cached_session)
+
+    id_info = id_token.verify_oauth2_token(
+        id_token = credentials._id_token,
+        request = token_request, 
+        audience = GOOGLE_CLIENT_ID
+    )
+    session["google_id"] = id_info.get("sub")
+    session["name"] = id_info.get("name")
+    return redirect("/protected_area")
+
+@app.route("/logout")
+def logout():
+    session.clear()     #clears logged session, google_id is erased.
+    return redirect("/")
+
+@app.route("/protected_area")
+@login_is_required
+def protected_area():
+    return "protected! <a href='/logout'><button> Logout</button></a>"
 @app.route("/")
 def get_home():
     return render_template("/home.html", items=Database.get_all())

@@ -9,3 +9,4 @@ src/static/*.png
 !src/static/electronic.png
 !src/static/football.png
 !src/static/shirt.png
+client_secret.json 
