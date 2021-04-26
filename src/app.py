@@ -69,6 +69,11 @@ def login_is_required(function):    #protect site by requiring login
             return function()
     return wrapper
 
+@app.route("/")
+def get_home():
+    return render_template("/login.html")
+
+
 @app.route("/login")
 def login():
     authorization_url, state = flow.authorization_url() #the state is a security feature, a random var that will be sent back from the authorization server.
@@ -94,7 +99,7 @@ def callback():
     )
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    return redirect("/protected_area")
+    return redirect("/home")
 
 @app.route("/logout")
 def logout():
@@ -105,7 +110,8 @@ def logout():
 @login_is_required
 def protected_area():
     return "protected! <a href='/logout'><button> Logout</button></a>"
-@app.route("/")
+@app.route("/home")
+@login_is_required
 def get_home():
     return render_template("/home.html", items=Database.get_all())
 
