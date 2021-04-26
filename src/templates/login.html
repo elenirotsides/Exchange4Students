@@ -36,11 +36,12 @@
           <h1 class="fw-light">Exchange4Students</h1>
           <p class="lead">Stevens Institute of Technology's Premier Exchange Marketplace</p>
           <div id="logreg-forms">
-            <form class="form-signin">
+            <form class="form-signin" method="POST" action="/login">
               <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Log In</h1>
               <div class="social-login">
-                <button class="btn google-btn social-btn btn-danger" type="button" action="/login"><span><i></i> Sign in with
-                    Google</span> </button>
+                <input type="submit" value="sign in with google">
+                <!-- <input class="btn google-btn social-btn btn-danger" type="submit" action="/login" method="POST"><span><i></i> Sign in with
+                    Google</span> </button> -->
               </div>
             </form>
           </div>

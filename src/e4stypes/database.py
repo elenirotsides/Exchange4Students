@@ -9,7 +9,6 @@ from .clothing_item import ClothingItem, ClothingGender, ClothingSize
 from .electronic_item import ElectronicItem
 from .furniture_item import FurnitureItem
 from .sports_gear_item import SportsGearItem
-from .user import User
 
 # establish connection with database
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -274,10 +273,7 @@ class Database:
         # making insertion
         sports_gear_col.insert_one(sports_gear.to_dict())
 
-    @classmethod
-    def add_user(cls, user: User) -> type(None):
-        #makes insertion
-        user_col.insert_one(user.to_dict())
+
     @classmethod
     def add_item(cls, item: Item) -> type(None):
         if isinstance(item, ClothingItem):
@@ -309,11 +305,5 @@ class Database:
                 result.append(current_item)
         return result
 
-    @classmethod
-    def create_user(cls, display_name, email, password) -> User:
-        if(email in user_col):
-            print("Account already exists with this email")
-            return
-        user = User(display_name, email, password)
-        return user 
+
   

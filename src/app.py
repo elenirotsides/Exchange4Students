@@ -22,26 +22,6 @@ import pathlib
 
 
 
-# For Firebase JS SDK v7.20.0 and later, measurementId is optional
-# firebaseConfig = {
-#   "apiKey": "AIzaSyDDpKjPvPYcGrxT_XAmcv2Q9BQp_ltP2UY",
-#   "authDomain": "exchange4students-a371f.firebaseapp.com",
-#   "databaseURL": "https://exchange4students-a371f-default-rtdb.firebaseio.com",
-#   "projectId": "exchange4students-a371f",
-#   "storageBucket": "exchange4students-a371f.appspot.com",
-#   "messagingSenderId": "708735395176",
-#   "appId": "1:708735395176:web:ec634ff7035d10860b62dd",
-#   "measurementId": "G-9GF7BMTJZW"
-# }
-
-
-# firebase = pyrebase.initialize_app(firebaseConfig)
-# auth = firebase.auth()
-# #provider = firebase.auth.GoogleAuthProvider()
-# email = input("PLease enter your email\n")
-# password = input("Please enter your password\n")
-# user = auth.create_user_with_email_and_password(email, password)
-# auth.get_account_info(user['idToken'])
 
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -68,13 +48,10 @@ def login_is_required(function):    #protect site by requiring login
         else:
             return function()
     return wrapper
-
-@app.route("/")
-def get_home():
+@app.route("/" )
+def get_start():
     return render_template("/login.html")
-
-
-@app.route("/login")
+@app.route("/login", methods=["POST"])
 def login():
     authorization_url, state = flow.authorization_url() #the state is a security feature, a random var that will be sent back from the authorization server.
     session["state"] = state
@@ -111,7 +88,6 @@ def logout():
 def protected_area():
     return "protected! <a href='/logout'><button> Logout</button></a>"
 @app.route("/home")
-@login_is_required
 def get_home():
     return render_template("/home.html", items=Database.get_all())
 
