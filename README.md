@@ -77,3 +77,25 @@ If by any chance something fails, that means the database schema has been change
 ### What if the database schema gets updated?
 
 No worries, you can edit the seed file! Example: if we decide to add a timestamp field to the database, then the functions in the seed file will need the timestamp argument to be provided. So, you'll just go in and add that little piece to each function. This is much easier than having to write all the functions from scratch to get fake data in the db so you can proceed with coding.
+
+## Google Authentication
+I followed this video directly: https://www.youtube.com/watch?v=FKgJEfrhU1E 
+How to create google authentication for a web app:
+1. Reinstall the requirements.txt with the added installs by using pip install -r requirements.txt
+2. Go to https://console.cloud.google.com/ and create an account.
+3. Go to select a project in the top left hand corner and create a new project.
+4. After creating the project, go to APIs & Services ![image](https://user-images.githubusercontent.com/55472479/116167341-03134380-a6ce-11eb-84b7-6d0957863261.png)
+5. Click "Configure Content Screen". For User Type, use *external*
+6. For the app information, give the app a name. I named mine "Exchange4Students". You also need to provide your email for the "User Support Email" and "Developer Content Email". 
+7. Save and continue. Leave scopes and test users alone, just press *Save and Continue*. Go back to Dashboard.
+8. Click Credentials on the left-hand side. ![image](https://user-images.githubusercontent.com/55472479/116167641-9e0c1d80-a6ce-11eb-86b7-0bf3036cae46.png)
+9. In the photo you can see *+Create Credentials*. Click that to make the OAuth Client ID. For the type of app select *Web Application*. Name it. I named mine "Flask Client".
+10. For the URI use: http://127.0.0.1:5000/callback
+11. Click create. Exit out of the pop-up. Now download the credentials with the download icon. ![image](https://user-images.githubusercontent.com/55472479/116167863-33a7ad00-a6cf-11eb-9207-dbe1d6bdf0a5.png)
+12. Put the download json into the /src folder in our project. Name it "client_secret.json". Make sure to gitignore it for safety reasons.
+13. From the json, copy the content of the field: *client_id*. Set the GOOGLE_CLIENT_ID variable in the app.py equal to what you just copied. It should be a string("").
+14. You have now set up google authentication!  
+
+
+ 
+
