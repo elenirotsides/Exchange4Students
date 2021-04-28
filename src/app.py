@@ -1,5 +1,6 @@
 import os
-#from pyrebase import auth
+
+# from pyrebase import auth
 from pathlib import Path
 from decimal import Decimal
 from flask import Flask, render_template, request, session, abort, redirect
@@ -18,12 +19,6 @@ from e4stypes.sports_gear_item import SportsGearItem
 import pathlib
 
 
-
-
-
-
-
-
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
 
@@ -34,65 +29,83 @@ if not uploadsdir.exists():
     uploadsdir.mkdir()
 app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
-#REPLACE THIS WITH YOUR PERSONAL GOOGLE CLIENT ID TO TEST
-GOOGLE_CLIENT_ID = ""
-client_secrets_file  = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"]= "1"
-flow = Flow.from_client_secrets_file(client_secrets_file=client_secrets_file,
-        scopes = [ "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-        redirect_uri = "http://127.0.0.1:5000/callback")   
-def login_is_required(function):    #protect site by requiring login
-    def wrapper(*args, **kwargs):   
-        if "google_id" not in session:  #checks to see if google user is logged in
-            return abort(401) #authorization required
+# REPLACE THIS WITH YOUR PERSONAL GOOGLE CLIENT ID TO TEST
+GOOGLE_CLIENT_ID = "708735395176-ahqkmv5m838t1p6vckt707kie4s1qdnl.apps.googleusercontent.com"
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=client_secrets_file,
+    scopes=[
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+        "openid",
+    ],
+    redirect_uri="http://127.0.0.1:5000/callback",
+)
+
+
+def login_is_required(function):  # protect site by requiring login
+    def wrapper(*args, **kwargs):
+        if "google_id" not in session:  # checks to see if google user is logged in
+            return abort(401)  # authorization required
         else:
             return function()
+
     return wrapper
-@app.route("/" )
+
+
+@app.route("/")
 def get_start():
     return render_template("/login.html")
+
+
 @app.route("/login", methods=["POST"])
 def login():
-    authorization_url, state = flow.authorization_url() #the state is a security feature, a random var that will be sent back from the authorization server.
+    (
+        authorization_url,
+        state,
+    ) = (
+        flow.authorization_url()
+    )  # the state is a security feature, a random var that will be sent back from the authorization server.
     session["state"] = state
     return redirect(authorization_url)
+
 
 @app.route("/callback")
 def callback():
     flow.fetch_token(authorization_response=request.url)
 
     if not session["state"] == request.args["state"]:
-        abort(500)      #state doesn't match
-    
+        abort(500)  # state doesn't match
+
     credentials = flow.credentials
     request_session = requests.session()
     cached_session = cachecontrol.CacheControl(request_session)
     token_request = google.auth.transport.requests.Request(session=cached_session)
 
     id_info = id_token.verify_oauth2_token(
-        id_token = credentials._id_token,
-        request = token_request, 
-        audience = GOOGLE_CLIENT_ID
+        id_token=credentials._id_token, request=token_request, audience=GOOGLE_CLIENT_ID
     )
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
     return redirect("/home")
 
+
 @app.route("/logout")
 def logout():
-    session.clear()     #clears logged session, google_id is erased.
+    session.clear()  # clears logged session, google_id is erased.
     return redirect("/")
 
-@app.route("/protected_area")
-@login_is_required
-def protected_area():
-    return "protected! <a href='/logout'><button> Logout</button></a>"
+
+
 @app.route("/home")
+@login_is_required
 def get_home():
     return render_template("/home.html", items=Database.get_all())
 
 
 @app.route("/books")
+#@login_is_required
 def get_books():
     return render_template(
         "/books.html", items=Database.get_item_by_category(Category.BOOK)
@@ -100,6 +113,7 @@ def get_books():
 
 
 @app.route("/clothes")
+#@login_is_required
 def get_clothes():
     return render_template(
         "/clothes.html", items=Database.get_item_by_category(Category.CLOTHING)
@@ -107,6 +121,7 @@ def get_clothes():
 
 
 @app.route("/electronics")
+#@login_is_required
 def get_electronics():
     return render_template(
         "/electronics.html", items=Database.get_item_by_category(Category.ELECTRONIC)
@@ -114,6 +129,7 @@ def get_electronics():
 
 
 @app.route("/sports")
+#@login_is_required
 def get_sports():
     return render_template(
         "/sports.html", items=Database.get_item_by_category(Category.SPORTS_GEAR)
@@ -121,6 +137,7 @@ def get_sports():
 
 
 @app.route("/furniture")
+#@login_is_required
 def get_furniture():
     return render_template(
         "/furniture.html", items=Database.get_item_by_category(Category.FURNITURE)
@@ -128,6 +145,7 @@ def get_furniture():
 
 
 @app.route("/sell", methods=["GET", "POST"])
+#@login_is_required
 def get_sell():
     if request.method == "POST":
         # grab form data in order they appear in sell.html
@@ -231,6 +249,7 @@ def get_sell():
 
 
 @app.route("/view/<item_id>")
+#@login_is_required
 def get_view(item_id):
     item = Database.get_item_by_id(item_id)
     if isinstance(item, ClothingItem):
@@ -285,6 +304,7 @@ def internal_server_error(error):
 
 
 @app.route("/search", methods=["GET", "POST"])
+#@login_is_required
 def get_search():
     if request.method == "POST":
         term = request.form["search_term"]

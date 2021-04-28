@@ -35,8 +35,6 @@ class Category(Enum):
 # Helper methods
 
 
-
-
 def _first_found_item(clo_query, book_query, furn_query, elec_query, spo_query) -> Item:
     # Returns the Item if a item was found with the given item_id
     if clo_query:
@@ -273,7 +271,6 @@ class Database:
         # making insertion
         sports_gear_col.insert_one(sports_gear.to_dict())
 
-
     @classmethod
     def add_item(cls, item: Item) -> type(None):
         if isinstance(item, ClothingItem):
@@ -304,6 +301,3 @@ class Database:
             if search_term.lower() in term_list:
                 result.append(current_item)
         return result
-
-
-  

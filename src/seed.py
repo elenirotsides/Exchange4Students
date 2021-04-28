@@ -450,8 +450,6 @@ def add_furniture():
     print("----------------------------------------------")
 
 
-
-
 # Calling the functions
 drop_db()
 add_clothing()
