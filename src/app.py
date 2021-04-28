@@ -168,7 +168,7 @@ def get_view(item_id):
     item = Database.get_item_by_id(item_id)
     if isinstance(item, ClothingItem):
         return render_template(
-            "/view.html",
+            "/view_clothing.html",
             item=item,
             small=item.get_size() == 0,
             medium=item.get_size() == 1,
@@ -177,21 +177,20 @@ def get_view(item_id):
             unisex=item.get_gender() == 0,
             female=item.get_gender() == 1,
             male=item.get_gender() == 2,
-            clothing=True,
         )
 
     if isinstance(item, BookItem):
-        return render_template("/view.html", item=item, book=True)
+        return render_template("/view_book.html", item=item)
 
     if isinstance(item, FurnitureItem):
-        return render_template("/view.html", item=item, furn=True)
+        return render_template("/view_furniture.html", item=item)
 
     if isinstance(item, ElectronicItem):
-        return render_template("/view.html", item=item, elect=True)
+        return render_template("/view_electronic.html", item=item)
 
     if isinstance(item, SportsGearItem):
         return render_template(
-            "/view.html",
+            "/view_sports_gear.html",
             item=item,
             small=item.get_size() == 0,
             medium=item.get_size() == 1,
@@ -200,7 +199,6 @@ def get_view(item_id):
             unisex=item.get_gender() == 0,
             female=item.get_gender() == 1,
             male=item.get_gender() == 2,
-            sports=True,
         )
 
 

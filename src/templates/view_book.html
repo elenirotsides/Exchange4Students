@@ -1,0 +1,41 @@
+{% extends 'view.html' %}
+
+{% block info %}
+<div class="list-group">
+    <a class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Book Title</h5>
+        </div>
+        <p class="mb-1">{{item.get_book_title()}}</p>
+    </a>
+<a class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">Description</h5>
+    </div>
+    <p class="mb-1">{{item.get_description()}}</p>
+</a>
+<a class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">Edition</h5>
+    </div>
+    <p class="mb-1">{{item.get_edition()}}</p>
+</a>
+<a class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">Course Number</h5>
+    </div>
+    <p class="mb-1">{{item.get_course_number()}}</p>
+</a>
+<a class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">Weight <span style="font-size: x-small;">lbs</span></h5>
+    </div>
+    <p class="mb-1">{{item.get_weight()}}</p>
+</a>
+<a class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">Seller</h5>
+    </div>
+    <p class="mb-1">{{item.get_seller()}}</p>
+</a>
+{% endblock %}
