@@ -23,7 +23,7 @@ app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
 @app.route("/")
 def get_home():
-    return render_template("/home.html", items=Database.get_all())
+    return render_template("/home.html", items=Database.get_all(), listing_title="All Items")
 
 
 @app.route("/books")
