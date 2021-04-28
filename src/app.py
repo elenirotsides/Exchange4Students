@@ -23,41 +23,54 @@ app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
 @app.route("/")
 def get_home():
-    return render_template("/home.html", items=Database.get_all(), listing_title="All Items")
+    return render_template(
+        "/home.html", items=Database.get_all(), listing_title="All Items"
+    )
 
 
 @app.route("/books")
 def get_books():
-    return render_template("/listing.html",
-                           items=Database.get_item_by_category(Category.BOOK), listing_title="Books")
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.BOOK),
+        listing_title="Books",
+    )
 
 
 @app.route("/clothes")
 def get_clothes():
-    return render_template("/listing.html",
-                           items=Database.get_item_by_category(
-                               Category.CLOTHING), listing_title="Clothes")
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.CLOTHING),
+        listing_title="Clothes",
+    )
 
 
 @app.route("/electronics")
 def get_electronics():
-    return render_template("/listing.html",
-                           items=Database.get_item_by_category(
-                               Category.ELECTRONIC), listing_title="Electronics")
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.ELECTRONIC),
+        listing_title="Electronics",
+    )
 
 
 @app.route("/sports")
 def get_sports():
-    return render_template("/listing.html",
-                           items=Database.get_item_by_category(
-                               Category.SPORTS_GEAR), listing_title="Sports")
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.SPORTS_GEAR),
+        listing_title="Sports",
+    )
 
 
 @app.route("/furniture")
 def get_furniture():
-    return render_template("/listing.html",
-                           items=Database.get_item_by_category(
-                               Category.FURNITURE), listing_title="Furniture")
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.FURNITURE),
+        listing_title="Furniture",
+    )
 
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -219,7 +232,11 @@ def internal_server_error(error):
 def get_search():
     if request.method == "POST":
         term = request.form["search_term"]
-    return render_template("/listing.html", items=Database.search_item(term), listing_title="Search Results")
+    return render_template(
+        "/listing.html",
+        items=Database.search_item(term),
+        listing_title="Search Results",
+    )
 
 
 @app.route("/item_posted", methods=["GET", "POST"])
