@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from decimal import Decimal
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from werkzeug.utils import secure_filename
 from e4stypes.database import Category, Database
 from e4stypes.book_item import BookItem
@@ -159,7 +159,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
-        return render_template("/sell.html")
+        return redirect("/item_posted")
     return render_template("/sell.html")
 
 
