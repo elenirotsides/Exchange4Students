@@ -87,7 +87,8 @@
             </li> -->
           </ul>
           <form class="d-flex" method="POST" id="search_term" action="/search">
-            <input  name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search"
+              aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>
@@ -109,7 +110,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div class="col">
             <div class="card shadow-sm">
-              <form class="p-3" method="POST" id="sellitem" action="/sell" enctype="multipart/form-data">
+              <form class="p-3" method="POST" id="sellitem" action="/item_posted" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="category_drop">Choose a Category</label>
                   <select class="form-control" name="category_drop_val" id="category_drop">
@@ -222,7 +223,7 @@
                 </div>
 
                 <div class="form-group" id="seller">
-                  <label for="seller_val">Your Name (Seller Name)</label>
+                  <label for="seller_val">Your Email</label>
                   <input type="text" name="seller_val" id="seller_val">
                 </div>
 
@@ -243,6 +244,7 @@
                 <input type="submit" value="Next">
               </form>
 
+
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center"></div>
 
@@ -257,7 +259,6 @@
   </main>
   <!-- jquery stuff-->
   <script>
-
     $("#category_drop").change(function () {
       //required
       // $('#book_title_ed').attr('required', '');
