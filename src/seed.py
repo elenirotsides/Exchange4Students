@@ -6,6 +6,7 @@ from e4stypes.clothing_item import ClothingItem, ClothingGender, ClothingSize
 from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
+
 """
 This is a file you can run to seed your database!
 Purpose: every time the database gets edited/refactored, the exchange4students db needs to be
