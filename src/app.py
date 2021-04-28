@@ -28,36 +28,36 @@ def get_home():
 
 @app.route("/books")
 def get_books():
-    return render_template("/books.html",
-                           items=Database.get_item_by_category(Category.BOOK))
+    return render_template("/listing.html",
+                           items=Database.get_item_by_category(Category.BOOK), listing_title="Books")
 
 
 @app.route("/clothes")
 def get_clothes():
-    return render_template("/clothes.html",
+    return render_template("/listing.html",
                            items=Database.get_item_by_category(
-                               Category.CLOTHING))
+                               Category.CLOTHING), listing_title="Clothes")
 
 
 @app.route("/electronics")
 def get_electronics():
-    return render_template("/electronics.html",
+    return render_template("/listing.html",
                            items=Database.get_item_by_category(
-                               Category.ELECTRONIC))
+                               Category.ELECTRONIC), listing_title="Electronics")
 
 
 @app.route("/sports")
 def get_sports():
-    return render_template("/sports.html",
+    return render_template("/listing.html",
                            items=Database.get_item_by_category(
-                               Category.SPORTS_GEAR))
+                               Category.SPORTS_GEAR), listing_title="Sports")
 
 
 @app.route("/furniture")
 def get_furniture():
-    return render_template("/furniture.html",
+    return render_template("/listing.html",
                            items=Database.get_item_by_category(
-                               Category.FURNITURE))
+                               Category.FURNITURE), listing_title="Furniture")
 
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -221,7 +221,7 @@ def internal_server_error(error):
 def get_search():
     if request.method == "POST":
         term = request.form["search_term"]
-    return render_template("/results.html", items=Database.search_item(term))
+    return render_template("/listing.html", items=Database.search_item(term), listing_title="Search Results")
 
 
 @app.route("/item_posted", methods=["GET", "POST"])
