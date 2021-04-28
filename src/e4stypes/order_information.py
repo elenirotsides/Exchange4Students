@@ -1,7 +1,7 @@
 from decimal import Decimal
 from typing import List
-
-from item import Item
+from .database import Database
+from .item import Item
 
 
 class OrderInformation:
@@ -10,13 +10,20 @@ class OrderInformation:
         self.total_amount: Decimal = total_amount
 
     def add_to_cart(self, item_id: str) -> type(None):
-        pass
+        self.item_list.append(item_id)
+        return self.item_list
 
     def remove_from_cart(self, item_id: str) -> type(None):
-        pass
+        self.item_list.remove(item_id)
+        return self.item_list
 
     def calculate_total_amount(self) -> Decimal:
-        pass
+        self.total_amount = 0
+        for item in self.item_list:
+            specific_item = Database.get_item_by_id(item)
+            price = specific_item.get_price()
+            self.total_amount += price
+        return self.total_amount
 
     def confirm(self) -> bool:
         pass
