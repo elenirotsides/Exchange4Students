@@ -32,7 +32,7 @@ if not uploadsdir.exists():
 app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
 # REPLACE THIS WITH YOUR PERSONAL GOOGLE CLIENT ID TO TEST
-GOOGLE_CLIENT_ID = "708735395176-ahqkmv5m838t1p6vckt707kie4s1qdnl.apps.googleusercontent.com"
+GOOGLE_CLIENT_ID = ""
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 flow = Flow.from_client_secrets_file(
