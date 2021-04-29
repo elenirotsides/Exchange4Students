@@ -1,5 +1,4 @@
 import os
-
 # from pyrebase import auth
 from pathlib import Path
 from decimal import Decimal
@@ -17,6 +16,9 @@ from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
 import pathlib
+import wrappers
+
+login_required = wrappers.login_is_required #this is the wrapper for checking if user is logged in
 
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -44,14 +46,6 @@ flow = Flow.from_client_secrets_file(
 )
 
 
-def login_is_required(function):  # protect site by requiring login
-    def wrapper(*args, **kwargs):
-        if "google_id" not in session:  # checks to see if google user is logged in
-            return abort(401)  # authorization required
-        else:
-            return function()
-
-    return wrapper
 
 
 @app.route("/")
@@ -99,13 +93,13 @@ def logout():
 
 
 @app.route("/home")
-@login_is_required
+@login_required
 def get_home():
     return render_template("/home.html", items=Database.get_all())
 
 
 @app.route("/books")
-#@login_is_required
+@login_required
 def get_books():
     return render_template(
         "/books.html", items=Database.get_item_by_category(Category.BOOK)
@@ -113,7 +107,7 @@ def get_books():
 
 
 @app.route("/clothes")
-#@login_is_required
+@login_required
 def get_clothes():
     return render_template(
         "/clothes.html", items=Database.get_item_by_category(Category.CLOTHING)
@@ -121,7 +115,7 @@ def get_clothes():
 
 
 @app.route("/electronics")
-#@login_is_required
+@login_required
 def get_electronics():
     return render_template(
         "/electronics.html", items=Database.get_item_by_category(Category.ELECTRONIC)
@@ -129,7 +123,7 @@ def get_electronics():
 
 
 @app.route("/sports")
-#@login_is_required
+@login_required
 def get_sports():
     return render_template(
         "/sports.html", items=Database.get_item_by_category(Category.SPORTS_GEAR)
@@ -137,7 +131,7 @@ def get_sports():
 
 
 @app.route("/furniture")
-#@login_is_required
+@login_required
 def get_furniture():
     return render_template(
         "/furniture.html", items=Database.get_item_by_category(Category.FURNITURE)
@@ -145,7 +139,7 @@ def get_furniture():
 
 
 @app.route("/sell", methods=["GET", "POST"])
-#@login_is_required
+@login_required
 def get_sell():
     if request.method == "POST":
         # grab form data in order they appear in sell.html
@@ -249,7 +243,7 @@ def get_sell():
 
 
 @app.route("/view/<item_id>")
-#@login_is_required
+@login_required
 def get_view(item_id):
     item = Database.get_item_by_id(item_id)
     if isinstance(item, ClothingItem):
@@ -304,7 +298,7 @@ def internal_server_error(error):
 
 
 @app.route("/search", methods=["GET", "POST"])
-#@login_is_required
+@login_required
 def get_search():
     if request.method == "POST":
         term = request.form["search_term"]
