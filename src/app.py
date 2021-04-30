@@ -1,7 +1,9 @@
 import os
-# from pyrebase import auth
+import pathlib
 from pathlib import Path
+import functools
 from decimal import Decimal
+import flask
 from flask import Flask, render_template, request, session, abort, redirect
 import google
 from google_auth_oauthlib.flow import Flow
@@ -15,10 +17,10 @@ from e4stypes.clothing_item import ClothingItem
 from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
-import pathlib
-import wrappers
 
-login_required = wrappers.login_is_required #this is the wrapper for checking if user is logged in
+# import wrappers
+
+#login_required = wrappers.login_is_required #this is the wrapper for checking if user is logged in
 
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -32,7 +34,7 @@ if not uploadsdir.exists():
 app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
 # REPLACE THIS WITH YOUR PERSONAL GOOGLE CLIENT ID TO TEST
-GOOGLE_CLIENT_ID = "708735395176-ahqkmv5m838t1p6vckt707kie4s1qdnl.apps.googleusercontent.com"
+GOOGLE_CLIENT_ID = ""
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 flow = Flow.from_client_secrets_file(
@@ -47,6 +49,15 @@ flow = Flow.from_client_secrets_file(
 
 
 
+def login_required(function):  # protect site by requiring login
+    @functools.wraps(function)
+    def wrapper(*args, **kwargs):
+        if "google_id" not in flask.session:  # checks to see if google user is logged in
+            return abort(401)  # authorization required
+        else:
+            return function()
+
+    return wrapper
 
 @app.route("/")
 def get_start():
