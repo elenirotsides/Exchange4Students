@@ -1,140 +1,19 @@
-<!doctype html>
-<html lang="en">
-  <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        <title>Exchange for Students</title>
+{% extends 'listing.html' %}
 
-        <!--extra styles-->
-        <style>
-            .bd-placeholder-img {
-              font-size: 1.125rem;
-              text-anchor: middle;
-              -webkit-user-select: none;
-              -moz-user-select: none;
-              user-select: none;
-            }
+{% block content %}
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Exchange4Students</h1>
+        <p class="lead text-muted">Stevens Institute of Technology's Premier Exchange Marketplace</p>
+        <p>
+          <a class="btn btn-primary btn-lg" href="/sell">Sell an Item</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
-            .col {
-              max-width: 15em;
-              max-height: 30em;
-              margin-right: 3em;
-              margin-left: 3.5em;
-              margin-bottom: 1.5em;
-            }
-      
-            @media (min-width: 768px) {
-              .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-              }
-            }
-          </style>
-    </head>
-    <body>
-        <header>
-            <!-- Navigation bar -->   
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/books">Books</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="/">Logout</a>
-                  </li>
-
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Account
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li> -->
-                    </ul>
-                    <form class="d-flex" method="POST" id="search_term" action="/search">
-                      <input  name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-                </div>
-            </nav>
-        </header>
-       <main>
-
-            <section class="py-5 text-center container">
-              <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                  <h1 class="fw-light">Exchange4Students</h1>
-                  <p class="lead text-muted">Stevens Institute of Technology's Premier Exchange Marketplace</p>
-                  <p>
-                    <a class="btn btn-primary btn-lg" href="/sell">Sell an Item</a>
-                  </p>
-                </div>
-              </div>
-            </section>
-          
-            <div class="album py-5 bg-light">
-              <h2 class="fw-light text-center">All Items</h2>
-              <div class="container-fluid">
-
-                <div class="row justify-content-center">
-                  {% for item in items %}
-                  <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
-                    <div class="card shadow-sm" style="width: 18rem;">
-                    <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
-                      <div class="card-body">
-                        <p class="card-text">{{item.get_title()}}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="/view/{{item.get_item_id()}}">View</a>
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
-                          </div>
-                          <span class="text-muted" style="font-size: medium;">${{item.get_price()}}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </div>
-              
-            </div>
-          
-          </main>
-    </body>
-</html>
+  {{ super() }}
+{% endblock %}
      
