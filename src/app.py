@@ -23,41 +23,54 @@ app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
 @app.route("/")
 def get_home():
-    return render_template("/home.html", items=Database.get_all())
+    return render_template(
+        "/home.html", items=Database.get_all(), listing_title="All Items"
+    )
 
 
 @app.route("/books")
 def get_books():
-    return render_template("/books.html",
-                           items=Database.get_item_by_category(Category.BOOK))
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.BOOK),
+        listing_title="Books",
+    )
 
 
 @app.route("/clothes")
 def get_clothes():
-    return render_template("/clothes.html",
-                           items=Database.get_item_by_category(
-                               Category.CLOTHING))
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.CLOTHING),
+        listing_title="Clothes",
+    )
 
 
 @app.route("/electronics")
 def get_electronics():
-    return render_template("/electronics.html",
-                           items=Database.get_item_by_category(
-                               Category.ELECTRONIC))
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.ELECTRONIC),
+        listing_title="Electronics",
+    )
 
 
 @app.route("/sports")
 def get_sports():
-    return render_template("/sports.html",
-                           items=Database.get_item_by_category(
-                               Category.SPORTS_GEAR))
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.SPORTS_GEAR),
+        listing_title="Sports",
+    )
 
 
 @app.route("/furniture")
 def get_furniture():
-    return render_template("/furniture.html",
-                           items=Database.get_item_by_category(
-                               Category.FURNITURE))
+    return render_template(
+        "/listing.html",
+        items=Database.get_item_by_category(Category.FURNITURE),
+        listing_title="Furniture",
+    )
 
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -168,7 +181,7 @@ def get_view(item_id):
     item = Database.get_item_by_id(item_id)
     if isinstance(item, ClothingItem):
         return render_template(
-            "/view.html",
+            "/view_clothing.html",
             item=item,
             small=item.get_size() == 0,
             medium=item.get_size() == 1,
@@ -177,21 +190,20 @@ def get_view(item_id):
             unisex=item.get_gender() == 0,
             female=item.get_gender() == 1,
             male=item.get_gender() == 2,
-            clothing=True,
         )
 
     if isinstance(item, BookItem):
-        return render_template("/view.html", item=item, book=True)
+        return render_template("/view_book.html", item=item)
 
     if isinstance(item, FurnitureItem):
-        return render_template("/view.html", item=item, furn=True)
+        return render_template("/view_furniture.html", item=item)
 
     if isinstance(item, ElectronicItem):
-        return render_template("/view.html", item=item, elect=True)
+        return render_template("/view_electronic.html", item=item)
 
     if isinstance(item, SportsGearItem):
         return render_template(
-            "/view.html",
+            "/view_sports_gear.html",
             item=item,
             small=item.get_size() == 0,
             medium=item.get_size() == 1,
@@ -200,7 +212,6 @@ def get_view(item_id):
             unisex=item.get_gender() == 0,
             female=item.get_gender() == 1,
             male=item.get_gender() == 2,
-            sports=True,
         )
 
 
@@ -221,7 +232,11 @@ def internal_server_error(error):
 def get_search():
     if request.method == "POST":
         term = request.form["search_term"]
-    return render_template("/results.html", items=Database.search_item(term))
+    return render_template(
+        "/listing.html",
+        items=Database.search_item(term),
+        listing_title="Search Results",
+    )
 
 
 @app.route("/item_posted", methods=["GET", "POST"])

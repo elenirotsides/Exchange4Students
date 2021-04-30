@@ -54,5 +54,4 @@ class Item:
         self._image = filepath
 
     def price_string(self) -> str:
-        return str(self.get_price().quantize(Decimal('1.00')))
-        
+        return str(self.get_price().quantize(Decimal("1.00")))
