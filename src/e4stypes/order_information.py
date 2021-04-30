@@ -11,9 +11,8 @@ class OrderInformation:
 
     def add_to_cart(self, item_id: str) -> type(None):
         item = Database.get_item_by_id(item_id)
-        if item in self.item_list:
-            return
-        self.item_list.append(item)
+        if item not in self.item_list:
+            self.item_list.append(item)
 
     def remove_from_cart(self, item_id: str) -> type(None):
         self.item_list = [item for item in self.item_list if item.get_item_id() != item_id]

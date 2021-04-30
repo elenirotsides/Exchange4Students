@@ -15,7 +15,6 @@ basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
 cart = OrderInformation([], 0)
 
-
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "Howdy D6"
@@ -24,10 +23,13 @@ if not uploadsdir.exists():
 app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 
 
-@app.route("/")
+@app.route("/", methods=["GET","POST"])
 def get_home():
+    if request.method == "POST":
+        item_id = request.form["add_to_cart"]
+        cart.add_to_cart(item_id)
     return render_template(
-        "/home.html", items=Database.get_all(), cart=cart, listing_title="All Items"
+        "/home.html", items=Database.get_all(), cart=cart, listing_title="All Items",
     )
 
 
