@@ -9,9 +9,12 @@ from e4stypes.clothing_item import ClothingItem
 from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
+from e4stypes.order_information import OrderInformation
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
+cart = OrderInformation([], 0)
+
 
 app = Flask(__name__)
 
@@ -24,7 +27,7 @@ app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 @app.route("/")
 def get_home():
     return render_template(
-        "/home.html", items=Database.get_all(), listing_title="All Items"
+        "/home.html", items=Database.get_all(), cart=cart, listing_title="All Items"
     )
 
 
@@ -33,7 +36,7 @@ def get_books():
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.BOOK),
-        listing_title="Books",
+        listing_title="Books", cart=cart,
     )
 
 
@@ -42,7 +45,7 @@ def get_clothes():
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.CLOTHING),
-        listing_title="Clothes",
+        listing_title="Clothes", cart=cart,
     )
 
 
@@ -51,7 +54,7 @@ def get_electronics():
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.ELECTRONIC),
-        listing_title="Electronics",
+        listing_title="Electronics", cart=cart,
     )
 
 
@@ -60,7 +63,7 @@ def get_sports():
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.SPORTS_GEAR),
-        listing_title="Sports",
+        listing_title="Sports", cart=cart,
     )
 
 
@@ -69,7 +72,7 @@ def get_furniture():
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.FURNITURE),
-        listing_title="Furniture",
+        listing_title="Furniture", cart=cart,
     )
 
 
