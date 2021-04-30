@@ -1,5 +1,4 @@
 import os
-# from pyrebase import auth
 from pathlib import Path
 from decimal import Decimal
 from flask import Flask, render_template, request, session, abort, redirect
