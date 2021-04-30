@@ -1,104 +1,12 @@
-<!doctype html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block content %}
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+<main>
 
-  <title>Exchange for Students</title>
-
-  <!--extra styles-->
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/books">Books</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/">Logout</a>
-          </li>
-            <!-- Account dropdown not implemented -->
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Account
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li> -->
-          </ul>
-          <form class="d-flex" method="POST" id="search_term" action="/search">
-            <input name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search"
-              aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <section class="py-5 text-center container">
       <div class="row py-lg-5">
@@ -258,37 +166,10 @@
       </div>
     </div>
     </div>
-
   </main>
-  <!-- jquery stuff-->
+
   <script>
     $("#category_drop").change(function () {
-      //required
-      // $('#book_title_ed').attr('required', '');
-      // $('#weight').attr('required', '');
-      // $('#price').attr('required', '');
-      // $('#quantity').attr('required', '');
-      // $('#comments').attr('required', '');
-      // $('#type').attr('required', '');
-      // $('#size').attr('required', '');
-      // $('#gender').attr('required', '');
-      // $('#model').attr('required', '');
-      // $('#dimensions').attr('required', '');
-      // $('#color').attr('required', '');
-      //$('#course_num').attr('required', '');
-      //data errors
-      // $('#book_title_ed').attr('data-error', 'This field is required.');
-      // $('#weight').attr('data-error', 'This field is required.');
-      // $('#price').attr('data-error', 'This field is required.');
-      // $('#quantity').attr('data-error', 'This field is required.');
-      // $('#comments').attr('data-error', 'This field is required.');
-      // $('#type').attr('data-error', 'This field is required.');
-      // $('#size').attr('data-error', 'This field is required.');
-      // $('#gender').attr('data-error', 'This field is required.');
-      // $('#model').attr('data-error', 'This field is required.');
-      // $('#dimensions').attr('data-error', 'This field is required.');
-      // $('#color').attr('data-error', 'This field is required.');
-
       if ($(this).val() == "books") {
         $('#post_title').show();
         $('#book_title_ed').show();
@@ -298,6 +179,7 @@
         $('#course_num').show();
         $('#seller').show();
         $('#photo').show();
+
         //hidden
         $('#quantity').hide();
         $('#size').hide();
@@ -306,19 +188,6 @@
         $('#model').hide();
         $('#dimensions').hide();
         $('#color').hide();
-        //not required
-        // $('#size').removeAttr('required');
-        // $('#gender').removeAttr('required');
-        // $('#model').removeAttr('required');
-        // $('#dimensions').removeAttr('required');
-        // $('#color').removeAttr('required');
-        // //data error
-        // $('#size').removeAttr('data-error', 'This field is required.');
-        // $('#gender').removeAttr('data-error', 'This field is required.');
-        // $('#model').removeAttr('data-error', 'This field is required.');
-        // $('#dimensions').removeAttr('data-error', 'This field is required.');
-        // $('#color').removeAttr('data-error', 'This field is required.');
-
       }
       else if ($(this).val() == "furniture") {
         $('#post_title').show();
@@ -330,6 +199,7 @@
         $('#comments').show();
         $('#seller').show();
         $('#photo').show();
+
         //hidden
         $('#quantity').hide();
         $('#book_title_ed').hide();
@@ -337,12 +207,6 @@
         $('#gender').hide();
         $('#model').hide();
         $('#course_num').hide();
-        //not required
-        // $('#book_title_ed').removeAttr('required');
-        // $('#gender').removeAttr('required');
-        // $('#model').removeAttr('required');
-        // $('#size').removeAttr('required');
-
       }
       else if ($(this).val() == "clothes") {
         $('#post_title').show();
@@ -355,16 +219,14 @@
         $('#comments').show();
         $('#seller').show();
         $('#photo').show();
+
         //hidden
         $('#quantity').hide();
         $('#book_title_ed').hide();
         $('#dimensions').hide();
         $('#model').hide();
         $('#course_num').hide();
-        //not required
-        // $('#book_title_ed').removeAttr('required');
-        // $('#dimensions').removeAttr('required');
-        // $('#model').removeAttr('required');
+        
       }
       else if ($(this).val() == "electronics") {
         $('#post_title').show();
@@ -377,17 +239,13 @@
         $('#comments').show();
         $('#seller').show();
         $('#photo').show();
+
         //hidden
         $('#book_title_ed').hide();
         $('#size').hide();
         $('#gender').hide();
         $('#color').hide();
         $('#course_num').hide();
-        //not required
-        // $('#book_title_ed').removeAttr('required');
-        // $('#gender').removeAttr('required');
-        // $('#size').removeAttr('required');
-        // $('#color').removeAttr('required');
       }
       else if ($(this).val() == "sports") {
         $('#post_title').show();
@@ -399,6 +257,7 @@
         $('#comments').show();
         $('#seller').show();
         $('#photo').show();
+
         //hidden
         $('#quantity').hide();
         $('#book_title_ed').hide();
@@ -406,11 +265,6 @@
         $('#dimensions').hide();
         $('#color').hide();
         $('#course_num').hide();
-        //not required
-        // $('#book_title_ed').removeAttr('required');
-        // $('#dimensions').removeAttr('required');
-        // $('#model').removeAttr('required');
-        // $('#color').removeAttr('required');
       }
       else {
         $('#post_title').hide();
@@ -431,37 +285,7 @@
       }
     });
     $("#category_drop").trigger("change");
-
-    // $( document ).ready(function() {
-    // $('#subBTM').on('click',function(e){
-    //     e.preventDefault();
-    //     var empty = false;
-    //     $('#sellitem').find( 'select, textarea, input' ).each(function(){
-    //       var attr = $(this).attr('required');
-    //         console.log($(this).toArray());
-    //         if($(this).val()==''){
-    //           console.log(attr);
-    //         }
-    //         if((typeof attr != 'undefined' && attr != false) && $(this).val()==''){
-    //             console.log("empty req");
-    //             empty = false;
-    //             return false;
-    //         } else empty = true;
-    //     });
-    //   if(!empty){
-    //     alert("All fields required.");
-    //     return false;
-    //   }
-    //   else{
-    //     $('form').submit();
-    //   }
-    // }); 
-
-    // $('#subBTM').on('click',function(){
-    //     $('form').submit();
-    // });
-  //});
   </script>
-</body>
-
-</html>
+  
+{% endblock %}
+     

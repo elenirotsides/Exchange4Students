@@ -1,421 +1,45 @@
-<!doctype html>
-<html lang="en">
-  <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        <title>Exchange for Students</title>
+{% extends 'base.html' %}
 
-        <!--extra styles-->
-        <style>
-            .bd-placeholder-img {
-              font-size: 1.125rem;
-              text-anchor: middle;
-              -webkit-user-select: none;
-              -moz-user-select: none;
-              user-select: none;
-            }
-      
-            @media (min-width: 768px) {
-              .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-              }
-            }
-          </style>
-    </head>
-    <body>
-        <header>
-            <!-- Navigation bar -->   
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/books">Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/clothes">Clothes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/electronics">Electronics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/sports">Sports Gear</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/furniture">Furniture</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="/">Logout</a>
-                      </li>
-              
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Account
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li> -->
-                    </ul>
-                     <!-- Search, not implemented -->
-                     <form class="d-flex" method="POST" id="search_term" action="/search">
-                      <input  name="search_term" id='search_term' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-                </div>
-            </nav>
-        </header>
-       <main>
+{% block content %}
 
-            <section class="py-2 text-center container">
-              <div class="row py-lg-2">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                  {% if book %}
-                  <h1 class="fw-light">{{item.get_book_title()}}</h1>
-                </div>
-              </div>
-            </section>
-          
-            <div class="album py-2 bg-light">
-              <div class="container">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--extra styles-->
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
-                      <div class="card-body">
-                      <h3 class="card-text text-center">{{item.get_title()}}</h3>
-                      <div class="list-group">
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Description</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_description()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Edition</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_edition()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Course Number</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_course_number()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Weight <span style="font-size: x-small;">lbs</span></h5>
-                          </div>
-                          <p class="mb-1">{{item.get_weight()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Seller</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_seller()}}</p>
-                        </a>
-                      </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
-                          </div>
-                          <span class="text-muted" style="font-size: large;">${{item.price_string()}}</span>
-                        </div>
-                      </div>
-                      {% endif %}
-                      {% if clothing %}
-                      <h1 class="fw-light">{{item.get_garment_type()}}</h1>
-                </div>
-              </div>
-            </section>
-          
-            <div class="album py-2 bg-light">
-              <div class="container">
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
-                      <div class="card-body">
-                      <h3 class="card-text text-center">{{item.get_title()}}</h3>
-                      <div class="list-group">
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Description</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_description()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Size</h5>
-                          </div>
-                          {% if small %}
-                          <p class="mb-1">Small</p>
-                          {% endif%}
-                          {% if medium %}
-                          <p class="mb-1">Medium</p>
-                          {% endif%}
-                          {% if large %}
-                          <p class="mb-1">Large</p>
-                          {% endif%}
-                          {% if xlarge %}
-                          <p class="mb-1">Extra Large</p>
-                          {% endif%}
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Color</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_color()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Gender</h5>
-                          </div>
-                          {% if unisex %}
-                          <p class="mb-1">Unisex</p>
-                          {% endif %}
-                          {% if female %}
-                          <p class="mb-1">Female</p>
-                          {% endif %}
-                          {% if male %}
-                          <p class="mb-1">Male</p>
-                          {% endif %}
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Weight <span style="font-size: x-small;">lbs</span></h5>
-                          </div>
-                          <p class="mb-1">{{item.get_weight()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Seller</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_seller()}}</p>
-                        </a>
-                      </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
-                          </div>
-                          <span class="text-muted" style="font-size: large;">${{item.price_string()}}</span>
-                        </div>
-                      </div>
-                      {% endif %}
-                      {% if elect %} 
-                  <h1 class="fw-light">{{item.get_electronic_type()}}</h1>
-                </div>
-              </div>
-            </section>
-          
-            <div class="album py-2 bg-light">
-              <div class="container">
+  <div class="album py-2 bg-light">
+    <div class="container">
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
-                      <div class="card-body">
-                      <h3 class="card-text text-center">{{item.get_title()}}</h3>
-                      <div class="list-group">
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Description</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_description()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Model</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_model()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Dimensions <span style="font-size: x-small;">[L,W,H]</span></h5>
-                          </div>
-                          <p class="mb-1">{{item.get_dimensions()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Weight <span style="font-size: x-small;">lbs</span></h5>
-                          </div>
-                          <p class="mb-1">{{item.get_weight()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Seller</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_seller()}}</p>
-                        </a>
-                      </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
-                          </div>
-                          <span class="text-muted" style="font-size: large;">${{item.price_string()}}</span>
-                        </div>
-                      </div>
-                      {% endif %}
-                      {% if furn %} 
-                  <h1 class="fw-light">{{item.get_furnishing_type()}}</h1>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
+            <div class="card-body">
+            <h3 class="card-text text-center">{{item.get_title()}}</h3>
+            {% block info %}
+            {% endblock %}
+            </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
                 </div>
-              </div>
-            </section>
-          
-            <div class="album py-2 bg-light">
-              <div class="container">
-
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
-                      <div class="card-body">
-                      <h3 class="card-text text-center">{{item.get_title()}}</h3>
-                      <div class="list-group">
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Description</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_description()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Color</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_color()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Dimensions <span style="font-size: x-small;">[L,W,H]</span></h5>
-                          </div>
-                          <p class="mb-1">{{item.get_dimensions()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Weight <span style="font-size: x-small;">lbs</span></h5>
-                          </div>
-                          <p class="mb-1">{{item.get_weight()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Seller</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_seller()}}</p>
-                        </a>
-                      </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
-                          </div>
-                          <span class="text-muted" style="font-size: large;">${{item.price_string()}}</span>
-                        </div>
-                      </div>
-                      {% endif %}
-                      {% if sports %} 
-                  <h1 class="fw-light">{{item.get_gear_type()}}</h1>
-                </div>
-              </div>
-            </section>
-          
-            <div class="album py-2 bg-light">
-              <div class="container">
-
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
-                      <div class="card-body">
-                      <h3 class="card-text text-center">{{item.get_title()}}</h3>
-                      <div class="list-group">
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Description</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_description()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Size</h5>
-                          </div>
-                          {% if small %}
-                          <p class="mb-1">Small</p>
-                          {% endif%}
-                          {% if medium %}
-                          <p class="mb-1">Medium</p>
-                          {% endif%}
-                          {% if large %}
-                          <p class="mb-1">Large</p>
-                          {% endif%}
-                          {% if xlarge %}
-                          <p class="mb-1">Extra Large</p>
-                          {% endif%}
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Gender</h5>
-                          </div>
-                          {% if unisex %}
-                          <p class="mb-1">Unisex</p>
-                          {% endif %}
-                          {% if female %}
-                          <p class="mb-1">Female</p>
-                          {% endif %}
-                          {% if male %}
-                          <p class="mb-1">Male</p>
-                          {% endif %}
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Weight <span style="font-size: x-small;">lbs</span></h5>
-                          </div>
-                          <p class="mb-1">{{item.get_weight()}}</p>
-                        </a>
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Seller</h5>
-                          </div>
-                          <p class="mb-1">{{item.get_seller()}}</p>
-                        </a>
-                      </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
-                          </div>
-                          <span class="text-muted" style="font-size: large;">${{item.price_string()}}</span>
-                        </div>
-                      </div>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
+                <span class="text-muted" style="font-size: large;">${{item.price_string()}}</span>
               </div>
             </div>
-          
-          </main>
-    </body>
-</html>
+  
+{% endblock %}
      
