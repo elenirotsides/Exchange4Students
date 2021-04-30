@@ -3,43 +3,73 @@
 {% block content %}
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!--extra styles-->
 <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
     }
+  }
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
+  .card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+  }
+</style>
 
-  <div class="album py-2 bg-light">
-    <div class="container">
+<div class="album py-2 bg-light">
+  <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
-            <div class="card-body">
-            <h3 class="card-text text-center">{{item.get_title()}}</h3>
-            {% block info %}
-            {% endblock %}
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-horizontal">
+            <div style="margin-top: auto; margin-bottom: auto; margin-left: 20px; margin-right: auto; display:block;">
+              <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="400" width="400">
             </div>
+            <div class="card-body">
+              <h3 class="card-text text-center">{{item.get_title()}}</h3>
+              {% block info %}
+              {% endblock %}
+
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
                 </div>
-                <span class="text-muted" style="font-size: large;">${{item.price_string()}}</span>
+                <!-- <span class="text-muted" style="font-size: large;">${{item.price_string()}}</span> -->
               </div>
             </div>
-  
-{% endblock %}
-     
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="container">
+            <div class="row">
+              <div class="text-left  col-md-6">
+                <h5>Seller</h5>
+                <span>{{item.get_seller()}}</span>
+              </div>
+              <div class="text-right  col-md-6">
+                <div>
+                  <span class="text-muted" style="font-size: 20px; ">${{item.price_string()}}</span>
+                </div>
+                <button type="button" class="fas fa-cart-plus btn btn-md btn-outline-success"> Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    {% endblock %}
