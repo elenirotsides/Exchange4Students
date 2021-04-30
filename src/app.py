@@ -17,7 +17,9 @@ from e4stypes.sports_gear_item import SportsGearItem
 import pathlib
 import wrappers
 
-login_required = wrappers.login_is_required #this is the wrapper for checking if user is logged in
+login_required = (
+    wrappers.login_is_required
+)  # this is the wrapper for checking if user is logged in
 
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -43,8 +45,6 @@ flow = Flow.from_client_secrets_file(
     ],
     redirect_uri="http://127.0.0.1:5000/callback",
 )
-
-
 
 
 @app.route("/")
@@ -90,7 +90,6 @@ def logout():
     return redirect("/")
 
 
-
 @app.route("/home")
 @login_required
 def get_home():
@@ -100,40 +99,41 @@ def get_home():
 @app.route("/books")
 @login_required
 def get_books():
-    return render_template("/books.html",
-                           items=Database.get_item_by_category(Category.BOOK))
+    return render_template(
+        "/books.html", items=Database.get_item_by_category(Category.BOOK)
+    )
 
 
 @app.route("/clothes")
 @login_required
 def get_clothes():
-    return render_template("/clothes.html",
-                           items=Database.get_item_by_category(
-                               Category.CLOTHING))
+    return render_template(
+        "/clothes.html", items=Database.get_item_by_category(Category.CLOTHING)
+    )
 
 
 @app.route("/electronics")
 @login_required
 def get_electronics():
-    return render_template("/electronics.html",
-                           items=Database.get_item_by_category(
-                               Category.ELECTRONIC))
+    return render_template(
+        "/electronics.html", items=Database.get_item_by_category(Category.ELECTRONIC)
+    )
 
 
 @app.route("/sports")
 @login_required
 def get_sports():
-    return render_template("/sports.html",
-                           items=Database.get_item_by_category(
-                               Category.SPORTS_GEAR))
+    return render_template(
+        "/sports.html", items=Database.get_item_by_category(Category.SPORTS_GEAR)
+    )
 
 
 @app.route("/furniture")
 @login_required
 def get_furniture():
-    return render_template("/furniture.html",
-                           items=Database.get_item_by_category(
-                               Category.FURNITURE))
+    return render_template(
+        "/furniture.html", items=Database.get_item_by_category(Category.FURNITURE)
+    )
 
 
 @app.route("/sell", methods=["GET", "POST"])
