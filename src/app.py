@@ -195,7 +195,7 @@ def get_sell():
             item.set_image_filepath(filename)
             Database.add_item(item)
         return redirect("/item_posted")
-    return render_template("/sell.html")
+    return render_template("/sell.html", cart=cart)
 
 
 @app.route("/view/<item_id>", methods=["GET","POST"])
@@ -274,13 +274,13 @@ def get_search():
     return render_template(
         "/listing.html",
         items=Database.search_item(term),
-        listing_title="Search Results",
+        listing_title="Search Results", cart=cart
     )
 
 
 @app.route("/item_posted", methods=["GET", "POST"])
 def get_item_posted():
-    return render_template("/item_posted.html")
+    return render_template("/item_posted.html", cart=cart)
 
 
 if __name__ == "__main__":
