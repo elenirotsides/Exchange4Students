@@ -32,7 +32,8 @@
                     <div class="btn-group">
                     <a class="btn btn-sm btn-outline-secondary" href="/view/{{item.get_item_id()}}">View</a>
                     <form method="POST"> 
-                        <input type="submit" name="add_to_cart" class="btn btn-sm btn-outline-secondary" value="{{item.get_item_id()}}">Add to Cart</button>
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
+                        <input type="hidden" name="add_to_cart" value="{{item.get_item_id()}}">
                     </form>
                     </div>
                     <span class="text-muted" style="font-size: medium;">${{item.price_string()}}</span>
