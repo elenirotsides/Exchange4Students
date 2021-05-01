@@ -3,6 +3,7 @@ from pathlib import Path
 from decimal import Decimal
 from flask import Flask, render_template, request, redirect
 from werkzeug.utils import secure_filename
+from flask_fontawesome import FontAwesome
 from e4stypes.database import Category, Database
 from e4stypes.book_item import BookItem
 from e4stypes.clothing_item import ClothingItem
@@ -16,6 +17,7 @@ uploadsdir = basedir.joinpath("static")
 cart = OrderInformation([], 0)
 
 app = Flask(__name__)
+fa = FontAwesome(app)
 
 app.config["SECRET_KEY"] = "Howdy D6"
 if not uploadsdir.exists():
