@@ -33,8 +33,11 @@ def get_home():
     )
 
 
-@app.route("/books")
+@app.route("/books", methods=["GET","POST"])
 def get_books():
+    if request.method == "POST":
+        item_id = request.form["add_to_cart"]
+        cart.add_to_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.BOOK),
@@ -42,8 +45,11 @@ def get_books():
     )
 
 
-@app.route("/clothes")
+@app.route("/clothes", methods=["GET","POST"])
 def get_clothes():
+    if request.method == "POST":
+        item_id = request.form["add_to_cart"]
+        cart.add_to_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.CLOTHING),
@@ -51,8 +57,11 @@ def get_clothes():
     )
 
 
-@app.route("/electronics")
+@app.route("/electronics", methods=["GET","POST"])
 def get_electronics():
+    if request.method == "POST":
+        item_id = request.form["add_to_cart"]
+        cart.add_to_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.ELECTRONIC),
@@ -60,8 +69,11 @@ def get_electronics():
     )
 
 
-@app.route("/sports")
+@app.route("/sports", methods=["GET","POST"])
 def get_sports():
+    if request.method == "POST":
+        item_id = request.form["add_to_cart"]
+        cart.add_to_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.SPORTS_GEAR),
@@ -69,8 +81,11 @@ def get_sports():
     )
 
 
-@app.route("/furniture")
+@app.route("/furniture", methods=["GET","POST"])
 def get_furniture():
+    if request.method == "POST":
+        item_id = request.form["add_to_cart"]
+        cart.add_to_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.FURNITURE),
@@ -181,10 +196,13 @@ def get_sell():
     return render_template("/sell.html")
 
 
-@app.route("/view/<item_id>")
+@app.route("/view/<item_id>", methods=["GET","POST"])
 def get_view(item_id):
     item = Database.get_item_by_id(item_id)
     if isinstance(item, ClothingItem):
+        if request.method == "POST":
+            item_id = request.form["add_to_cart"]
+            cart.add_to_cart(item_id)
         return render_template(
             "/view_clothing.html",
             item=item,
@@ -195,18 +213,31 @@ def get_view(item_id):
             unisex=item.get_gender() == 0,
             female=item.get_gender() == 1,
             male=item.get_gender() == 2,
+            cart=cart
         )
 
     if isinstance(item, BookItem):
-        return render_template("/view_book.html", item=item)
+        if request.method == "POST":
+            item_id = request.form["add_to_cart"]
+            cart.add_to_cart(item_id)
+        return render_template("/view_book.html", item=item, cart=cart)
 
     if isinstance(item, FurnitureItem):
-        return render_template("/view_furniture.html", item=item)
+        if request.method == "POST":
+            item_id = request.form["add_to_cart"]
+            cart.add_to_cart(item_id)
+        return render_template("/view_furniture.html", item=item, cart=cart)
 
     if isinstance(item, ElectronicItem):
-        return render_template("/view_electronic.html", item=item)
+        if request.method == "POST":
+            item_id = request.form["add_to_cart"]
+            cart.add_to_cart(item_id)
+        return render_template("/view_electronic.html", item=item, cart=cart)
 
     if isinstance(item, SportsGearItem):
+        if request.method == "POST":
+            item_id = request.form["add_to_cart"]
+            cart.add_to_cart(item_id)
         return render_template(
             "/view_sports_gear.html",
             item=item,
@@ -217,6 +248,7 @@ def get_view(item_id):
             unisex=item.get_gender() == 0,
             female=item.get_gender() == 1,
             male=item.get_gender() == 2,
+            cart=cart
         )
 
 
