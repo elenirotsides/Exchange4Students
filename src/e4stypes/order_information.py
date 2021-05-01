@@ -19,12 +19,9 @@ class OrderInformation:
             self.item_list.append(item)
 
     def remove_from_cart(self, item_id: str) -> type(None):
-        item = Database.get_item_by_id(item_id)
-        item_list_ids = []
-        for item1 in self.item_list:
-            item_list_ids.append(item1.get_item_id())
-        if ObjectId(item_id) in item_list_ids:
-            self.item_list.remove(item)
+        for item_list_item in self.item_list:
+            if ObjectId(item_id) == item_list_item.get_item_id():
+                self.item_list.remove(item_list_item)
 
     def calculate_total_amount(self) -> Decimal:
         self.total_amount = 0
