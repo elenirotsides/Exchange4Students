@@ -97,15 +97,7 @@
               <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
                 class="badge badge-pill badge-danger">{{cart.item_list|length}}</span></button>
             <div class="dropdown-menu">
-              <div class="row total-header-section">
-                <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                </div>
-                <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-                  <p>Total: <span class="text-info">fix this</span></p>
-                </div>
-              </div>
-              <div class="row cart-detail">
+              <div class="row cart-detail col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2"">
                 {% if items|length == 0 %}
                 <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
                   <h2 class="text-muted">No Items in Cart</h2>
@@ -120,7 +112,10 @@
                         <div class="btn-group">
                           <a class="btn btn-sm btn-outline-secondary" href="/view/{{item.get_item_id()}}">View</a>
                         </div>
-                        <span class="text-muted" style="font-size: medium;">${{item.get_price()}}</span>
+                        <form method="POST">
+                          <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                          <input type="hidden" name="remove_from_cart" value="{{item.get_item_id()}}">
+                        </form>
                       </div>
                     </div>
                   </div>

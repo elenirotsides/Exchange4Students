@@ -15,12 +15,16 @@ class OrderInformation:
         item_list_ids = []
         for item1 in self.item_list:
             item_list_ids.append(item1.get_item_id())
-        print(item_list_ids)
         if ObjectId(item_id) not in item_list_ids:
             self.item_list.append(item)
 
     def remove_from_cart(self, item_id: str) -> type(None):
-        self.item_list = [item for item in self.item_list if item.get_item_id() != item_id]
+        item = Database.get_item_by_id(item_id)
+        item_list_ids = []
+        for item1 in self.item_list:
+            item_list_ids.append(item1.get_item_id())
+        if ObjectId(item_id) in item_list_ids:
+            self.item_list.remove(item)
 
     def calculate_total_amount(self) -> Decimal:
         self.total_amount = 0
