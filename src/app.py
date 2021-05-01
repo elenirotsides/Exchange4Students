@@ -327,5 +327,12 @@ def get_item_posted():
     return render_template("/item_posted.html", cart=cart)
 
 
+@app.route("/checkout", methods=["GET", "POST"])
+def get_checkout():
+    total = 0
+    for item in cart.item_list:
+        total += item.get_price()
+    return render_template("/checkout.html", cart=cart, total=total)
+
 if __name__ == "__main__":
     app.run(debug=True)
