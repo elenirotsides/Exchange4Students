@@ -38,122 +38,122 @@
               <!--Post Title-->
               <div class="form-group" id="post_title">
                 <label for="post_title_val">Title for Post</label>
-                <input type="text" class="form-control" name="post_title_val" id="post_title_val">
+                <input type="text" class="form-control" name="post_title_val" id="post_title_val" required>
               </div>
-              
+
               <!-- Price -->
               <div class="form-group" id="price">
                 <label for="price">Price ($)</label>
-                <input type="text" class="form-control" name="price_val" id="price_val">
+                <input type="number" class="form-control" name="price_val" id="price_val" required>
               </div>
 
-                <!-- Book Properties -->
-                <div class="form-group" id="book_title_ed">
-                  <div class="row">
-                    <div class="col-6">
-                      <label for="title_val">Book Title</label>
-                      <input type="text" class="form-control" name="title_val" id="title_val">
-                    </div>
-                    <div class="col-6">
-                      <label for="ed_val">Book Edition</label>
-                      <input type="text" class="form-control" name="ed_val" id="ed_val">
-                    </div>
+              <!-- Book Properties -->
+              <div class="form-group" id="book_title_ed">
+                <div class="row">
+                  <div class="col-6">
+                    <label for="title_val">Book Title</label>
+                    <input type="text" class="form-control" name="title_val" id="title_val" required>
+                  </div>
+                  <div class="col-6">
+                    <label for="ed_val">Book Edition</label>
+                    <input type="text" class="form-control" name="ed_val" id="ed_val" required>
                   </div>
                 </div>
+              </div>
 
-                <div class="form-group" id="dimensions">
-                  <div class="row">
-                    <div class="col-6">
-                      <label for="height_val">Height (in.)</label>
-                      <input type="text" class="form-control" name="height_val" id="height_val">
-                    </div>
-                    <div class="col-6">
-                      <label for="width_val">Width(in.)</label>
-                      <input type="text" class="form-control" name="width_val" id="width_val">
-                    </div>
-                    <div class="col-6">
-                      <label for="length_val">Length (in.)</label>
-                      <input type="text" class="form-control" name="length_val" id="length_val">
-                    </div>
+              <div class="form-group" id="dimensions">
+                <div class="row">
+                  <div class="col-6">
+                    <label for="height_val">Height (in.)</label>
+                    <input type="number" class="form-control" name="height_val" id="height_val" required>
+                  </div>
+                  <div class="col-6">
+                    <label for="width_val">Width(in.)</label>
+                    <input type="number" class="form-control" name="width_val" id="width_val" required>
+                  </div>
+                  <div class="col-6">
+                    <label for="length_val">Length (in.)</label>
+                    <input type="number" class="form-control" name="length_val" id="length_val" required>
                   </div>
                 </div>
+              </div>
 
-                <div class="form-group" id="quantity">
-                  <label for="quantity_val">Quantity</label>
-                  <input type="text" class="form-control" name="quantity_val" id="quantity_val">
-                </div>
+              <div class="form-group" id="quantity">
+                <label for="quantity_val">Quantity</label>
+                <input type="number" class="form-control" name="quantity_val" id="quantity_val" required>
+              </div>
 
-                <div class="form-group" id="weight">
-                  <label for="weight_val">Weight (lbs)</label>
-                  <input type="text" class="form-control" name="weight_val" id="weight_val">
-                </div>
+              <div class="form-group" id="weight">
+                <label for="weight_val">Weight (lbs)</label>
+                <input type="number" class="form-control" name="weight_val" id="weight_val" required>
+              </div>
 
-                <div class="form-group" id="color">
-                  <label for="color_val">Color</label>
-                  <input type="text" class="form-control" name="color_val" id="color_val">
-                </div>
+              <div class="form-group" id="color">
+                <label for="color_val">Color</label>
+                <input type="text" class="form-control" name="color_val" id="color_val" required>
+              </div>
 
-                <div class="form-group" id="type">
-                  <label for="type_val">Type</label>
-                  <input type="text" class="form-control" name="type_val" id="type_val">
-                </div>
+              <div class="form-group" id="type">
+                <label for="type_val">Type</label>
+                <input type="text" class="form-control" name="type_val" id="type_val" required>
+              </div>
 
-                <div class="form-group" id="course_num">
-                  <label for="course_num_val">Course Number</label>
-                  <input type="text" class="form-control" name="course_num_val" id="course_num_val">
-                </div>
+              <div class="form-group" id="course_num">
+                <label for="course_num_val">Course Number</label>
+                <input type="text" class="form-control" name="course_num_val" id="course_num_val" required>
+              </div>
 
-                <div class="form-group" id="size">
-                  <label for="size">Size</label>
-                  <select class="form-control" id="size_val" name="size_val">
-                    <option>Select</option>
-                    <option value=0>Small</option>
-                    <option value=1>Medium</option>
-                    <option value=2>Large</option>
-                    <option value=3>Extra Large</option>
-                  </select>
-                </div>
+              <div class="form-group" id="size">
+                <label for="size">Size</label>
+                <select class="form-control" id="size_val" name="size_val" required>
+                  <option>Select</option>
+                  <option value=0>Small</option>
+                  <option value=1>Medium</option>
+                  <option value=2>Large</option>
+                  <option value=3>Extra Large</option>
+                </select>
+              </div>
 
-                <div class="form-group" id="gender">
-                  <label for="gender">Gender</label>
-                  <select class="form-control" id="gender_val" name="gender_val">
-                    <option>Select</option>
-                    <option value=0>Unisex</option>
-                    <option value=1>Female</option>
-                    <option value=2>Male</option>
-                  </select>
-                </div>
+              <div class="form-group" id="gender">
+                <label for="gender">Gender</label>
+                <select class="form-control" id="gender_val" name="gender_val" required>
+                  <option>Select</option>
+                  <option value=0>Unisex</option>
+                  <option value=1>Female</option>
+                  <option value=2>Male</option>
+                </select>
+              </div>
 
-                <div class="form-group" id="model">
-                  <label for="model">Model</label>
-                  <input type="text" class="form-control" name="model_val" id="model_val">
-                </div>
+              <div class="form-group" id="model">
+                <label for="model">Model</label>
+                <input type="text" class="form-control" name="model_val" id="model_val" required>
+              </div>
 
-                <div class="form-group" id="comments">
-                  <label for="comments_val">Description</label>
-                  <input type="text" class="form-control" name="comments_val" id="comments_val">
-                </div>
+              <div class="form-group" id="comments">
+                <label for="comments_val">Description</label>
+                <textarea type="text" class="form-control" name="comments_val" id="comments_val" required></textarea>
+              </div>
 
-                <div class="form-group" id="seller">
-                  <label for="seller_val">Your Email</label>
-                  <input type="text" class="form-control" name="seller_val" id="seller_val">
-                </div>
+              <div class="form-group" id="seller">
+                <label for="seller_val">Your Email</label>
+                <input type="email" class="form-control" name="seller_val" id="seller_val" required>
+              </div>
 
-                <div class="form-group" id="photo">
-                  <label for="photo">Photos</label>
+              <div class="form-group" id="photo">
+                <label for="photo">Photos</label>
 
-                  <div class="input-group">
-                    <span class="input-group-btn">
-                      <span class="btn btn-primary btn-file">
-                        Browse… <input type="file" id="fileupload" name="file" multiple>
-                      </span>
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                      Browse… <input type="file" id="fileupload" name="file" multiple required>
                     </span>
-                    <!-- <input type="text" class="form-control" readonly> -->
-                  </div>
-
+                  </span>
+                  <!-- <input type="text" class="form-control" readonly> -->
                 </div>
 
-                <input type="submit" value="Submit" class="btn btn-outline-success" disabled>
+              </div>
+
+              <input type="submit" value="Submit" id="buttonSubmit" class="btn btn-outline-success">
             </form>
 
 
@@ -180,7 +180,7 @@
       $('#course_num').show();
       $('#seller').show();
       $('#photo').show();
-      
+
       //hidden
       $('#quantity').hide();
       $('#size').hide();
