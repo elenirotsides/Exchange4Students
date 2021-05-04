@@ -2,12 +2,13 @@
 
 {% block content %}
 <main>
-    <body class="bg-light">
-        <div class="container">
+
+  <body class="bg-light">
+    <div class="container">
       <div class="py-5 text-center">
         <h2>Checkout</h2>
       </div>
-    
+
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -16,9 +17,9 @@
           </h4>
           <ul class="list-group mb-3">
             {% if cart.item_list|length == 0 %}
-                <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
-                    <h2 class="text-muted">No Items in Cart</h2>
-                </div>
+            <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
+              <h2 class="text-muted">No Items in Cart</h2>
+            </div>
             {% endif %}
             {% for item in cart.item_list %}
             <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -33,122 +34,112 @@
               <strong>${{total}}</strong>
             </li>
           </ul>
-    
+
         </div>
         <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Shipping Information</h4>
-          <form class="needs-validation" novalidate>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                  Valid first name is required.
+          <form class="p-3" method="POST" id="checkout" enctype="multipart/form-data">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName">First name</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName_val" placeholder="" value="">
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lastName">Last name</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName_val" placeholder="" value="">
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+
+              <div class="mb-3">
+                <label for="email">Email <span class="text-muted"></span></label>
+                <input type="email" class="form-control" id="email" name="email_val" placeholder="you@example.com">
                 <div class="invalid-feedback">
-                  Valid last name is required.
+                  Please enter a valid email address.
                 </div>
               </div>
-            </div>    
-    
-            <div class="mb-3">
-              <label for="email">Email <span class="text-muted"></span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
-              <div class="invalid-feedback">
-                Please enter a valid email address.
+
+              <label for="drop">Choose Delivery Method</label>
+              <select class="form-control" name="drop_val" id="drop">
+                <option selected disabled value="">Select</option>
+                <option value="Ship">Ship</option>
+                <option value="Dropoff/Pickup">Dropoff/Pickup</option>
+              </select>
+            </div>
+            <div class="form-group" name="ship_drop_val" id="ship_drop">
+              <h4 class="mb-3">Shipping Information</h4>
+              <!-- <form class="needs-validation" novalidate> -->
+              <div class="mb-3">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address_val" placeholder="1234 Main St">
+                <div class="invalid-feedback">
+                  Please enter your shipping address.
+                </div>
               </div>
-            </div>
-    
-            <div class="mb-3">
-              <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
+
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" id="country" name="country_val" placeholder="" value="">
+                  <div class="invalid-feedback">
+                    Please select a valid country.
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="state">State</label>
+                  <input type="text" class="form-control" id="state" name="state_val" placeholder="" value="">
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="zip">Zip</label>
+                  <input type="text" class="form-control" id="zip" name="zip_val" placeholder="">
+                </div>
               </div>
+              <hr class="mb-4">
             </div>
-    
-            <div class="mb-3">
-              <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-            </div>
-    
-            <div class="row">
-              <div class="col-md-5 mb-3">
-                <label for="country">Country</label>
-                <select class="custom-select d-block w-100" id="country" required>
-                  <option value="">Choose...</option>
-                  <option>United States</option>
+
+            <div class="form-group" name="meet_val" id="meet">
+              <h4 class="mb-3">Meetup Information</h4>
+              <div class="row">
+                <label for="meet">Choose a Meeting Place</label>
+                <select class="form-control" name="place_val">
+                  <option selected disabled value="">Select</option>
+                  <option value="babbio">Babbio Patio</option>
+                  <option value="palmer">Palmer Lawn</option>
+                  <option value="pierce">Pierce Cafe</option>
+                  <option value="eas">EAS Park</option>
                 </select>
+
+                <label for="date">Meeting Date</label>
+                <input type="text" class="form-control" id="date" name="date_val" placeholder="XX/XX/XXXX" value="">
                 <div class="invalid-feedback">
-                  Please select a valid country.
+                  Please select a valid date.
                 </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="state">State</label>
-                <select class="custom-select d-block w-100" id="state" required>
-                  <option value="">Choose...</option>
-                  <option>California</option>
+
+                <label for="meet_time">Choose a Meeting Time</label>
+                <select class="form-control" name="time_val">
+                  <option selected disabled value="">Select</option>
+                  <option value="ten">10:00 AM</option>
+                  <option value="twelve">12:00 PM</option>
+                  <option value="two">2:00 PM</option>
+                  <option value="four">4:00 PM</option>
                 </select>
-                <div class="invalid-feedback">
-                  Please provide a valid state.
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
-                <div class="invalid-feedback">
-                  Zip code required.
-                </div>
+
               </div>
             </div>
-            <hr class="mb-4">
-            
+
             <h4 class="mb-3">Payment</h4>
-    
-            <div class="d-block my-3" id="payment_method" name="payment_method">
-              <div class="custom-control custom-radio">
-                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                <label class="custom-control-label" for="credit">Credit card</label>
-              </div>
-              <!-- <div class="custom-control custom-radio">
-                <input id="venmo" name="paymentMethod" type="radio" class="custom-control-input" required>
-                <label class="custom-control-label" name="venmo" for="venmo">Venmo</label>
-              </div> -->
-            </div>
-            <div class="row" id="credit1" name="credit1">
+            <div class="row" id="venmo" name="venmo">
               <div class="col-md-6 mb-3">
-                <label for="cc-name">Name on card</label>
-                <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                <small class="text-muted">Full name as displayed on card</small>
+                <label for="v-name">Venmo Username</label>
+                <input type="text" class="form-control" id="v-name" name="v-name" placeholder="">
+                <small class="text-muted">"Username will be sent to seller for charging"</small>
                 <div class="invalid-feedback">
-                  Name on card is required
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="cc-number">Credit card number</label>
-                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                <div class="invalid-feedback">
-                  Credit card number is required
-                </div>
-              </div>
-            </div>
-            <div class="row" id="credit2" name="credit2">
-              <div class="col-md-3 mb-3">
-                <label for="cc-expiration">Expiration</label>
-                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                <div class="invalid-feedback">
-                  Expiration date required
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="cc-cvv">CVV</label>
-                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                <div class="invalid-feedback">
-                  Security code required
+                  Username is required
                 </div>
               </div>
             </div>
@@ -156,19 +147,21 @@
             <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Order</button>
           </form>
         </div>
-      </div>
-    </main>
-    <script>
-        $("#payment_method").change(function () {
-        if ($(this).val() == "venmo") {
-            $('#credit1').hide();
-            $('#credit2').hide();
-        }
-        else{
-            $('#credit1').show();
-            $('#credit2').show(); 
-        }
-        });
-    </script>
+</main>
+
+<script>
+  $('#ship_drop').hide();
+  $('#meet').hide();
+  $("#drop").change(function () {
+    if ($(this).val() == "Ship") {
+      $('#ship_drop').show();
+      $('#meet').hide();
+    }
+    else if ($(this).val() == "Dropoff/Pickup") {
+      $('#meet').show();
+      $('#ship_drop').hide();
+    }
+  });
+</script>
 
 {% endblock %}
