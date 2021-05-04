@@ -15,6 +15,11 @@ from e4stypes.order_information import OrderInformation
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
 cart = OrderInformation([], 0)
+order_info_keys = ["first", "last", "email", "venmo", "address", "country",
+"state", "zip", "place", "date", "time"]
+order_info_dict = dict.fromkeys(order_info_keys, None)
+final_cart_list = []
+final_total = 0
 
 app = Flask(__name__)
 fa = FontAwesome(app)
@@ -347,6 +352,7 @@ def internal_server_error(error):
 def get_search():
     if request.method == "POST":
         term = request.form["search_term"]
+
     return render_template(
         "/listing.html",
         items=Database.search_item(term),
@@ -365,6 +371,26 @@ def get_checkout():
     total = 0
     for item in cart.item_list:
         total += item.get_price()
+    if request.method == "POST":
+        if "drop_val" in request.form:
+            category = request.form["drop_val"]
+            order_info_dict["first"] = request.form["firstName_val"]  
+            order_info_dict["last"] = request.form["lastName_val"]
+            order_info_dict["email"] = request.form["email_val"]
+            order_info_dict["venmo"] = request.form["v-name"]
+            if category == "Ship":
+                order_info_dict["address"] = request.form["address_val"]
+                order_info_dict["country"] = request.form["country_val"]
+                order_info_dict["state"] = request.form["state_val"]
+                order_info_dict["zip"] = request.form["zip_val"]
+            if category == "Dropoff/Pickup":
+                order_info_dict["place"] = request.form["place_val"]
+                order_info_dict["date"] = request.form["date_val"]
+                order_info_dict["time"] = request.form["time_val"]
+        final_cart_list = cart.item_list
+        final_total = total
+        #email stuff here
+
     return render_template("/checkout.html", cart=cart, total=total)
 
 
