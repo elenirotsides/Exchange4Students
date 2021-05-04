@@ -4,288 +4,315 @@
 
 <main>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <section class="py-5 text-center container">
-      <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="fw-light">Post your item for sale here:</h1>
-        </div>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Post your item for sale here:</h1>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <div class="album py-5 bg-light" id="item_box">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <form class="p-3" method="POST" id="sellitem" action="/sell"  enctype="multipart/form-data">
-                <div class="form-group">
-                  <label for="category_drop">Choose a Category</label>
-                  <select class="form-control" name="category_drop_val" id="category_drop">
-                    <option value="no">Select</option>
-                    <option value="books">Books</option>
-                    <option value="clothes">Clothes</option>
-                    <option value="furniture">Furniture</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="sports">Sports Gear</option>
-                  </select>
-                </div>
+  <div class="album py-5 bg-light" id="item_box">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <form class="p-3" method="POST" id="sellitem" action="/sell" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="category_drop">Choose a Category</label>
+                <select class="form-control" name="category_drop_val" id="category_drop">
+                  <option selected disabled value="">Select</option>
+                  <option value="books">Books</option>
+                  <option value="clothes">Clothes</option>
+                  <option value="furniture">Furniture</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="sports">Sports Gear</option>
+                </select>
+              </div>
 
-                <!--Post Title-->
-                <div class="form-group" id="post_title">
-                  <label for="post_title_val">Title for Post</label>
-                  <input type="text" name="post_title_val" id="post_title_val">
-                </div>
 
-                <!-- Price -->
-                <div class="form-group" id="price">
-                  <label for="price">Price ($)</label>
-                  <input type="text" name="price_val" id="price_val">
-                </div>
+              <!--Post Title-->
+              <div class="form-group" id="post_title">
+                <label for="post_title_val">Title for Post<span style="color: red; font-size: large;">*</span></label>
+                <input type="text" class="form-control" name="post_title_val" id="post_title_val" required>
+              </div>
 
-                <!-- Book Properties -->
-                <div class="form-group" id="book_title_ed">
-                  <div class="row">
-                    <div class="col-6">
-                      <label for="title_val">Book Title</label>
-                      <input type="text" name="title_val" id="title_val">
-                    </div>
-                    <div class="col-6">
-                      <label for="ed_val">Book Edition</label>
-                      <input type="text" name="ed_val" id="ed_val">
-                    </div>
+              <!-- Price -->
+              <div class="row">
+                <div class="col-3">
+                  <div class="form-group" id="price">
+                    <label for="price">Price ($)<span style="color: red; font-size: large;">*</span></label>
+                    <input type="number" class="form-control" name="price_val" id="price_val" required>
                   </div>
                 </div>
-
-                <div class="form-group" id="dimensions">
-                  <div class="row">
-                    <div class="col-6">
-                      <label for="height_val">Height (in.)</label>
-                      <input type="text" name="height_val" id="height_val">
-                    </div>
-                    <div class="col-6">
-                      <label for="width_val">Width(in.)</label>
-                      <input type="text" name="width_val" id="width_val">
-                    </div>
-                    <div class="col-6">
-                      <label for="length_val">Length (in.)</label>
-                      <input type="text" name="length_val" id="length_val">
-                    </div>
+              </div>
+              <!-- Book Properties -->
+              <div class="form-group" id="book_title_ed">
+                <div class="row">
+                  <div class="col-6">
+                    <label for="title_val">Book Title</label>
+                    <input type="text" class="form-control" name="title_val" id="title_val">
+                  </div>
+                  <div class="col-6">
+                    <label for="ed_val">Book Edition</label>
+                    <input type="text" class="form-control" name="ed_val" id="ed_val">
                   </div>
                 </div>
+              </div>
 
-                <div class="form-group" id="quantity">
-                  <label for="quantity_val">Quantity</label>
-                  <input type="text" name="quantity_val" id="quantity_val">
+              <div class="form-group" id="dimensions">
+                <div class="row">
+                  <div class="col-4">
+                    <label for="height_val">Height (in.)</label>
+                    <input type="number" class="form-control" name="height_val" id="height_val">
+                  </div>
+                  <div class="col-4">
+                    <label for="width_val">Width(in.)</label>
+                    <input type="number" class="form-control" name="width_val" id="width_val">
+                  </div>
+                  <div class="col-4">
+                    <label for="length_val">Length (in.)</label>
+                    <input type="number" class="form-control" name="length_val" id="length_val">
+                  </div>
                 </div>
+              </div>
 
-                <div class="form-group" id="weight">
-                  <label for="weight_val">Weight (lbs)</label>
-                  <input type="text" name="weight_val" id="weight_val">
+              <div class="form-group" id="weight">
+                <label for="weight_val">Weight (lbs)</label>
+                <input type="number" class="form-control" name="weight_val" id="weight_val">
+              </div>
+
+              <div class="form-group" id="color">
+                <label for="color_val">Color</label>
+                <input type="text" class="form-control" name="color_val" id="color_val">
+              </div>
+
+              <div class="form-group" id="type">
+                <label for="type_val">Type</label>
+                <input type="text" class="form-control" name="type_val" id="type_val">
+              </div>
+
+              <div class="form-group" id="course_num">
+                <label for="course_num_val">Course Number</label>
+                <input type="text" class="form-control" name="course_num_val" id="course_num_val">
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group" id="size">
+                    <label for="size">Size</label>
+                    <select class="form-control" id="size_val" name="size_val">
+                      <option id="size_selected" disabled value="">Select</option>
+                      <option value=0>Small</option>
+                      <option value=1>Medium</option>
+                      <option value=2>Large</option>
+                      <option value=3>Extra Large</option>
+                    </select>
+                  </div>
                 </div>
-
-                <div class="form-group" id="color">
-                  <label for="color_val">Color</label>
-                  <input type="text" name="color_val" id="color_val">
+                <div class="col-6">
+                  <div class="form-group" id="gender">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender_val" name="gender_val">
+                      <option id="gender_selected" disabled value="">Select</option>
+                      <option value=0>Unisex</option>
+                      <option value=1>Female</option>
+                      <option value=2>Male</option>
+                    </select>
+                  </div>
                 </div>
+              </div>
 
-                <div class="form-group" id="type">
-                  <label for="type_val">Type</label>
-                  <input type="text" name="type_val" id="type_val">
+              <div class="form-group" id="model">
+                <label for="model">Model</label>
+                <input type="text" class="form-control" name="model_val" id="model_val">
+              </div>
+
+              <div class="form-group" id="comments">
+                <label for="comments_val">Description<span style="color: red; font-size: large;">*</span></label>
+                <textarea type="text" class="form-control" name="comments_val" id="comments_val" required></textarea>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group" id="seller">
+                    <label for="seller_val">Your Email<span style="color: red; font-size: large;">*</span></label>
+                    <input type="email" class="form-control" name="seller_val" id="seller_val" required>
+                  </div>
                 </div>
+              </div>
 
-                <div class="form-group" id="course_num">
-                  <label for="course_num_val">Course Number</label>
-                  <input type="text" name="course_num_val" id="course_num_val">
-                </div>
+              <div class="form-group" id="photo">
+                <label for="photo">Photo<span style="color: red; font-size: large;">*</span></label>
 
-                <div class="form-group" id="size">
-                  <label for="size">Size</label>
-                  <select class="form-control" id="size_val" name="size_val">
-                    <option>Select</option>
-                    <option value=0>Small</option>
-                    <option value=1>Medium</option>
-                    <option value=2>Large</option>
-                    <option value=3>Extra Large</option>
-                  </select>
-                </div>
-
-                <div class="form-group" id="gender">
-                  <label for="gender">Gender</label>
-                  <select class="form-control" id="gender_val" name="gender_val">
-                    <option>Select</option>
-                    <option value=0>Unisex</option>
-                    <option value=1>Female</option>
-                    <option value=2>Male</option>
-                  </select>
-                </div>
-
-                <div class="form-group" id="model">
-                  <label for="model">Model</label>
-                  <input type="text" name="model_val" id="model_val">
-                </div>
-
-                <div class="form-group" id="comments">
-                  <label for="comments_val">Description</label>
-                  <input type="text" name="comments_val" id="comments_val">
-                </div>
-
-                <div class="form-group" id="seller">
-                  <label for="seller_val">Your Email</label>
-                  <input type="text" name="seller_val" id="seller_val">
-                </div>
-
-                <div class="form-group" id="photo">
-                  <label for="photo">Photos</label>
-
-                  <div class="input-group">
-                    <span class="input-group-btn">
-                      <span class="btn btn-primary btn-file">
-                        Browse… <input type="file" id="fileupload" name="file" multiple>
-                      </span>
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                      Browse… <input type="file" id="fileupload" name="file" required>
                     </span>
-                    <!-- <input type="text" class="form-control" readonly> -->
-                  </div>
-
+                  </span>
+                  <!-- <input type="text" class="form-control" readonly> -->
                 </div>
-
-                <input type="submit" value="Submit" class="btn btn-outline-success">
-              </form>
-
-
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center"></div>
 
               </div>
+
+              <input type="submit" value="Submit" id="buttonSubmit" class="btn btn-outline-success">
+            </form>
+
+
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center"></div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
-  </main>
+  </div>
+  </div>
+</main>
 
-  <script>
-    $("#category_drop").change(function () {
-      if ($(this).val() == "books") {
-        $('#post_title').show();
-        $('#book_title_ed').show();
-        $('#weight').show();
-        $('#price').show();
-        $('#comments').show();
-        $('#course_num').show();
-        $('#seller').show();
-        $('#photo').show();
+<script>
+  $("#category_drop").change(function () {
+    if ($(this).val() == "books") {
+      $('#post_title').show();
+      $('#book_title_ed').show();
+      $('#weight').show();
+      $('#price').show();
+      $('#comments').show();
+      $('#course_num').show();
+      $('#seller').show();
+      $('#photo').show();
 
-        //hidden
-        $('#quantity').hide();
-        $('#size').hide();
-        $('#type').hide();
-        $('#gender').hide();
-        $('#model').hide();
-        $('#dimensions').hide();
-        $('#color').hide();
-      }
-      else if ($(this).val() == "furniture") {
-        $('#post_title').show();
-        $('#dimensions').show();
-        $('#weight').show();
-        $('#type').show();
-        $('#color').show();
-        $('#price').show();
-        $('#comments').show();
-        $('#seller').show();
-        $('#photo').show();
+      $('#size_val').removeAttr('required');
+      $('#gender_val').removeAttr('required');
+      $("#size_selected").removeAttr('selected', false);
+      $("#gender_selected").removeAttr('selected', false);
 
-        //hidden
-        $('#quantity').hide();
-        $('#book_title_ed').hide();
-        $('#size').hide();
-        $('#gender').hide();
-        $('#model').hide();
-        $('#course_num').hide();
-      }
-      else if ($(this).val() == "clothes") {
-        $('#post_title').show();
-        $('#type').show();
-        $('#weight').show();
-        $('#price').show();
-        $('#size').show();
-        $('#gender').show();
-        $('#color').show();
-        $('#comments').show();
-        $('#seller').show();
-        $('#photo').show();
+      //hidden
+      $('#size').hide();
+      $('#type').hide();
+      $('#gender').hide();
+      $('#model').hide();
+      $('#dimensions').hide();
+      $('#color').hide();
+    }
+    else if ($(this).val() == "furniture") {
+      $('#post_title').show();
+      $('#dimensions').show();
+      $('#weight').show();
+      $('#type').show();
+      $('#color').show();
+      $('#price').show();
+      $('#comments').show();
+      $('#seller').show();
+      $('#photo').show();
 
-        //hidden
-        $('#quantity').hide();
-        $('#book_title_ed').hide();
-        $('#dimensions').hide();
-        $('#model').hide();
-        $('#course_num').hide();
-        
-      }
-      else if ($(this).val() == "electronics") {
-        $('#post_title').show();
-        $('#type').show();
-        $('#model').show();
-        $('#weight').show();
-        $('#price').show();
-        $('#dimensions').show();
-        $('#quantity').show();
-        $('#comments').show();
-        $('#seller').show();
-        $('#photo').show();
+      $('#size_val').removeAttr('required');
+      $('#gender_val').removeAttr('required');
+      $("#size_selected").removeAttr('selected', false);
+      $("#gender_selected").removeAttr('selected', false);
 
-        //hidden
-        $('#book_title_ed').hide();
-        $('#size').hide();
-        $('#gender').hide();
-        $('#color').hide();
-        $('#course_num').hide();
-      }
-      else if ($(this).val() == "sports") {
-        $('#post_title').show();
-        $('#type').show();
-        $('#size').show();
-        $('#weight').show();
-        $('#gender').show();
-        $('#price').show();
-        $('#comments').show();
-        $('#seller').show();
-        $('#photo').show();
 
-        //hidden
-        $('#quantity').hide();
-        $('#book_title_ed').hide();
-        $('#model').hide();
-        $('#dimensions').hide();
-        $('#color').hide();
-        $('#course_num').hide();
-      }
-      else {
-        $('#post_title').hide();
-        $('#book_title_ed').hide();
-        $('#dimensions').hide();
-        $('#price').hide();
-        $('#color').hide();
-        $('#weight').hide();
-        $('#quantity').hide();
-        $('#comments').hide();
-        $('#type').hide();
-        $('#size').hide();
-        $('#gender').hide();
-        $('#model').hide();
-        $('#course_num').hide();
-        $('#seller').hide();
-        $('#photo').hide();
-      }
-    });
-    $("#category_drop").trigger("change");
-  </script>
-  
+      //hidden
+      $('#book_title_ed').hide();
+      $('#size').hide();
+      $('#gender').hide();
+      $('#model').hide();
+      $('#course_num').hide();
+    }
+    else if ($(this).val() == "clothes") {
+      $('#post_title').show();
+      $('#type').show();
+      $('#weight').show();
+      $('#price').show();
+      $('#size').show();
+      $('#gender').show();
+      $('#color').show();
+      $('#comments').show();
+      $('#seller').show();
+      $('#photo').show();
+
+      $('#size_val').attr('required', true);
+      $('#gender_val').attr('required', true);
+      $("#size_selected").attr('selected', true);
+      $("#gender_selected").attr('selected', true);
+
+      //hidden
+      $('#book_title_ed').hide();
+      $('#dimensions').hide();
+      $('#model').hide();
+      $('#course_num').hide();
+
+    }
+    else if ($(this).val() == "electronics") {
+      $('#post_title').show();
+      $('#type').show();
+      $('#model').show();
+      $('#weight').show();
+      $('#price').show();
+      $('#dimensions').show();
+      $('#comments').show();
+      $('#seller').show();
+      $('#photo').show();
+
+      $('#size_val').removeAttr('required');
+      $('#gender_val').removeAttr('required');
+      $("#size_selected").removeAttr('selected', false);
+      $("#gender_selected").removeAttr('selected', false);
+
+      //hidden
+      $('#book_title_ed').hide();
+      $('#size').hide();
+      $('#gender').hide();
+      $('#color').hide();
+      $('#course_num').hide();
+    }
+    else if ($(this).val() == "sports") {
+      $('#post_title').show();
+      $('#type').show();
+      $('#size').show();
+      $('#weight').show();
+      $('#gender').show();
+      $('#price').show();
+      $('#comments').show();
+      $('#seller').show();
+      $('#photo').show();
+
+      $('#size_val').attr('required', true);
+      $('#gender_val').attr('required', true);
+      $("#size_selected").attr('selected', true);
+      $("#gender_selected").attr('selected', true);
+
+      //hidden
+      $('#book_title_ed').hide();
+      $('#model').hide();
+      $('#dimensions').hide();
+      $('#color').hide();
+      $('#course_num').hide();
+    }
+    else {
+      $('#post_title').hide();
+      $('#book_title_ed').hide();
+      $('#dimensions').hide();
+      $('#price').hide();
+      $('#color').hide();
+      $('#weight').hide();
+      $('#comments').hide();
+      $('#type').hide();
+      $('#size').hide();
+      $('#gender').hide();
+      $('#model').hide();
+      $('#course_num').hide();
+      $('#seller').hide();
+      $('#photo').hide();
+    }
+  });
+  $("#category_drop").trigger("change");
+</script>
+
 {% endblock %}
-     

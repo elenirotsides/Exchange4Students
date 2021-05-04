@@ -21,9 +21,6 @@ class Item:
         self._image = Path()
         self.is_sold = False
 
-        # Public instance attributes
-        self.quantity: int = 1
-
     def get_item_id(self) -> str:
         return self._item_id
 
