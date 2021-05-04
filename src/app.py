@@ -28,94 +28,102 @@ app.config["UPLOADED_PHOTOS_DEST"] = str(uploadsdir)
 @app.route("/", methods=["GET", "POST"])
 def get_home():
     if request.method == "POST":
-        if"add_to_cart" in request.form:
+        if "add_to_cart" in request.form:
             item_id = request.form["add_to_cart"]
             cart.add_to_cart(item_id)
-        if"remove_from_cart" in request.form:
+        if "remove_from_cart" in request.form:
             item_id = request.form["remove_from_cart"]
             cart.remove_from_cart(item_id)
     return render_template(
-        "/home.html", items=Database.get_all(), cart=cart, listing_title="All Items",
+        "/home.html",
+        items=Database.get_all(),
+        cart=cart,
+        listing_title="All Items",
     )
 
 
 @app.route("/books", methods=["GET", "POST"])
 def get_books():
     if request.method == "POST":
-        if"add_to_cart" in request.form:
+        if "add_to_cart" in request.form:
             item_id = request.form["add_to_cart"]
             cart.add_to_cart(item_id)
-        if"remove_from_cart" in request.form:
+        if "remove_from_cart" in request.form:
             item_id = request.form["remove_from_cart"]
             cart.remove_from_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.BOOK),
-        listing_title="Books", cart=cart,
+        listing_title="Books",
+        cart=cart,
     )
 
 
 @app.route("/clothes", methods=["GET", "POST"])
 def get_clothes():
     if request.method == "POST":
-        if"add_to_cart" in request.form:
+        if "add_to_cart" in request.form:
             item_id = request.form["add_to_cart"]
             cart.add_to_cart(item_id)
-        if"remove_from_cart" in request.form:
+        if "remove_from_cart" in request.form:
             item_id = request.form["remove_from_cart"]
             cart.remove_from_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.CLOTHING),
-        listing_title="Clothes", cart=cart,
+        listing_title="Clothes",
+        cart=cart,
     )
 
 
 @app.route("/electronics", methods=["GET", "POST"])
 def get_electronics():
     if request.method == "POST":
-        if"add_to_cart" in request.form:
+        if "add_to_cart" in request.form:
             item_id = request.form["add_to_cart"]
             cart.add_to_cart(item_id)
-        if"remove_from_cart" in request.form:
+        if "remove_from_cart" in request.form:
             item_id = request.form["remove_from_cart"]
             cart.remove_from_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.ELECTRONIC),
-        listing_title="Electronics", cart=cart,
+        listing_title="Electronics",
+        cart=cart,
     )
 
 
 @app.route("/sports", methods=["GET", "POST"])
 def get_sports():
     if request.method == "POST":
-        if"add_to_cart" in request.form:
+        if "add_to_cart" in request.form:
             item_id = request.form["add_to_cart"]
             cart.add_to_cart(item_id)
-        if"remove_from_cart" in request.form:
+        if "remove_from_cart" in request.form:
             item_id = request.form["remove_from_cart"]
             cart.remove_from_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.SPORTS_GEAR),
-        listing_title="Sports", cart=cart,
+        listing_title="Sports",
+        cart=cart,
     )
 
 
 @app.route("/furniture", methods=["GET", "POST"])
 def get_furniture():
     if request.method == "POST":
-        if"add_to_cart" in request.form:
+        if "add_to_cart" in request.form:
             item_id = request.form["add_to_cart"]
             cart.add_to_cart(item_id)
-        if"remove_from_cart" in request.form:
+        if "remove_from_cart" in request.form:
             item_id = request.form["remove_from_cart"]
             cart.remove_from_cart(item_id)
     return render_template(
         "/listing.html",
         items=Database.get_item_by_category(Category.FURNITURE),
-        listing_title="Furniture", cart=cart,
+        listing_title="Furniture",
+        cart=cart,
     )
 
 
@@ -251,10 +259,10 @@ def get_view(item_id):
     item = Database.get_item_by_id(item_id)
     if isinstance(item, ClothingItem):
         if request.method == "POST":
-            if"add_to_cart" in request.form:
+            if "add_to_cart" in request.form:
                 item_id = request.form["add_to_cart"]
                 cart.add_to_cart(item_id)
-            if"remove_from_cart" in request.form:
+            if "remove_from_cart" in request.form:
                 item_id = request.form["remove_from_cart"]
                 cart.remove_from_cart(item_id)
         return render_template(
@@ -267,45 +275,45 @@ def get_view(item_id):
             unisex=item.get_gender() == 0,
             female=item.get_gender() == 1,
             male=item.get_gender() == 2,
-            cart=cart
+            cart=cart,
         )
 
     if isinstance(item, BookItem):
         if request.method == "POST":
-            if"add_to_cart" in request.form:
+            if "add_to_cart" in request.form:
                 item_id = request.form["add_to_cart"]
                 cart.add_to_cart(item_id)
-            if"remove_from_cart" in request.form:
+            if "remove_from_cart" in request.form:
                 item_id = request.form["remove_from_cart"]
                 cart.remove_from_cart(item_id)
         return render_template("/view_book.html", item=item, cart=cart)
 
     if isinstance(item, FurnitureItem):
         if request.method == "POST":
-            if"add_to_cart" in request.form:
+            if "add_to_cart" in request.form:
                 item_id = request.form["add_to_cart"]
                 cart.add_to_cart(item_id)
-            if"remove_from_cart" in request.form:
+            if "remove_from_cart" in request.form:
                 item_id = request.form["remove_from_cart"]
                 cart.remove_from_cart(item_id)
         return render_template("/view_furniture.html", item=item, cart=cart)
 
     if isinstance(item, ElectronicItem):
         if request.method == "POST":
-            if"add_to_cart" in request.form:
+            if "add_to_cart" in request.form:
                 item_id = request.form["add_to_cart"]
                 cart.add_to_cart(item_id)
-            if"remove_from_cart" in request.form:
+            if "remove_from_cart" in request.form:
                 item_id = request.form["remove_from_cart"]
                 cart.remove_from_cart(item_id)
         return render_template("/view_electronic.html", item=item, cart=cart)
 
     if isinstance(item, SportsGearItem):
         if request.method == "POST":
-            if"add_to_cart" in request.form:
+            if "add_to_cart" in request.form:
                 item_id = request.form["add_to_cart"]
                 cart.add_to_cart(item_id)
-            if"remove_from_cart" in request.form:
+            if "remove_from_cart" in request.form:
                 item_id = request.form["remove_from_cart"]
                 cart.remove_from_cart(item_id)
         return render_template(
@@ -318,7 +326,7 @@ def get_view(item_id):
             unisex=item.get_gender() == 0,
             female=item.get_gender() == 1,
             male=item.get_gender() == 2,
-            cart=cart
+            cart=cart,
         )
 
 
@@ -342,7 +350,8 @@ def get_search():
     return render_template(
         "/listing.html",
         items=Database.search_item(term),
-        listing_title="Search Results", cart=cart
+        listing_title="Search Results",
+        cart=cart,
     )
 
 
