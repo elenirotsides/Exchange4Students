@@ -304,14 +304,24 @@ class Database:
     @classmethod
     def update_sold(cls, item) -> type(None):
         if isinstance(item, ClothingItem):
-            clothing_col.update_one({"_id": item._id}, {"$set": {'is_sold': True}})
+            clothing_col.update_one(
+                {"_id": item.get_item_id()}, {"$set": {"is_sold": True}}
+            )
         elif isinstance(item, BookItem):
-            book_col.update_one({"_id": item._id}, {"$set": {'is_sold': True}})
+            book_col.update_one(
+                {"_id": item.get_item_id()}, {"$set": {"is_sold": True}}
+            )
         elif isinstance(item, FurnitureItem):
-            furniture_col.update_one({"_id": item._id}, {"$set": {'is_sold': True}})
+            furniture_col.update_one(
+                {"_id": item.get_item_id()}, {"$set": {"is_sold": True}}
+            )
         elif isinstance(item, ElectronicItem):
-            electronic_col.update_one({"_id": item._id}, {"$set": {'is_sold': True}})
+            electronic_col.update_one(
+                {"_id": item.get_item_id()}, {"$set": {"is_sold": True}}
+            )
         elif isinstance(item, SportsGearItem):
-            sports_gear_col.update_one({"_id": item._id}, {"$set": {'is_sold': True}})
+            sports_gear_col.update_one(
+                {"_id": item.get_item_id()}, {"$set": {"is_sold": True}}
+            )
         else:
             raise RuntimeError("Could not update item")
