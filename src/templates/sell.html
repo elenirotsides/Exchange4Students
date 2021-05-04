@@ -25,7 +25,7 @@
               <div class="form-group">
                 <label for="category_drop">Choose a Category</label>
                 <select class="form-control" name="category_drop_val" id="category_drop">
-                  <option value="no">Select</option>
+                  <option selected disabled value="">Select</option>
                   <option value="books">Books</option>
                   <option value="clothes">Clothes</option>
                   <option value="furniture">Furniture</option>
@@ -37,26 +37,29 @@
 
               <!--Post Title-->
               <div class="form-group" id="post_title">
-                <label for="post_title_val">Title for Post</label>
+                <label for="post_title_val">Title for Post<span style="color: red; font-size: large;">*</span></label>
                 <input type="text" class="form-control" name="post_title_val" id="post_title_val" required>
               </div>
 
               <!-- Price -->
-              <div class="form-group" id="price">
-                <label for="price">Price ($)</label>
-                <input type="number" class="form-control" name="price_val" id="price_val" required>
+              <div class="row">
+                <div class="col-3">
+                  <div class="form-group" id="price">
+                    <label for="price">Price ($)<span style="color: red; font-size: large;">*</span></label>
+                    <input type="number" class="form-control" name="price_val" id="price_val" required>
+                  </div>
+                </div>
               </div>
-
               <!-- Book Properties -->
               <div class="form-group" id="book_title_ed">
                 <div class="row">
                   <div class="col-6">
                     <label for="title_val">Book Title</label>
-                    <input type="text" class="form-control" name="title_val" id="title_val" required>
+                    <input type="text" class="form-control" name="title_val" id="title_val">
                   </div>
                   <div class="col-6">
                     <label for="ed_val">Book Edition</label>
-                    <input type="text" class="form-control" name="ed_val" id="ed_val" required>
+                    <input type="text" class="form-control" name="ed_val" id="ed_val">
                   </div>
                 </div>
               </div>
@@ -65,50 +68,45 @@
                 <div class="row">
                   <div class="col-4">
                     <label for="height_val">Height (in.)</label>
-                    <input type="number" class="form-control" name="height_val" id="height_val" required>
+                    <input type="number" class="form-control" name="height_val" id="height_val">
                   </div>
                   <div class="col-4">
                     <label for="width_val">Width(in.)</label>
-                    <input type="number" class="form-control" name="width_val" id="width_val" required>
+                    <input type="number" class="form-control" name="width_val" id="width_val">
                   </div>
                   <div class="col-4">
                     <label for="length_val">Length (in.)</label>
-                    <input type="number" class="form-control" name="length_val" id="length_val" required>
+                    <input type="number" class="form-control" name="length_val" id="length_val">
                   </div>
                 </div>
               </div>
 
-              <div class="form-group" id="quantity">
-                <label for="quantity_val">Quantity</label>
-                <input type="number" class="form-control" name="quantity_val" id="quantity_val" required>
-              </div>
-
               <div class="form-group" id="weight">
                 <label for="weight_val">Weight (lbs)</label>
-                <input type="number" class="form-control" name="weight_val" id="weight_val" required>
+                <input type="number" class="form-control" name="weight_val" id="weight_val">
               </div>
 
               <div class="form-group" id="color">
                 <label for="color_val">Color</label>
-                <input type="text" class="form-control" name="color_val" id="color_val" required>
+                <input type="text" class="form-control" name="color_val" id="color_val">
               </div>
 
               <div class="form-group" id="type">
                 <label for="type_val">Type</label>
-                <input type="text" class="form-control" name="type_val" id="type_val" required>
+                <input type="text" class="form-control" name="type_val" id="type_val">
               </div>
 
               <div class="form-group" id="course_num">
                 <label for="course_num_val">Course Number</label>
-                <input type="text" class="form-control" name="course_num_val" id="course_num_val" required>
+                <input type="text" class="form-control" name="course_num_val" id="course_num_val">
               </div>
 
               <div class="row">
                 <div class="col-6">
                   <div class="form-group" id="size">
                     <label for="size">Size</label>
-                    <select class="form-control" id="size_val" name="size_val" required>
-                      <option>Select</option>
+                    <select class="form-control" id="size_val" name="size_val">
+                      <option id="size_selected" disabled value="">Select</option>
                       <option value=0>Small</option>
                       <option value=1>Medium</option>
                       <option value=2>Large</option>
@@ -119,8 +117,8 @@
                 <div class="col-6">
                   <div class="form-group" id="gender">
                     <label for="gender">Gender</label>
-                    <select class="form-control" id="gender_val" name="gender_val" required>
-                      <option>Select</option>
+                    <select class="form-control" id="gender_val" name="gender_val">
+                      <option id="gender_selected" disabled value="">Select</option>
                       <option value=0>Unisex</option>
                       <option value=1>Female</option>
                       <option value=2>Male</option>
@@ -131,26 +129,30 @@
 
               <div class="form-group" id="model">
                 <label for="model">Model</label>
-                <input type="text" class="form-control" name="model_val" id="model_val" required>
+                <input type="text" class="form-control" name="model_val" id="model_val">
               </div>
 
               <div class="form-group" id="comments">
-                <label for="comments_val">Description</label>
+                <label for="comments_val">Description<span style="color: red; font-size: large;">*</span></label>
                 <textarea type="text" class="form-control" name="comments_val" id="comments_val" required></textarea>
               </div>
 
-              <div class="form-group" id="seller">
-                <label for="seller_val">Your Email</label>
-                <input type="email" class="form-control" name="seller_val" id="seller_val" required>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group" id="seller">
+                    <label for="seller_val">Your Email<span style="color: red; font-size: large;">*</span></label>
+                    <input type="email" class="form-control" name="seller_val" id="seller_val" required>
+                  </div>
+                </div>
               </div>
 
               <div class="form-group" id="photo">
-                <label for="photo">Photos</label>
+                <label for="photo">Photo<span style="color: red; font-size: large;">*</span></label>
 
                 <div class="input-group">
                   <span class="input-group-btn">
                     <span class="btn btn-primary btn-file">
-                      Browse… <input type="file" id="fileupload" name="file" multiple required>
+                      Browse… <input type="file" id="fileupload" name="file" required>
                     </span>
                   </span>
                   <!-- <input type="text" class="form-control" readonly> -->
@@ -186,8 +188,12 @@
       $('#seller').show();
       $('#photo').show();
 
+      $('#size_val').removeAttr('required');
+      $('#gender_val').removeAttr('required');
+      $("#size_selected").removeAttr('selected', false);
+      $("#gender_selected").removeAttr('selected', false);
+
       //hidden
-      $('#quantity').hide();
       $('#size').hide();
       $('#type').hide();
       $('#gender').hide();
@@ -206,8 +212,13 @@
       $('#seller').show();
       $('#photo').show();
 
+      $('#size_val').removeAttr('required');
+      $('#gender_val').removeAttr('required');
+      $("#size_selected").removeAttr('selected', false);
+      $("#gender_selected").removeAttr('selected', false);
+
+
       //hidden
-      $('#quantity').hide();
       $('#book_title_ed').hide();
       $('#size').hide();
       $('#gender').hide();
@@ -226,8 +237,12 @@
       $('#seller').show();
       $('#photo').show();
 
+      $('#size_val').attr('required', true);
+      $('#gender_val').attr('required', true);
+      $("#size_selected").attr('selected', true);
+      $("#gender_selected").attr('selected', true);
+
       //hidden
-      $('#quantity').hide();
       $('#book_title_ed').hide();
       $('#dimensions').hide();
       $('#model').hide();
@@ -241,10 +256,14 @@
       $('#weight').show();
       $('#price').show();
       $('#dimensions').show();
-      $('#quantity').show();
       $('#comments').show();
       $('#seller').show();
       $('#photo').show();
+
+      $('#size_val').removeAttr('required');
+      $('#gender_val').removeAttr('required');
+      $("#size_selected").removeAttr('selected', false);
+      $("#gender_selected").removeAttr('selected', false);
 
       //hidden
       $('#book_title_ed').hide();
@@ -264,8 +283,12 @@
       $('#seller').show();
       $('#photo').show();
 
+      $('#size_val').attr('required', true);
+      $('#gender_val').attr('required', true);
+      $("#size_selected").attr('selected', true);
+      $("#gender_selected").attr('selected', true);
+
       //hidden
-      $('#quantity').hide();
       $('#book_title_ed').hide();
       $('#model').hide();
       $('#dimensions').hide();
@@ -279,7 +302,6 @@
       $('#price').hide();
       $('#color').hide();
       $('#weight').hide();
-      $('#quantity').hide();
       $('#comments').hide();
       $('#type').hide();
       $('#size').hide();
