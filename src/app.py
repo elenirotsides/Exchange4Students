@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from decimal import Decimal
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, flash
 from werkzeug.utils import secure_filename
 from flask_fontawesome import FontAwesome
 from e4stypes.database import Category, Database
@@ -197,6 +197,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
+            flash("Success! Item has been posted!")
         elif category == "furniture":
             item = FurnitureItem(
                 post_title,
@@ -210,6 +211,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
+            flash("Success! Item has been posted!")
         elif category == "clothes":
             item = ClothingItem(
                 post_title,
@@ -224,6 +226,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
+            flash("Success! Item has been posted!")
         elif category == "sports":
             item = SportsGearItem(
                 post_title,
@@ -237,6 +240,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
+            flash("Success! Item has been posted!")
         elif category == "electronics":
             item = ElectronicItem(
                 post_title,
@@ -250,7 +254,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
-        return redirect("/item_posted")
+            flash("Success! Item has been posted!")
     return render_template("/sell.html", cart=cart)
 
 
