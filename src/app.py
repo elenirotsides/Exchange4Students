@@ -395,6 +395,9 @@ def get_checkout():
                 order_info_dict["place"] = request.form["place_val"]
                 order_info_dict["date"] = request.form["date_val"]
                 order_info_dict["time"] = request.form["time_val"]
+        print(cart.item_list)
+        cart.confirm()
+        cart.reset_cart()
         final_cart_list = cart.item_list
         final_total = total
         #email stuff here

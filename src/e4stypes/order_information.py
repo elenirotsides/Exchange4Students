@@ -34,7 +34,8 @@ class OrderInformation:
 
     def confirm(self) -> type(None):
         for item in self.item_list:
-            item.is_sold = True
+            Database.update_sold(item)
+            print(item.is_sold)
 
     def reset_cart(self) -> type(None):
         self.item_list = []
