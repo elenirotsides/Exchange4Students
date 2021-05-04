@@ -43,5 +43,5 @@ class BookItem(Item):
             "edition": self.get_edition(),
             "course_number": self.get_course_number(),
             "img": str(self.get_image_filepath()),
-            "is_sold": self.is_sold
+            "is_sold": self.is_sold,
         }
