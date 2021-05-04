@@ -19,6 +19,7 @@ class Item:
         self._seller: str = seller
         self._condition: str = ""
         self._image = Path()
+        self.is_sold = False
 
     def get_item_id(self) -> str:
         return self._item_id

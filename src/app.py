@@ -342,16 +342,25 @@ def internal_server_error(error):
     print(error)
     return render_template("/500.html"), 500
 
-
 @app.route("/search", methods=["GET", "POST"])
 def get_search():
     if request.method == "POST":
-        term = request.form["search_term"]
+        if"search_term" in request.form:
+            term = request.form["search_term"]
+            return render_template(
+                "/listing.html",
+                items=Database.search_item(term),
+                listing_title="Search Results", cart=cart
+            )
+        if"add_to_cart" in request.form:
+            item_id = request.form["add_to_cart"]
+            cart.add_to_cart(item_id)
+        if"remove_from_cart" in request.form:
+            item_id = request.form["remove_from_cart"]
+            cart.remove_from_cart(item_id)
     return render_template(
         "/listing.html",
-        items=Database.search_item(term),
-        listing_title="Search Results",
-        cart=cart,
+        listing_title="Search Results", cart=cart
     )
 
 
