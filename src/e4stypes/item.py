@@ -53,6 +53,3 @@ class Item:
 
     def price_string(self) -> str:
         return str(self.get_price().quantize(Decimal("1.00")))
-
-    def get_is_sold(self) -> bool:
-        return self.is_sold

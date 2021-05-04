@@ -12,12 +12,12 @@ class OrderInformation:
         self.buyer = None
 
     def add_to_cart(self, item_id: str) -> type(None):
-        item = Database.get_item_by_id(item_id)
+        item_to_add = Database.get_item_by_id(item_id)
         item_list_ids = []
-        for item1 in self.item_list:
-            item_list_ids.append(item1.get_item_id())
+        for item in self.item_list:
+            item_list_ids.append(item.get_item_id())
         if ObjectId(item_id) not in item_list_ids:
-            self.item_list.append(item)
+            self.item_list.append(item_to_add)
 
     def remove_from_cart(self, item_id: str) -> type(None):
         for item_list_item in self.item_list:
@@ -35,12 +35,6 @@ class OrderInformation:
     def confirm(self) -> type(None):
         for item in self.item_list:
             item.is_sold = True
-
-    def set_buyer(self, buyer) -> type(None):
-        self.buyer = buyer
-
-    def get_buyer(self) -> type(str):
-        return self.buyer
 
     def reset_cart(self) -> type(None):
         self.item_list = []
