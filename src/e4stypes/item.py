@@ -20,9 +20,6 @@ class Item:
         self._condition: str = ""
         self._image = Path()
 
-        # Public instance attributes
-        self.quantity: int = 1
-
     def get_item_id(self) -> str:
         return self._item_id
 

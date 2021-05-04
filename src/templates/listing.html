@@ -2,44 +2,50 @@
 
 {% block content %}
 
-    {% block top_of_listing %}
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">{{listing_title}}</h1>
-                </div>
-            </div>
-        </section>
-    {% endblock %}
+{% block top_of_listing %}
+<section class="py-1 text-center container">
+    <div class="row py-lg-1">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">{{listing_title}}</h1>
+        </div>
+    </div>
+</section>
+{% endblock %}
 
-    <div class="album py-5 bg-light">
-        <div class="container-fluid">
+<div class="album py-5 bg-light">
+    <div class="container-fluid">
 
         <div class="row justify-content-center">
             {% if items|length == 0 %}
             <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
-            <h2 class="text-muted">No Items to Display</h2>
+                <h2 class="text-muted">No Items to Display</h2>
             </div>
             {% endif %}
 
             {% for item in items %}
             <div class="col-lg-3-margin col-md-4-margin col-xs-12-margin d-flex p-2">
-            <div class="card shadow-sm" style="width: 18rem;">
-                <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
-                <div class="card-body">
-                <p class="card-text">{{item.get_title()}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                    <a class="btn btn-sm btn-outline-secondary" href="/view/{{item.get_item_id()}}">View</a>
-                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button> -->
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <img src="{{url_for('static', filename=item.get_image_filepath())}}" alt="{{item.get_title()}}" width="100%" height="225">
+                    <div class="card-body">
+                        <h5 class="card-text text-center">{{item.get_title()}}</h5>
+                        <p class="card-text text-center">Seller: {{item.get_seller()}}</p>
                     </div>
-                    <span class="text-muted" style="font-size: medium;">${{item.price_string()}}</span>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="fas btn btn-md btn-outline-secondary" href="/view/{{item.get_item_id()}}">View</a>
+                                <form method="POST"> 
+                                    <button type="submit" class="fas fa-cart-plus btn btn-md btn-outline-success">Add</button>
+                                    <input type="hidden" name="add_to_cart" value="{{item.get_item_id()}}">
+                                </form>
+                            </div>
+                            <span class="text-muted" style="font-size: medium;">${{item.price_string()}}</span>
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </div>
             {% endfor %}
         </div>
-        </div>
     </div>
+</div>
 {% endblock %}

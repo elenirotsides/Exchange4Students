@@ -3,7 +3,9 @@
 __pycache__
 *.pyc
 env
+client_secret.json
 src/static/*.png
+src/static/*.jpeg
 !src/static/book.png
 !src/static/chair.png
 !src/static/electronic.png
