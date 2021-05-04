@@ -9,6 +9,7 @@ class OrderInformation:
     def __init__(self, item_list: List[Item], total_amount: Decimal):
         self.item_list: List[Item] = item_list
         self.total_amount: Decimal = total_amount
+        self.buyer = None
 
     def add_to_cart(self, item_id: str) -> type(None):
         item = Database.get_item_by_id(item_id)
@@ -31,8 +32,17 @@ class OrderInformation:
             self.total_amount += price
         return self.total_amount
 
-    def confirm(self) -> bool:
-        pass
+    def confirm(self) -> type(None):
+        for item in self.item_list:
+            item.is_sold = True
 
-    def select_exchange_type(self) -> type(None):
-        pass
+    def set_buyer(self, buyer) -> type(None):
+        self.buyer = buyer
+
+    def get_buyer(self) -> type(str):
+        return self.buyer
+
+    def reset_cart(self) -> type(None):
+        self.item_list = []
+        self.total_amount = 0
+        self.buyer = None

@@ -19,6 +19,7 @@ class Item:
         self._seller: str = seller
         self._condition: str = ""
         self._image = Path()
+        self.is_sold = False
 
         # Public instance attributes
         self.quantity: int = 1
@@ -55,3 +56,6 @@ class Item:
 
     def price_string(self) -> str:
         return str(self.get_price().quantize(Decimal("1.00")))
+
+    def get_is_sold(self) -> bool:
+        return self.is_sold
