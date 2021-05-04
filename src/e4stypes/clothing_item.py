@@ -29,7 +29,7 @@ class ClothingItem(Item):
         garment_type: str,
         size: ClothingSize,
         gender: ClothingGender,
-        color: str,
+        color: str
     ):
         super().__init__(title, desc, price, weight, seller)
         self._garment_type = garment_type
@@ -61,4 +61,5 @@ class ClothingItem(Item):
             "gender": self.get_gender(),
             "color": self.get_color(),
             "img": str(self.get_image_filepath()),
+            "is_sold": self.is_sold
         }
