@@ -398,8 +398,8 @@ def get_checkout():
             cart.confirm()
             cart.reset_cart()
             total = 0
-        final_cart_list = cart.item_list
-        final_total = total
+        # final_cart_list = cart.item_list
+        # final_total = total
         #email stuff here
 
     return render_template("/checkout.html", cart=cart, total=total)
