@@ -43,4 +43,5 @@ class FurnitureItem(Item):
             "color": self.get_color(),
             "dimensions": self.get_dimensions(),
             "img": str(self.get_image_filepath()),
+            "is_sold": self.is_sold,
         }

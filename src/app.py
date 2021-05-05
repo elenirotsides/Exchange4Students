@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from decimal import Decimal
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, flash
 from werkzeug.utils import secure_filename
 from flask_fontawesome import FontAwesome
 from e4stypes.database import Category, Database
@@ -13,14 +13,29 @@ from e4stypes.sports_gear_item import SportsGearItem
 from e4stypes.order_information import OrderInformation
 import autoemail
 
+
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
 cart = OrderInformation([], 0)
-order_info_keys = ["first", "last", "email", "venmo", "address", "country",
-"state", "zip", "place", "date", "time", "item_name"]
+# order_info_keys = ["first", "last", "email", "venmo", "address", "country",
+# "state", "zip", "place", "date", "time", "item_name"]
+order_info_keys = [
+    "first",
+    "last",
+    "email",
+    "venmo",
+    "address",
+    "country",
+    "state",
+    "zip",
+    "place",
+    "date",
+    "time",
+    "item_name",
+    "price",
+]
 order_info_dict = dict.fromkeys(order_info_keys, None)
-final_cart_list = []
-final_total = 0
+
 
 app = Flask(__name__)
 fa = FontAwesome(app)
@@ -203,6 +218,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
+            flash("Success! Item has been posted!")
         elif category == "furniture":
             item = FurnitureItem(
                 post_title,
@@ -216,6 +232,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
+            flash("Success! Item has been posted!")
         elif category == "clothes":
             item = ClothingItem(
                 post_title,
@@ -230,6 +247,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
+            flash("Success! Item has been posted!")
         elif category == "sports":
             item = SportsGearItem(
                 post_title,
@@ -243,6 +261,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
+            flash("Success! Item has been posted!")
         elif category == "electronics":
             item = ElectronicItem(
                 post_title,
@@ -256,7 +275,7 @@ def get_sell():
             )
             item.set_image_filepath(filename)
             Database.add_item(item)
-        return redirect("/item_posted")
+            flash("Success! Item has been posted!")
     return render_template("/sell.html", cart=cart)
 
 
@@ -352,19 +371,21 @@ def internal_server_error(error):
 @app.route("/search", methods=["GET", "POST"])
 def get_search():
     if request.method == "POST":
-        term = request.form["search_term"]
-
-    return render_template(
-        "/listing.html",
-        items=Database.search_item(term),
-        listing_title="Search Results",
-        cart=cart,
-    )
-
-
-@app.route("/item_posted", methods=["GET", "POST"])
-def get_item_posted():
-    return render_template("/item_posted.html", cart=cart)
+        if "search_term" in request.form:
+            term = request.form["search_term"]
+            return render_template(
+                "/listing.html",
+                items=Database.search_item(term),
+                listing_title="Search Results",
+                cart=cart,
+            )
+        if "add_to_cart" in request.form:
+            item_id = request.form["add_to_cart"]
+            cart.add_to_cart(item_id)
+        if "remove_from_cart" in request.form:
+            item_id = request.form["remove_from_cart"]
+            cart.remove_from_cart(item_id)
+    return render_template("/listing.html", listing_title="Search Results", cart=cart)
 
 
 @app.route("/checkout", methods=["GET", "POST"])
@@ -372,12 +393,15 @@ def get_checkout():
     total = 0
     for item in cart.item_list:
         total += item.get_price()
-        order_info_dict["item_name"]= item.get_title()
+        order_info_dict["item_name"] = item.get_title()
+        order_info_dict["price"] = item.get_price()
+
     if request.method == "POST":
+
         if "drop_val" in request.form:
             category = request.form["drop_val"]
-            
-            order_info_dict["first"] = request.form["firstName_val"]  
+
+            order_info_dict["first"] = request.form["firstName_val"]
             order_info_dict["last"] = request.form["lastName_val"]
             order_info_dict["email"] = request.form["email_val"]
             order_info_dict["venmo"] = request.form["v-name"]
@@ -390,10 +414,42 @@ def get_checkout():
                 order_info_dict["place"] = request.form["place_val"]
                 order_info_dict["date"] = request.form["date_val"]
                 order_info_dict["time"] = request.form["time_val"]
-        final_cart_list = cart.item_list
-        final_total = total
-        #email stuff here
-        exec('autoemail')
+            for item in cart.item_list:
+                order_info_dict["item_name"] = item.get_title()
+                order_info_dict["price"] = item.get_price()
+                autoemail.email_buyer(
+                    order_info_dict["email"],
+                    order_info_dict["first"],
+                    order_info_dict["last"],
+                    order_info_dict["item_name"],
+                    order_info_dict["price"],
+                    item.get_seller(),
+                    order_info_dict["place"],
+                    order_info_dict["time"],
+                    order_info_dict["address"],
+                    order_info_dict["country"],
+                    order_info_dict["state"],
+                    order_info_dict["zip"],
+                )
+                autoemail.email_seller(
+                    item.get_seller(),
+                    order_info_dict["first"],
+                    order_info_dict["last"],
+                    order_info_dict["venmo"],
+                    order_info_dict["email"],
+                    order_info_dict["item_name"],
+                    order_info_dict["place"],
+                    order_info_dict["time"],
+                    order_info_dict["address"],
+                    order_info_dict["country"],
+                    order_info_dict["state"],
+                    order_info_dict["zip"],
+                )
+            cart.confirm()
+
+            cart.reset_cart()
+            total = 0
+
     return render_template("/checkout.html", cart=cart, total=total)
 
 

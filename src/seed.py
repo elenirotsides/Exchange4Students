@@ -229,7 +229,7 @@ def add_electronics():
         "An oldie but a goodie.",
         50.00,
         10,
-        "Grace",
+        "gracem730@gmail.com",
         "PlayStation",
         "2nd",
         [10, 20, 10],
