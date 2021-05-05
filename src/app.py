@@ -11,10 +11,14 @@ from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
 from e4stypes.order_information import OrderInformation
+import autoemail
+
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
 cart = OrderInformation([], 0)
+# order_info_keys = ["first", "last", "email", "venmo", "address", "country",
+# "state", "zip", "place", "date", "time", "item_name"]
 order_info_keys = [
     "first",
     "last",
@@ -27,10 +31,11 @@ order_info_keys = [
     "place",
     "date",
     "time",
+    "item_name",
+    "price",
 ]
 order_info_dict = dict.fromkeys(order_info_keys, None)
-final_cart_list = []
-final_total = 0
+
 
 app = Flask(__name__)
 fa = FontAwesome(app)
@@ -388,9 +393,14 @@ def get_checkout():
     total = 0
     for item in cart.item_list:
         total += item.get_price()
+        order_info_dict["item_name"] = item.get_title()
+        order_info_dict["price"] = item.get_price()
+
     if request.method == "POST":
+
         if "drop_val" in request.form:
             category = request.form["drop_val"]
+
             order_info_dict["first"] = request.form["firstName_val"]
             order_info_dict["last"] = request.form["lastName_val"]
             order_info_dict["email"] = request.form["email_val"]
@@ -404,12 +414,41 @@ def get_checkout():
                 order_info_dict["place"] = request.form["place_val"]
                 order_info_dict["date"] = request.form["date_val"]
                 order_info_dict["time"] = request.form["time_val"]
+            for item in cart.item_list:
+                order_info_dict["item_name"] = item.get_title()
+                order_info_dict["price"] = item.get_price()
+                autoemail.email_buyer(
+                    order_info_dict["email"],
+                    order_info_dict["first"],
+                    order_info_dict["last"],
+                    order_info_dict["item_name"],
+                    order_info_dict["price"],
+                    item.get_seller(),
+                    order_info_dict["place"],
+                    order_info_dict["time"],
+                    order_info_dict["address"],
+                    order_info_dict["country"],
+                    order_info_dict["state"],
+                    order_info_dict["zip"],
+                )
+                autoemail.email_seller(
+                    item.get_seller(),
+                    order_info_dict["first"],
+                    order_info_dict["last"],
+                    order_info_dict["venmo"],
+                    order_info_dict["email"],
+                    order_info_dict["item_name"],
+                    order_info_dict["place"],
+                    order_info_dict["time"],
+                    order_info_dict["address"],
+                    order_info_dict["country"],
+                    order_info_dict["state"],
+                    order_info_dict["zip"],
+                )
             cart.confirm()
+
             cart.reset_cart()
             total = 0
-            # final_cart_list = cart.item_list
-            # final_total = total
-            # email stuff here
 
             flash(
                 "Your order has successfully been placed! Seller(s) have been notified of your purchase(s)."
