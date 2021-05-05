@@ -15,8 +15,19 @@ from e4stypes.order_information import OrderInformation
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
 cart = OrderInformation([], 0)
-order_info_keys = ["first", "last", "email", "venmo", "address", "country",
-"state", "zip", "place", "date", "time"]
+order_info_keys = [
+    "first",
+    "last",
+    "email",
+    "venmo",
+    "address",
+    "country",
+    "state",
+    "zip",
+    "place",
+    "date",
+    "time",
+]
 order_info_dict = dict.fromkeys(order_info_keys, None)
 final_cart_list = []
 final_total = 0
@@ -347,26 +358,25 @@ def internal_server_error(error):
     print(error)
     return render_template("/500.html"), 500
 
+
 @app.route("/search", methods=["GET", "POST"])
 def get_search():
     if request.method == "POST":
-        if"search_term" in request.form:
+        if "search_term" in request.form:
             term = request.form["search_term"]
             return render_template(
                 "/listing.html",
                 items=Database.search_item(term),
-                listing_title="Search Results", cart=cart
+                listing_title="Search Results",
+                cart=cart,
             )
-        if"add_to_cart" in request.form:
+        if "add_to_cart" in request.form:
             item_id = request.form["add_to_cart"]
             cart.add_to_cart(item_id)
-        if"remove_from_cart" in request.form:
+        if "remove_from_cart" in request.form:
             item_id = request.form["remove_from_cart"]
             cart.remove_from_cart(item_id)
-    return render_template(
-        "/listing.html",
-        listing_title="Search Results", cart=cart
-    )
+    return render_template("/listing.html", listing_title="Search Results", cart=cart)
 
 
 @app.route("/item_posted", methods=["GET", "POST"])
@@ -382,7 +392,7 @@ def get_checkout():
     if request.method == "POST":
         if "drop_val" in request.form:
             category = request.form["drop_val"]
-            order_info_dict["first"] = request.form["firstName_val"]  
+            order_info_dict["first"] = request.form["firstName_val"]
             order_info_dict["last"] = request.form["lastName_val"]
             order_info_dict["email"] = request.form["email_val"]
             order_info_dict["venmo"] = request.form["v-name"]
@@ -400,7 +410,7 @@ def get_checkout():
             total = 0
         # final_cart_list = cart.item_list
         # final_total = total
-        #email stuff here
+        # email stuff here
 
     return render_template("/checkout.html", cart=cart, total=total)
 
