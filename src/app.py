@@ -11,6 +11,7 @@ from e4stypes.electronic_item import ElectronicItem
 from e4stypes.furniture_item import FurnitureItem
 from e4stypes.sports_gear_item import SportsGearItem
 from e4stypes.order_information import OrderInformation
+import autoemail
 
 basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
@@ -392,7 +393,7 @@ def get_checkout():
         final_cart_list = cart.item_list
         final_total = total
         #email stuff here
-
+        exec('autoemail')
     return render_template("/checkout.html", cart=cart, total=total)
 
 
