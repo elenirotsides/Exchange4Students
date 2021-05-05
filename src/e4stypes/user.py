@@ -28,32 +28,3 @@ class User:
 
     def get_password(self) -> str:
         return self._password
-
-    def edit_settings(self) -> type(None):
-        pass
-
-    def logout(self) -> type(None):
-        pass
-
-    def login(self, email: str, password: str) -> type(None):
-        pass
-
-    @classmethod
-    def register(cls):
-        pass
-
-    def post_item(self, item_id: str) -> type(None):
-        """Implements Seller.post_item()"""
-        pass
-
-    def edit_item(self, item_id: str) -> type(None):
-        """Implements Seller.edit_item()"""
-        pass
-
-    def send_message_to_seller(self, seller: str) -> bool:
-        """Implements Customer.send_message_to_seller()"""
-        pass
-
-    def purchase_item(self, item_id: str) -> type(None):
-        """Implements Customer.purchase_item()"""
-        pass
