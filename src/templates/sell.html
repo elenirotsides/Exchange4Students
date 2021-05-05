@@ -21,6 +21,22 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class=flashes>
+              {% for message in messages %}
+              <div class="alert alert-success alter-dismissable fade show">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
             <form class="p-3" method="POST" id="sellitem" action="/sell" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="category_drop">Choose a Category</label>
@@ -160,14 +176,8 @@
 
               </div>
 
-              <input type="submit" value="Submit" id="buttonSubmit" class="btn btn-outline-success">
-            </form>
+              <button type="submit" class="btn btn-outline-success" id="submitButton">Submit</button>
 
-
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center"></div>
-
-            </div>
           </div>
         </div>
       </div>
@@ -177,6 +187,7 @@
 </main>
 
 <script>
+  $('#submitButton').hide();
   $("#category_drop").change(function () {
     if ($(this).val() == "books") {
       $('#post_title').show();
@@ -187,6 +198,7 @@
       $('#course_num').show();
       $('#seller').show();
       $('#photo').show();
+      $('#submitButton').show();
 
       $('#size_val').removeAttr('required');
       $('#gender_val').removeAttr('required');
@@ -211,6 +223,7 @@
       $('#comments').show();
       $('#seller').show();
       $('#photo').show();
+      $('#submitButton').show();
 
       $('#size_val').removeAttr('required');
       $('#gender_val').removeAttr('required');
@@ -236,6 +249,7 @@
       $('#comments').show();
       $('#seller').show();
       $('#photo').show();
+      $('#submitButton').show();
 
       $('#size_val').attr('required', true);
       $('#gender_val').attr('required', true);
@@ -259,6 +273,7 @@
       $('#comments').show();
       $('#seller').show();
       $('#photo').show();
+      $('#submitButton').show();
 
       $('#size_val').removeAttr('required');
       $('#gender_val').removeAttr('required');
@@ -282,6 +297,7 @@
       $('#comments').show();
       $('#seller').show();
       $('#photo').show();
+      $('#submitButton').show();
 
       $('#size_val').attr('required', true);
       $('#gender_val').attr('required', true);
