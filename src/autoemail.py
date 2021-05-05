@@ -4,27 +4,16 @@ import ssl
 import app
 
 
-def email_buyer(
-    email_add,
-    first,
-    last,
-    item,
-    price,
-    seller,
-    location,
-    time,
-    address,
-    country,
-    state,
-    zipcode,
-):
+
+
+def email_buyer(email_add, first, last, item, price, seller, location, time, address, country, state, zipcode):
     PORT = 465  # For SSL. Have to use port 465 for gmail SSL
     password = os.environ.get("D6_PASSWORD")
     SENDER_EMAIL = "exchange4studentsd6@gmail.com"
     SUBJECT = "Exchange4Students Order Confirmation"
     RECEIVER_EMAIL = email_add
     # RECEIVER_EMAIL = order_info["email"]
-    if address is None:
+    if(address is None):
         TEXT = f"""\n
             Subject: Order Confirmation\n
             
@@ -45,6 +34,7 @@ def email_buyer(
 
             -Exchange4Students
             """
+            
     else:
         TEXT = f"""\n
         Subject: Order Confirmation\n
@@ -69,7 +59,7 @@ def email_buyer(
         -Exchange4Students
         """
 
-    MESSAGE = "Subject: {}\n\n{}".format(SUBJECT, TEXT)
+    MESSAGE = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
     # Create a secure SSL context
     context = ssl.create_default_context()
 
@@ -78,27 +68,14 @@ def email_buyer(
         # TODO: Send email here
         server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, MESSAGE)
 
-
-def email_seller(
-    seller,
-    buyer_first,
-    buyer_last,
-    venmo,
-    buyer_email,
-    item,
-    location,
-    time,
-    address,
-    country,
-    state,
-    zipcode,
-):
+def email_seller(seller, buyer_first, buyer_last, venmo, buyer_email, item, location,
+ time, address, country, state, zipcode):
     PORT = 465  # For SSL. Have to use port 465 for gmail SSL
     password = os.environ.get("D6_PASSWORD")
     SENDER_EMAIL = "exchange4studentsd6@gmail.com"
     SUBJECT = "Exchange4Students Order Confirmation"
     RECEIVER_EMAIL = seller
-    if address is None:
+    if(address is None):
         TEXT = f"""\n
             Subject: Order Confirmation\n
             
@@ -121,7 +98,7 @@ def email_seller(
 
             """
     else:
-        TEXT = f"""\n
+        TEXT= f"""\n
           Subject: Order Confirmation\n
             
             Dear user,
@@ -143,7 +120,7 @@ def email_seller(
 
             Exchange4students
             """
-    MESSAGE = "Subject: {}\n\n{}".format(SUBJECT, TEXT)
+    MESSAGE = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
     # Create a secure SSL context
     context = ssl.create_default_context()
 
