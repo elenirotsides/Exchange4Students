@@ -231,15 +231,15 @@ class Database:
         # we can add checks for empty collections later if this causes problems.
         item_dicts = None
         if category == Category.CLOTHING:
-            item_dicts = clothing_col.find({})
+            item_dicts = clothing_col.find({"is_sold": False})
         elif category == Category.BOOK:
-            item_dicts = book_col.find({})
+            item_dicts = book_col.find({"is_sold": False})
         elif category == Category.FURNITURE:
-            item_dicts = furniture_col.find({})
+            item_dicts = furniture_col.find({"is_sold": False})
         elif category == Category.ELECTRONIC:
-            item_dicts = electronic_col.find({})
+            item_dicts = electronic_col.find({"is_sold": False})
         elif category == Category.SPORTS_GEAR:
-            item_dicts = sports_gear_col.find({})
+            item_dicts = sports_gear_col.find({"is_sold": False})
         else:
             raise RuntimeError("get_item_by_category: category undefined")
 
