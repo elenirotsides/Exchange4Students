@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from decimal import Decimal
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect
 from werkzeug.utils import secure_filename
 from flask_fontawesome import FontAwesome
 from e4stypes.database import Category, Database
@@ -407,9 +407,14 @@ def get_checkout():
             cart.confirm()
             cart.reset_cart()
             total = 0
-        # final_cart_list = cart.item_list
-        # final_total = total
-        # email stuff here
+            # final_cart_list = cart.item_list
+            # final_total = total
+            # email stuff here
+
+            flash(
+                "Your order has successfully been placed! Seller(s) have been notified of your purchase(s)."
+            )
+            return redirect("/")
 
     return render_template("/checkout.html", cart=cart, total=total)
 
