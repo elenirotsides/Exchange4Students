@@ -16,7 +16,7 @@ basedir = Path(os.path.dirname(os.path.realpath(__file__)))
 uploadsdir = basedir.joinpath("static")
 cart = OrderInformation([], 0)
 order_info_keys = ["first", "last", "email", "venmo", "address", "country",
-"state", "zip", "place", "date", "time"]
+"state", "zip", "place", "date", "time", "item_name"]
 order_info_dict = dict.fromkeys(order_info_keys, None)
 final_cart_list = []
 final_total = 0
@@ -371,9 +371,11 @@ def get_checkout():
     total = 0
     for item in cart.item_list:
         total += item.get_price()
+        order_info_dict["item_name"]= item.get_title()
     if request.method == "POST":
         if "drop_val" in request.form:
             category = request.form["drop_val"]
+            
             order_info_dict["first"] = request.form["firstName_val"]  
             order_info_dict["last"] = request.form["lastName_val"]
             order_info_dict["email"] = request.form["email_val"]

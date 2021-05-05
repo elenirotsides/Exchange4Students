@@ -1,7 +1,6 @@
 import smtplib
 import os
 import ssl
-import app
 from app import order_info_dict
 
 order_info = order_info_dict
@@ -9,18 +8,25 @@ order_info = order_info_dict
 PORT = 465  # For SSL. Have to use port 465 for gmail SSL
 password = os.environ.get("D6_PASSWORD")
 SENDER_EMAIL = "exchange4studentsd6@gmail.com"
-RECEIVER_EMAIL = order_info.email
-MESSAGE = """\n
-    Subject: Test Email\n
+SUBJECT = "Exchange4Students Order Confirmation"
+RECEIVER_EMAIL = order_info["email"]
+TEXT = f"""\n
+    Subject: Order Confirmation\n
     
+    Dear {order_info["first"]} {order_info["last"]},
 
-    This is from Exchange4students. Time to figure out automation
+    This is to confirm your purchase! 
+
+    Below is your order information: 
+
+    Item: {order_info["item_name"]}
+     
 
     -Grace
 
     """
 
-
+MESSAGE = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
 # Create a secure SSL context
 context = ssl.create_default_context()
 
